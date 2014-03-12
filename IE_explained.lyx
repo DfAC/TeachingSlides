@@ -1,0 +1,1759 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+
+
+\input{Preamble.tex} %my math + CROSSREF+nomenclature
+\input{stdSent.tex} %shortcuts and refs
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement tbh
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "Closely coupled integration of Locata and GPS for Engineering Applications"
+\pdf_author "Lukasz K Bonenberg"
+\pdf_subject "Viva doc"
+\pdf_keywords "Locata, GPS, Integration, AR OTF, pseudolite,engineering, GNSS"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine jurabib
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 2cm
+\bottommargin 3.7cm
+\headheight 1cm
+\headsep 1cm
+\footskip 0.7cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language swedish
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\bullet 1 0 9 -1
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+to create new mathmacro use 
+\backslash
+newcommand{
+\backslash
+test}[1]{
+\backslash
+textrm{
+\backslash
+num[group-digits = true]{#1}}} and C+M
+\end_layout
+
+\begin_layout Plain Layout
+or in mini-buffer math-macro name args, where name is a string and args
+ is an optional integer indicating the number of arguments
+\end_layout
+
+\begin_layout Plain Layout
+first macro below;
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset FormulaMacro
+\newcommand{\units}[1]{\textrm{\mathbf{[\si{#1}]}}}
+{\mathbf{[{#1}]}}
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\units}[1]{\textrm{\mathbf{[\si{#1}]}}}
+{\mathbf{[{#1}]}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+\begin_inset VSpace 5cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+H24VLP Location Technology
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Inertial Explorer Manual for POSRS and SPAN
+\end_layout
+
+\begin_layout Author
+\begin_inset VSpace 2cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Lukasz Kosma Bonenberg
+\end_layout
+
+\begin_layout Author
+\begin_inset VSpace 10cm*
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename pic/00_logo.png
+	lyxscale 50
+	width 7cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+thispagestyle{empty}%no number on this page
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This document outline the use of Inertial Explorer 8.50 for the 
+\series bold
+H24VLP Location Technology Practical
+\series default
+.
+ The goal of this practical is to study the performance of three types of
+ IMU sensors (navigation grade, tactical grade and low cost MEMS one) and
+ its performance in aiding GNSS solution in three different environments:
+\end_layout
+
+\begin_layout Itemize
+semi-urban
+\end_layout
+
+\begin_layout Itemize
+rural
+\end_layout
+
+\begin_layout Itemize
+dense urban (down town)
+\end_layout
+
+\begin_layout Standard
+Study should include analysis of existing performance (as outlined in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Processing-GNSS-data"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Processing-Loosely-Coupled"
+
+\end_inset
+
+) and performance during GNSS outage (as outlined in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Simulating-GNSS-outage"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Description of expected output can be found in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Exporting-final-results"
+
+\end_inset
+
+.
+ Bear in mind that this is only an broad outline and details are up to you.
+ 
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Both IMU and GNSS data has already been collected and converted to 
+\emph on
+Inertial Explorer 
+\emph default
+native format.
+ Please copy relevant files to local folder on your computer and start 
+\emph on
+Inertial Explorer
+\emph default
+.
+ All relevant information are presented in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Van-experiment-layout"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Create an new project
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Create-an-new"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To create a new project open 
+\emph on
+Inertial Explorer 
+\emph default
+and go to
+\series bold
+\emph on
+ File->New Project->Project Wizard
+\end_layout
+
+\begin_layout Itemize
+Navigate to project folder and name processing accordingly (SPAN, POSRS,
+ MicroStrain ect).
+ 
+\emph on
+Please created a separate project file for each IMU (it can be in the same
+ folder).
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Select GNSS & IMU files
+\end_layout
+
+\begin_layout Itemize
+antenna height 0m, use antenna profile as per 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Van-experiment-layout"
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+I would like add Base Station Data 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Don't check any options 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Add Station From File
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Select base station GNSS data and make sure that 
+\series bold
+NGB2
+\series default
+ settings are
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+antenna height 0.502m, type 
+\emph on
+LEIAR25.R4
+\end_layout
+
+\begin_layout Itemize
+position 52° 57' 06.95636" N 1° 11' 02.39879" W 91.2006m
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Checking options below will allow to download precise ephemerides, if they
+ are available.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Click on NEXT, NEXT, Finish, Finish
+\end_layout
+
+\begin_layout Subsection*
+NOTES
+\end_layout
+
+\begin_layout Standard
+IE use a very strange naming convention for the height.
+ Ant height will only be applied to export, Arms need to INCLUDE antenna
+ height.
+ In other words to match GPS and IMU one need to: GPS (add_ht), Arms (add_ht),
+ Export (no_ht!).
+ This is VERY CONFUSING so I suggest: GPS_Rover (ht=0), Arms (add_ht), Export
+ (add_ht)
+\end_layout
+
+\begin_layout Section
+Processing GNSS data
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Processing-GNSS-data"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+First check your data overlap using 
+\series bold
+\emph on
+Output->Plot Results 
+\series default
+\emph default
+and selecting
+\emph on
+ File Data Coverage 
+\emph default
+plot.
+ 
+\end_layout
+
+\begin_layout Subsection
+Precise Clocks/Orbits
+\end_layout
+
+\begin_layout Standard
+The precise orbits/clocks latency is 12-18 days and the GPS rapid ones its
+ less then a day.
+ If observation are available and you haven't downloaded them in last step,
+ use
+\emph on
+ 
+\series bold
+File->Add precise Files
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout Itemize
+Set proper time and date, uncheck GLONASS and press Download for GPS data
+ 
+\end_layout
+
+\begin_layout Itemize
+Set proper time and date, check GLONASS and press Download for GLONASS data
+ (some files will be overwritten)
+\end_layout
+
+\begin_layout Itemize
+Press OK to exit window In View->Project Overview you should be able to
+ see all the files you added
+\end_layout
+
+\begin_layout Subsection
+Processing GNSS data
+\end_layout
+
+\begin_layout Standard
+Go to
+\emph on
+ 
+\series bold
+Process->Process GNSS
+\end_layout
+
+\begin_layout Itemize
+Processing Method: 
+\emph on
+Differential GNSS
+\end_layout
+
+\begin_layout Itemize
+Processing Direction: 
+\emph on
+Both
+\emph default
+ 
+\end_layout
+
+\begin_layout Itemize
+Profile GNSS: 
+\emph on
+Ground Vehicle
+\emph default
+, don't change any Advanced..
+ options 
+\end_layout
+
+\begin_layout Itemize
+Add description/User name
+\end_layout
+
+\begin_layout Standard
+This will generate *.cmb file (combined GPS file), which is used in next
+ step.
+ 
+\end_layout
+
+\begin_layout Standard
+To check quality of the position use following plots: 
+\emph on
+Combined Separation, Combined Separation(Fix), Estimated Position Accuracy,
+ Quality factor, Float/Fixed Ambiguity Status
+\emph default
+.
+ You can also get overview summary using 
+\series bold
+\emph on
+View->Processing summary
+\series default
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+To check baseline check 
+\emph on
+Local Level Vector
+\emph default
+ (pay attention to height component !) and 
+\emph on
+Distance Separation
+\emph default
+.
+\end_layout
+
+\begin_layout Subsection*
+NOTES
+\end_layout
+
+\begin_layout Standard
+If you ever close background map, use 
+\series bold
+\emph on
+Output->Show Map window
+\end_layout
+
+\begin_layout Section
+Processing Loosely Coupled GNSS/IMU data
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Processing-Loosely-Coupled"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To determine which processing option to use plot 
+\emph on
+File Data Coverag
+\emph default
+e and 
+\emph on
+Velocity profile
+\emph default
+.
+ Before proceeding if check orientation of axis and level arms (those are
+ values AFTER the rotation) are as provided.
+ 
+\end_layout
+
+\begin_layout Subsection
+Processing POSRS
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Processing-POSRS"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In 
+\series bold
+\emph on
+Process->Process LC 
+\series default
+\emph default
+select
+\end_layout
+
+\begin_layout Itemize
+update data: 
+\emph on
+GNSS Combined
+\end_layout
+
+\begin_layout Itemize
+POSRS Profile: 
+\emph on
+SPAN Airborne (uIRS)
+\end_layout
+
+\begin_layout Itemize
+use POSRS lever arms from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Body2IMU Rotation: 
+\emph on
+180,0,90 
+\end_layout
+
+\begin_layout Subsubsection
+Checking results
+\end_layout
+
+\begin_layout Standard
+Before you analyse LC results, following workflow in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Processing-Workflow"
+
+\end_inset
+
+, its useful to familiarise yourself with the control plots you going to
+ use to check quality of solution.
+ 
+\end_layout
+
+\begin_layout Standard
+Plot 
+\emph on
+Attitude separation
+\emph default
+ to check IMU initialisation.
+ To check final position, and quality of LC results plot 
+\emph on
+Combined Separation, Combined Separation (fix)
+\emph default
+ and
+\emph on
+ IMU/GPS position misclosure
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Heading (orientation of axis) can be checked by plotting 
+\emph on
+Heading minus COG 
+\emph default
+and 
+\emph on
+Attitude(Azimuth/Heading)
+\emph default
+.
+ To check lever arm in 
+\series bold
+\emph on
+Process->Process LC
+\series default
+\emph default
+ go to 
+\series bold
+\emph on
+Advanced...->States 
+\series default
+\emph default
+and check
+\emph on
+ Solve for lever arms.
+ 
+\emph default
+After reprocessing the data plot
+\emph on
+ IMU/IMU-GPS Level Arm
+\emph default
+ and compare results with values given.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Processing Workflow
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Processing-Workflow"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Run all automatic.
+ There should be small separation between pitch and roll (70 arc-sec), aligned
+ with large jumps in heading at the beginning and the end (up to 700 arc-sec).
+ This tend to indicate weak starting (and finishing) angle estimate.
+ Everything else should be smooth (within 70 arc-sec).
+\end_layout
+
+\begin_layout Enumerate
+Plot 
+\emph on
+Acceleration Profile
+\emph default
+ and 
+\emph on
+Body Frame Acceleration
+\emph default
+ to check for suspected static periods using GPS and IMU data respectively.
+ Make sure that dataset start and finish on static period (changing
+\emph on
+ IMU Time Range
+\emph default
+ in 
+\series bold
+\emph on
+Advanced...
+
+\series default
+\emph default
+ if necessary).
+ You can also check 
+\emph on
+Velocity Profile
+\emph default
+ and 
+\emph on
+Body Frame Velocity.
+\end_layout
+
+\begin_layout Enumerate
+Knowing static periods go to 
+\series bold
+\emph on
+Advanced...
+\series default
+\emph default
+and in 
+\series bold
+\emph on
+Method for Initial Alignment
+\series default
+\emph default
+ select 
+\emph on
+Static Coarse+Fine align
+\emph default
+ for both reverse and forward.
+ Use Coarse: 60-100s, Fine 100-200s.
+ If you have longer static dataset extend fine alignment period.
+ Results should be within 10 arc-sec and there should be no separation between
+ pitch and roll.
+ There will be large jumps in heading at the beginning and end (up to 100
+ arc-sec) 
+\end_layout
+
+\begin_layout Enumerate
+Transfer alignment.
+ Use reverse value for forward solution and vice versa.
+ Follow description in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:SPAN-Workflow"
+
+\end_inset
+
+.
+ Results should be within 10 arc-sec for heading and 2 arc-sec for rest.
+ and no separation between pitch and roll.
+ Heading separation should be largest in the middle and no jumps at the
+ beginning/end.
+ 
+\end_layout
+
+\begin_layout Subsection
+Processing SPAN
+\end_layout
+
+\begin_layout Standard
+SPAN data should be processed after POSRS as POSRS results can be used to
+ increase its accuracy.
+ Please created a separate project file for SPAN (it can be in the same
+ folder) following 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Processing-GNSS-data"
+
+\end_inset
+
+.
+ There is no need to process GNSS data again, in 
+\series bold
+\emph on
+Process->Process LC 
+\series default
+\emph default
+select
+\end_layout
+
+\begin_layout Itemize
+update data: 
+\emph on
+External Trajectory 
+\emph default
+(select *.cmb file created during POSRS processing)
+\end_layout
+
+\begin_layout Itemize
+SPAN Profile: 
+\emph on
+SPAN Ground (LCI) 
+\end_layout
+
+\begin_layout Itemize
+use POSRS lever arms from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Body2IMU Rotation: 
+\emph on
+0,0,90
+\end_layout
+
+\begin_layout Subsubsection
+SPAN Workflow
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:SPAN-Workflow"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Run all automatic.
+ This is purely to check if data is ok.
+\end_layout
+
+\begin_layout Enumerate
+After checking for static data run 
+\emph on
+Static Coarse+Fine align
+\emph default
+, suggested settings are Coarse: 120s, Fine 480s.
+ If you have longer static dataset extend fine alignment period.
+ Results should show improvement over previous one
+\end_layout
+
+\begin_layout Enumerate
+If all is correct transfer alignment from POSRS
+\end_layout
+
+\begin_layout Itemize
+In 
+\series bold
+\emph on
+Advanced...
+
+\series default
+\emph default
+ for the 
+\series bold
+\emph on
+Method for Initial Alignment
+\series default
+\emph default
+ select 
+\emph on
+Transfer Aligment (enter known attiude) 
+\emph default
+and press
+\emph on
+ Enter Attitude 
+\emph default
+button.
+ You will do the same for forward and reverse solution.
+\end_layout
+
+\begin_layout Itemize
+Click 
+\emph on
+Get From Trajectory 
+\emph default
+and select 
+\emph on
+reverse
+\emph default
+ POSRS data (*.rim) for forward and 
+\emph on
+forward
+\emph default
+ POSRS data (*.fim) for reverse.
+ Estimated StdDev for both should be similiar.
+ Increase it tenfold (x10) to loosen EKF.
+ 
+\end_layout
+
+\begin_layout Itemize
+Click OK
+\end_layout
+
+\begin_layout Itemize
+Click 
+\emph on
+Enter Position and Velocity
+\emph default
+, click
+\emph on
+ Get from Trajectory
+\emph default
+ and select the same files (they should be already selected).
+ Click 
+\emph on
+Extract
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+I suggest increase estimated StdDev tenfold (x10) to loosen EKF.
+ 
+\end_layout
+
+\begin_layout Itemize
+Click OK three times to get back to 
+\emph on
+Process Loosely Coupled
+\emph default
+ screen.
+\end_layout
+
+\begin_layout Subsection
+Processing Microstrain
+\end_layout
+
+\begin_layout Standard
+Please created a separate project file for SPAN (it can be in the same folder)
+ following 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:Processing-GNSS-data"
+
+\end_inset
+
+.
+ There is no need to process GNSS data again, in 
+\series bold
+\emph on
+Process->Process LC 
+\series default
+\emph default
+select
+\end_layout
+
+\begin_layout Itemize
+SPAN Profile: 
+\emph on
+SPAN Ground (ADIS16488) 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+go to 
+\series bold
+\emph on
+Advanced...->States
+\end_layout
+
+\begin_layout Itemize
+Under 
+\emph on
+Error Model
+\emph default
+ uncheck 
+\emph on
+Lock Selection
+\emph default
+ and select 
+\series bold
+\emph on
+Automotive (Low Precision)
+\series default
+\emph default
+ error model
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+use POSRS lever arms from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Body2IMU Rotation: 
+\emph on
+180,0,90 
+\end_layout
+
+\begin_layout Standard
+Follow 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:SPAN-Workflow"
+
+\end_inset
+
+ to obtain all results.
+ Bear in mind that this sensor is of much lower accuracy the other ones
+ and it might be more logical to focus on the small set of data.
+\end_layout
+
+\begin_layout Section
+Simulating GNSS outage
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Simulating-GNSS-outage"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As a part of your assignment you will simulate a GNSS outage.
+ To do so remove epochs from GNSS generated trajectory, generated in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sub:Processing-POSRS"
+
+\end_inset
+
+.
+ Each epoch is saved in following record
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting} [language=Matlab,backgroundcolor=
+\backslash
+color{lightgray},frame=single,basicstyle=
+\backslash
+footnotesize,numbers=left,numbersep=5pt, numberstyle=
+\backslash
+tiny
+\backslash
+color{mygray}]
+\end_layout
+
+\begin_layout Plain Layout
+
+Out {Tim: 121252.00 121252.000000 1777 			  %GPS second HHMMSS.SSS GPS Week
+\end_layout
+
+\begin_layout Plain Layout
+
+Geo: 52 57 07.03189 -1 11 00.40441 80.5757 0.061 	%vehicle location
+\end_layout
+
+\begin_layout Plain Layout
+
+Loc: 37.235 2.335 -10.564 0.054 -0.028 -0.002 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Sta: 2 0.025500 1.31 1.420 0.960 1.040 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Rms: 0.0282 2.180 0.000 0.023 0.0406 7.880 1.126 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Var: 3.85994e-003 6.52259e-004 ...	
+\end_layout
+
+\begin_layout Plain Layout
+
+Ecf: -7.457 37.397 -7.025 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Acc: -0.010 0.013 0.025 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Flg: K L 7 6 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Sep: 0.136 -0.211 0.151 0.069 0.108 0.077 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Wgt: 2 2 39 61 	
+\end_layout
+
+\begin_layout Plain Layout
+
+Cov: -4.00800e-004 7.41043e-005 ...
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Delete 
+\emph on
+Out{...}
+\emph default
+ to remove whole epoch.
+ Make sure you don't remove static data used by IMU to initialise.
+ Start with small data gaps and slowly increase their duration.
+ Make sure you copy and rename relevant *.cmb file and you work on COPY!
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A very useful tool during this exercise is 
+\series bold
+\emph on
+View->Processing History
+\series default
+\emph default
+, which you can use to restore previous settings.
+ Note that this will not restore any changes to external files so make sure
+ you always work on the COPY!
+\end_layout
+
+\begin_layout Section
+Exporting final results
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Exporting-final-results"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Graphical results
+\end_layout
+
+\begin_layout Standard
+To save all active plots use
+\series bold
+\emph on
+ Output->Build HTML Report 
+\series default
+.
+ 
+\emph default
+Data will be saved in .
+\backslash
+Html folder.
+\end_layout
+
+\begin_layout Standard
+Save and check all the plots listed in this walktrough.
+ You should have at least two set of plots (testing and final) for each
+ sensor! 
+\end_layout
+
+\begin_layout Standard
+To output trajectory to Google Earth use
+\series bold
+\emph on
+ Output->Export to Google Earth...
+\end_layout
+
+\begin_layout Subsubsection
+Coordinates
+\end_layout
+
+\begin_layout Standard
+To output post-processed ASCII go to 
+\series bold
+\emph on
+Output->Export Wizard
+\series default
+\emph default
+ 
+\end_layout
+
+\begin_layout Itemize
+select profile (I suggest outputting in XYZ)
+\end_layout
+
+\begin_layout Itemize
+make sure you use 
+\series bold
+\emph on
+processing datum
+\end_layout
+
+\begin_layout Itemize
+define lever arm (use 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+, if you estimate results for the same antenna) and time interval (up to
+ 200Hz)
+\end_layout
+
+\begin_layout Itemize
+uncheck 
+\emph on
+View ASCII 
+\emph default
+and click
+\emph on
+ Finish
+\end_layout
+
+\begin_layout Subsubsection
+Checking results
+\end_layout
+
+\begin_layout Standard
+Check IMU solution against GNSS one.
+ Export with the same arms as for IMU calculation, SUBTRACT any L1/L2 height
+ offsets.
+ It should agree to few mm in clean environment.
+ 
+\end_layout
+
+\begin_layout Standard
+Check between different IMU solutions.
+ SPAN/POSRS should agree on cm level.
+\end_layout
+
+\begin_layout Subsection*
+NOTES
+\end_layout
+
+\begin_layout Standard
+Lever arms should be calculated to ARP (this won't include any L1/L2 height
+ offsets).
+ If you can use 
+\series bold
+\emph on
+Export Wizard
+\series default
+\emph default
+ make sure that combined solution exist (*.cmb).
+ In IE8.50 it is always generated after each processing run.
+ It can also be created using 
+\series bold
+\emph on
+Process->Combine Solution 
+\series default
+\emph default
+but use extreme caution if using this option.
+\end_layout
+
+\begin_layout Standard
+To convert results to OSGB use Grid InQuest
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.ordnancesurvey.co.uk/docs/gps/grid-inquest-executable.zip
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Appendixes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{./pic/VanLayout.tex}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+input{./pic/VanLayout.tex}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+centering
+\backslash
+flushright
+\backslash
+resizebox{!}{
+\backslash
+textheigh}{%%UR STUFF HERE%}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Van experiment layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Van-experiment-layout"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="5">
+<features booktabs="true" tabularvalignment="middle" tabularwidth="12cm">
+<column alignment="center" valignment="middle" width="1cm">
+<column alignment="center" valignment="top" width="2cm">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="center" valignment="top" width="5cm">
+<column alignment="center" valignment="top" width="0pt">
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+rowcolor{lightgray}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Antenna Location
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" bottomline="true" usebox="none" width="9cm">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lever Arm
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+SENSOR->ANTENNA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" bottomline="true" rotate="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+POSRS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.198
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.830
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.552
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1.134
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.338
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.557
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" bottomline="true" rotate="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+SPAN
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RR
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.307
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-0.626
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.543
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="middle" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+RL
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-1.025
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.542
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.583
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Lever Arm Values
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Lever-Arm-Values"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

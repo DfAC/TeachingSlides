@@ -34,10 +34,10 @@
 \paperfontsize default
 \spacing single
 \use_hyperref true
-\pdf_title "Closely coupled integration of Locata and GPS for Engineering Applications"
+\pdf_title "Inertial Explorer Manual "
 \pdf_author "Lukasz K Bonenberg"
-\pdf_subject "Viva doc"
-\pdf_keywords "Locata, GPS, Integration, AR OTF, pseudolite,engineering, GNSS"
+\pdf_subject "teaching"
+\pdf_keywords "Integration, GNSS, IMU, LC"
 \pdf_bookmarks true
 \pdf_bookmarksnumbered false
 \pdf_bookmarksopen false
@@ -147,7 +147,7 @@ H24VLP Location Technology
 
 
 \series bold
-Inertial Explorer Manual for POSRS and SPAN
+Inertial Explorer Manual
 \end_layout
 
 \begin_layout Author
@@ -1072,7 +1072,7 @@ reference "sub:Processing-POSRS"
 
 \begin_layout Standard
 \begin_inset ERT
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1233,6 +1233,100 @@ To output trajectory to Google Earth use
 \series bold
 \emph on
  Output->Export to Google Earth...
+\end_layout
+
+\begin_layout Subsection*
+NOTES
+\end_layout
+
+\begin_layout Standard
+In case of multiple exports it recommended to change the output parameters.
+ To do so right click on the background map window, go to 
+\series bold
+\emph on
+Export
+\series default
+\emph default
+ tab and set the following:
+\end_layout
+
+\begin_layout Description
+Optimize
+\begin_inset space ~
+\end_inset
+
+output
+\begin_inset space ~
+\end_inset
+
+for
+\begin_inset space ~
+\end_inset
+
+trajectory
+\begin_inset space ~
+\end_inset
+
+comparison
+\begin_inset space ~
+\end_inset
+
+in
+\begin_inset space ~
+\end_inset
+
+GE creates new colour for the each export (it also means that export don’t
+ follow Quality Numbers any more), files are not overwritten and a new folder
+ is created if the 
+\emph on
+Run
+\emph default
+ descriptor has changed.
+\end_layout
+
+\begin_layout Description
+Use
+\begin_inset space ~
+\end_inset
+
+concise
+\begin_inset space ~
+\end_inset
+
+epoch
+\begin_inset space ~
+\end_inset
+
+description
+\begin_inset space ~
+\end_inset
+
+for
+\begin_inset space ~
+\end_inset
+
+lower
+\begin_inset space ~
+\end_inset
+
+memory
+\begin_inset space ~
+\end_inset
+
+usage shortens output information allowing for quick display in Google Earth
+\end_layout
+
+\begin_layout Standard
+Note that First and last option of this page (
+\emph on
+Hold epochs and events to ground 
+\emph default
+and 
+\emph on
+Output MSL height for better compatibility with GE elevation data, using
+\emph default
+) are mutualy exclusinve and should be used respectively for terrestrial
+ (ground) and aviation data only.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1434,7 +1528,7 @@ name "fig:Van-experiment-layout"
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -1749,7 +1843,7 @@ RR
 \begin_inset Text
 
 \begin_layout Plain Layout
-RL
+FL
 \end_layout
 
 \end_inset

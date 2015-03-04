@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass article
+\textclass book
 \begin_preamble
 
 
@@ -133,47 +133,58 @@ first macro below;
 
 \end_layout
 
-\begin_layout Title
-\begin_inset VSpace 5cm*
-\end_inset
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
 
+\begin_layout Plain Layout
 
+%restart numbering for each Part
 \end_layout
 
-\begin_layout Title
-H24VLP Location Technology
-\begin_inset Newline newline
-\end_inset
+\begin_layout Plain Layout
 
 
-\series bold
-Practical 2
-\begin_inset Newline newline
-\end_inset
-
-Introduction to Inertial Explorer
+\backslash
+makeatletter
 \end_layout
 
-\begin_layout Author
-\begin_inset VSpace 2cm*
-\end_inset
+\begin_layout Plain Layout
 
 
+\backslash
+@addtoreset{section}{part}
 \end_layout
 
-\begin_layout Author
-Dr Lukasz Kosma Bonenberg
+\begin_layout Plain Layout
+
+
+\backslash
+makeatother 
 \end_layout
 
-\begin_layout Author
-\begin_inset VSpace 10cm*
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
 \begin_inset Graphics
 	filename pic/00_logo.png
 	lyxscale 50
@@ -182,14 +193,28 @@ Dr Lukasz Kosma Bonenberg
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-\align center
-\begin_inset VSpace bigskip
+\begin_inset VSpace 5cm*
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+H24VLP Location Technology
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Project 2
+\begin_inset Newline newline
+\end_inset
+
+Introduction to Inertial Explorer
+\end_layout
+
+\begin_layout Author
+Dr Lukasz Kosma Bonenberg
 \end_layout
 
 \begin_layout Standard
@@ -209,13 +234,29 @@ thispagestyle{empty}%no number on this page
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Part
+\begin_layout Chapter
 Introduction
 \end_layout
 
@@ -224,13 +265,9 @@ Outline
 \end_layout
 
 \begin_layout Standard
-This document accompany practical classess of H24VLP 
-\series bold
-Location Technology Practical 
-\series default
-and outline both Project 2 requirements as well as introduction to the Inertial
- Explorer 8.50, required to complete second project of H24VLP.
- This document consist of following parts:
+This document is an  introduction to the Inertial Explorer 8.50, supporting
+ second project of H24VLP Location Technology Practical.
+ It consist of following parts:
 \end_layout
 
 \begin_layout Description
@@ -258,7 +295,7 @@ Explorer explaining basics of using the software with the dataset provided;
 \end_layout
 
 \begin_layout Description
-Appendix summaring information needed to successfully process the data.
+Appendix summary of information needed to successfully process the data.
 \end_layout
 
 \begin_layout Section
@@ -390,7 +427,8 @@ Description of supporting document
 \begin_layout Standard
 During the fist week you will be provided with all relevant data files,
  which you should copy to local folder on your computer.
- Please make a backup of all your work before leaving the Fotogrametry Lab.
+ Please make a backup of all your work before leaving the Photogrammetry
+ Lab.
  This should include all RAW data files and any 
 \emph on
 Inertial Explorer
@@ -414,25 +452,7 @@ H24VLP
 Inertial Explorer 
 \emph default
 native format.
- Approximately 50 minutes long dataset was collected using NGI van, equipped
- with three different type of IMU.
- Trial was run in around Nottingham.
- NGB2 was used as reference station for the duration of the trials.
- All reference values can be found in 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "fig:Van-experiment-layout"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "tab:Lever-Arm-Values"
-
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -455,6 +475,36 @@ SPAN_54.* IMU and GNSS data for SPAN receiver (tactical grade);
 microstrain.imr IMU data for low cost Microstrain receiver;
 \end_layout
 
+\begin_layout Standard
+Approximately 90 minutes long dataset was collected using NGI van, equipped
+ with three different type of IMU.
+ Trial was run in around Nottingham (see 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Van-trajectory"
+
+\end_inset
+
+).
+ Each dataset consist of static period at the beginning and the end.
+ NGB2 was used as a reference station for the duration of the trials.
+ All reference values can be found in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Van-experiment-layout"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Supporting Document
 \end_layout
@@ -463,19 +513,23 @@ Supporting Document
 Following document are also provided for your reference:
 \end_layout
 
-\begin_layout Itemize
-InertialExplorer850_Manual.pdf
+\begin_layout Description
+POSRS.pdf Document outlining POSRS characteristics;
 \end_layout
 
-\begin_layout Itemize
-IMU-LCI.pdf
+\begin_layout Description
+SPAN.pdf Document outlining SPAN characteristics;
 \end_layout
 
-\begin_layout Itemize
-SPANBrochure.pdf
+\begin_layout Description
+Microstrain.pdf Document outlining Microstrain characteristics;
 \end_layout
 
-\begin_layout Part
+\begin_layout Description
+InertialExplorer850_Manual.pdf Full manual for IE 8.50 (reference only).
+\end_layout
+
+\begin_layout Chapter
 Introduction to Inertial Explorer
 \end_layout
 
@@ -583,13 +637,26 @@ NOTES
 \end_layout
 
 \begin_layout Standard
-IE use a very strange naming convention for the height.
- As antenna profile height will only be applied to export arms need to INCLUDE
- antenna height.
- In other words to match GPS and IMU one need to: GPS (add_ht), Arms (add_ht),
- Export (no_ht!).
- This is VERY CONFUSING so I suggest: GPS_Rover (ht=0), Arms (add_ht), Export
- (add_ht)
+To avoid any confusion choose proper antenna and select ht 0.00.
+ Note that, if you followed instruction correctly, your GNSS and IMU level
+ arm will be calculated to antenna phase centre but output level arm will
+ be estimated to ARP.
+ IE use a very strange naming convention for the height.
+ Antenna profile will not be applied to exported arms, hence you need to
+ INCLUDE profile antenna height offset.
+ This means that for export only 
+\begin_inset Formula $Arm_{exprt}^{Z}=Arm^{z}+AntProfile^{z}$
+\end_inset
+
+.
+ Relevant Arm values can be read from 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+ and antenna profile from the software itself.
 \end_layout
 
 \begin_layout Section
@@ -706,30 +773,151 @@ This will generate *.cmb file (combined GPS file), which is used in next
 
 \begin_layout Standard
 To check quality of the position use following plots: 
-\emph on
-Combined Separation, Combined Separation(Fix), Estimated Position Accuracy,
- Quality factor, Float/Fixed Ambiguity Status
-\emph default
-.
- You can also get overview summary using 
+\end_layout
+
+\begin_layout Itemize
+Combined Separation
+\end_layout
+
+\begin_layout Itemize
+Combined Separation(Fix)
+\end_layout
+
+\begin_layout Itemize
+Estimated Position Accuracy
+\end_layout
+
+\begin_layout Itemize
+Quality factor
+\end_layout
+
+\begin_layout Itemize
+Float/Fixed Ambiguity Status
+\end_layout
+
+\begin_layout Standard
+To check baseline data use following plots: :
+\end_layout
+
+\begin_layout Itemize
+Local Level Vector (pay attention to height component !)
+\end_layout
+
+\begin_layout Itemize
+Distance Separation
+\end_layout
+
+\begin_layout Itemize
+RMS - Carrier Phase
+\end_layout
+
+\begin_layout Standard
+You can also get overview summary using 
 \series bold
 \emph on
 View->Processing summary
 \series default
 \emph default
 .
+ 
+\end_layout
+
+\begin_layout Subsection
+Introducing static data in GNSS processing
 \end_layout
 
 \begin_layout Standard
-To check baseline check 
+IE will automatically detect longer static periods, but for the intialisation
+ of IMU it is advisable to identify static periods at the begining and end
+ of dataset.
+ To do so:
+\end_layout
+
+\begin_layout Itemize
+use 
 \emph on
-Local Level Vector
+Acceleration Profile
 \emph default
- (pay attention to height component !) and 
+ plot to identify static periods.
+\end_layout
+
+\begin_layout Itemize
+create new file Static.txt with each row identifying static period as NAME
+\begin_inset space ~
+\end_inset
+
+START_TIME
+\begin_inset space ~
+\end_inset
+
+END_TIME
+\begin_inset space ~
+\end_inset
+
+NOTE (see IE manual page 32 for details).
+ Compare example below: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting} [language=Matlab,backgroundcolor=
+\backslash
+color{lightgray},frame=single,basicstyle=
+\backslash
+footnotesize,numbers=left,numbersep=5pt, numberstyle=
+\backslash
+tiny
+\backslash
+color{mygray}]
+\end_layout
+
+\begin_layout Plain Layout
+
+NGI_Start 201200.0 203505.0 Intial_Period_NGB_Yard
+\end_layout
+
+\begin_layout Plain Layout
+
+NGI_End 221200.0 223505.0 End_Period_NGB_Yard
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+use 
+\series bold
+File->GPB Utility->Insert Static/Kinematic Markers
+\series default
+ to import static data
+\end_layout
+
+\begin_layout Itemize
+process GNSS data again
+\end_layout
+
+\begin_layout Itemize
+Use 
 \emph on
-Distance Separation
+Static Session Convergence
 \emph default
-.
+ plot to assess each period
+\end_layout
+
+\begin_layout Itemize
+Use any of plots described in previous section to compare results.
 \end_layout
 
 \begin_layout Subsection*
@@ -737,10 +925,46 @@ NOTES
 \end_layout
 
 \begin_layout Standard
+Every plot have menu accessible by right clicking on it.
+ Selecting 
+\emph on
+Properties 
+\emph default
+allows to modify plot display
+\emph on
+.
+
+\emph default
+ Plot range can be modified from same menu using 
+\emph on
+X-Axis
+\emph default
+ and 
+\emph on
+Y-Axis.
+ Apply to All 
+\emph default
+subcommand match all open plots to the current one.
+
+\emph on
+ Compute statistics for...
+ 
+\emph default
+provide quantification of plot data.
+ Use 
+\series bold
+\emph on
+Ctr+C
+\series default
+\emph default
+ to copy window content.
+\end_layout
+
+\begin_layout Standard
 If you ever close background map, use 
 \series bold
 \emph on
-Output->Show Map window
+Output->Show Map window 
 \end_layout
 
 \begin_layout Section
@@ -764,8 +988,15 @@ e and
 Velocity profile
 \emph default
 .
- Before proceeding if check orientation of axis and level arms (those are
- values AFTER the rotation) are as provided.
+ Before proceeding check orientation of axis and level arms (those are values
+ AFTER the rotation) are as provided in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "tab:Lever-Arm-Values"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -1270,6 +1501,47 @@ reference "sub:SPAN-Workflow"
 \end_layout
 
 \begin_layout Section
+Processing IMU on its own
+\end_layout
+
+\begin_layout Standard
+After defining starting and ending orientation for IMU (using 
+\emph on
+Transfer Aligment
+\emph default
+) it is possible to process IMU only data.
+ To do so:
+\end_layout
+
+\begin_layout Itemize
+in 
+\series bold
+Process->Process LC
+\series default
+ check 
+\series bold
+Process IMU Data only 
+\series default
+box
+\end_layout
+
+\begin_layout Itemize
+depending on desired outcome select Both/Forward/Reverse in 
+\series bold
+Processing Direction
+\end_layout
+
+\begin_layout Itemize
+provide proper description
+\end_layout
+
+\begin_layout Itemize
+click 
+\series bold
+Process
+\end_layout
+
+\begin_layout Section
 Simulating GNSS outage
 \begin_inset CommandInset label
 LatexCommand label
@@ -1398,10 +1670,22 @@ Out{...}
  Make sure you don't remove static data used by IMU to initialise.
  Start with small data gaps and slowly increase their duration.
  Make sure you copy and rename relevant *.cmb file and you work on COPY!
-\begin_inset VSpace bigskip
-\end_inset
+\end_layout
 
+\begin_layout Standard
+I suggest experimenting with different settings of 
+\series bold
+Processing Direction
+\series default
+ in 
+\series bold
+Process->Process LC 
+\series default
+to fully understand system accuracy.
+\end_layout
 
+\begin_layout Subsection*
+NOTES
 \end_layout
 
 \begin_layout Standard
@@ -1427,7 +1711,7 @@ name "sec:Exporting-final-results"
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Graphical results
 \end_layout
 
@@ -1446,7 +1730,7 @@ Html folder.
 \end_layout
 
 \begin_layout Standard
-Save and check all the plots listed in this walktrough.
+Save and check all the plots listed in this walk-trough.
  You should have at least two set of plots (testing and final) for each
  sensor! 
 \end_layout
@@ -1552,7 +1836,7 @@ Output MSL height for better compatibility with GE elevation data, using
  (ground) and aviation data only.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Coordinates
 \end_layout
 
@@ -1606,7 +1890,7 @@ and click
  Finish
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Checking results
 \end_layout
 
@@ -1674,7 +1958,7 @@ http://www.ordnancesurvey.co.uk/docs/gps/grid-inquest-executable.zip
 .
 \end_layout
 
-\begin_layout Part
+\begin_layout Chapter
 Appendixes
 \end_layout
 
@@ -1686,7 +1970,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset ERT
@@ -1763,10 +2047,13 @@ name "fig:Van-experiment-layout-1-1"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset ERT
@@ -1831,6 +2118,74 @@ name "fig:Van-experiment-layout"
 \end_inset
 
 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pic/TrajectoryLayout.jpg
+	height 12cm
+	clip
+	rotateOrigin leftTop
+	groupId vertical
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+resizebox{!}{
+\backslash
+textheight}{%Ur object here%}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Test route plan
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Van-trajectory"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1838,7 +2193,7 @@ name "fig:Van-experiment-layout"
 placement h
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -2221,7 +2576,7 @@ name "tab:Lever-Arm-Values"
 placement h
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -2758,7 +3113,7 @@ Not processed
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Quality Number description
+IE Quality Number description
 \begin_inset CommandInset label
 LatexCommand label
 name "tab:Quality-Number-description"

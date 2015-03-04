@@ -147,7 +147,11 @@ H24VLP Location Technology
 
 
 \series bold
-Inertial Explorer Manual
+Practical 2
+\begin_inset Newline newline
+\end_inset
+
+Introduction to Inertial Explorer
 \end_layout
 
 \begin_layout Author
@@ -158,7 +162,7 @@ Inertial Explorer Manual
 \end_layout
 
 \begin_layout Author
-Lukasz Kosma Bonenberg
+Dr Lukasz Kosma Bonenberg
 \end_layout
 
 \begin_layout Author
@@ -211,31 +215,81 @@ thispagestyle{empty}%no number on this page
 
 \end_layout
 
+\begin_layout Part
+Introduction
+\end_layout
+
+\begin_layout Section
+Outline
+\end_layout
+
 \begin_layout Standard
-This document outline the use of Inertial Explorer 8.50 for the 
+This document accompany practical classess of H24VLP 
 \series bold
-H24VLP Location Technology Practical
+Location Technology Practical 
 \series default
-.
- The goal of this practical is to study the performance of three types of
- IMU sensors (navigation grade, tactical grade and low cost MEMS one) and
- its performance in aiding GNSS solution in three different environments:
+and outline both Project 2 requirements as well as introduction to the Inertial
+ Explorer 8.50, required to complete second project of H24VLP.
+ This document consist of following parts:
 \end_layout
 
-\begin_layout Itemize
-semi-urban
+\begin_layout Description
+
+\series bold
+Introduction
+\series default
+ which you are reading now;
 \end_layout
 
-\begin_layout Itemize
-rural
+\begin_layout Description
+Introduction
+\begin_inset space ~
+\end_inset
+
+to
+\begin_inset space ~
+\end_inset
+
+Inertial
+\begin_inset space ~
+\end_inset
+
+Explorer explaining basics of using the software with the dataset provided;
 \end_layout
 
-\begin_layout Itemize
-dense urban (down town)
+\begin_layout Description
+Appendix summaring information needed to successfully process the data.
+\end_layout
+
+\begin_layout Section
+Goal of the practical
 \end_layout
 
 \begin_layout Standard
-Study should include analysis of existing performance (as outlined in 
+The goal of this practical is to to assess the performance of integrated
+ GNSS and INS for navigation and tracking applications, using a moving platform
+ and to develop a full understanding of the advantages and limitations of
+ integrated GNSS and INS system.
+ You are to analyse the performance of three types of IMU sensors (navigation
+ grade, tactical grade and low cost MEMS one) collected during route combining
+ three different environments:
+\end_layout
+
+\begin_layout Itemize
+semi-urban;
+\end_layout
+
+\begin_layout Itemize
+rural;
+\end_layout
+
+\begin_layout Itemize
+dense urban (down town).
+\end_layout
+
+\begin_layout Standard
+To this end you will process each IMU combination separately (as outlined
+ in 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "sec:Processing-GNSS-data"
@@ -249,7 +303,10 @@ reference "sec:Processing-Loosely-Coupled"
 
 \end_inset
 
-) and performance during GNSS outage (as outlined in 
+).
+ After that you will be required to visualise performance of each of the
+ IMUs using GNSS denied environment, by introducing artificial GNSS gaps
+ (outage) in the GNSS data set (as outlined in 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "sec:Simulating-GNSS-outage"
@@ -257,10 +314,20 @@ reference "sec:Simulating-GNSS-outage"
 \end_inset
 
 ).
+ Duration of those gaps should allow you to properly characterise each of
+ the IMUs.
+ All this data processing should allow you to answer the following:
 \end_layout
 
 \begin_layout Standard
-Description of expected output can be found in 
+
+\series bold
+Characterise the performance of each integrated GNSS and INS system for
+ navigation and tracking applications.
+\end_layout
+
+\begin_layout Standard
+A brief description of expected output can be found in 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "sec:Exporting-final-results"
@@ -268,26 +335,90 @@ reference "sec:Exporting-final-results"
 \end_inset
 
 .
- Bear in mind that this is only an broad outline and details are up to you.
+ Bear in mind that this is only an broad outline and we expect, that with
+ your existing experience, you can complete this task on your own.
  
-\begin_inset VSpace bigskip
-\end_inset
+\end_layout
 
-
+\begin_layout Section
+Layout of the practical
 \end_layout
 
 \begin_layout Standard
-Both IMU and GNSS data has already been collected and converted to 
+This practical will span two supervised lab classes, giving you knowledge
+ to complete the task.
+ Apart from that, you are expected to work in your own time, and to facilitate
+ this, each group will be provided with two IE dongles for the duration
+ of thee weeks.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+Week
+\begin_inset space ~
+\end_inset
+
+1 Introduction to the practical.
+ By the end you should have processed all your GNSS data and started processing
+ IMU data.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+Week
+\begin_inset space ~
+\end_inset
+
+2 IMU processing.
+ By the end you should have processed all IMU data and start introducing
+ data gaps.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+Week
+\begin_inset space ~
+\end_inset
+
+3 Group presentation.
+\end_layout
+
+\begin_layout Section
+Description of supporting document
+\end_layout
+
+\begin_layout Standard
+During the fist week you will be provided with all relevant data files,
+ which you should copy to local folder on your computer.
+ Please make a backup of all your work before leaving the Fotogrametry Lab.
+ This should include all RAW data files and any 
+\emph on
+Inertial Explorer
+\emph default
+ generated files.
+ 
+\end_layout
+
+\begin_layout Subsection
+Data
+\end_layout
+
+\begin_layout Standard
+Data required for this practical (three types of IMU and GNSS) have been
+ already collected by 
+\series bold
+H24VLP
+\series default
+ staff and converted to 
 \emph on
 Inertial Explorer 
 \emph default
 native format.
- Please copy relevant files to local folder on your computer and start 
-\emph on
-Inertial Explorer
-\emph default
-.
- All relevant information are presented in 
+ Approximately 50 minutes long dataset was collected using NGI van, equipped
+ with three different type of IMU.
+ Trial was run in around Nottingham.
+ NGB2 was used as reference station for the duration of the trials.
+ All reference values can be found in 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "fig:Van-experiment-layout"
@@ -302,6 +433,55 @@ reference "tab:Lever-Arm-Values"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Those files are:
+\end_layout
+
+\begin_layout Description
+NGB2.* GNSS data from NGB2 reference station;
+\end_layout
+
+\begin_layout Description
+POSRS.* IMU and GNSS data for POSRS receiver (navigation grade);
+\end_layout
+
+\begin_layout Description
+SPAN_54.* IMU and GNSS data for SPAN receiver (tactical grade);
+\end_layout
+
+\begin_layout Description
+microstrain.imr IMU data for low cost Microstrain receiver;
+\end_layout
+
+\begin_layout Subsection
+Supporting Document
+\end_layout
+
+\begin_layout Standard
+Following document are also provided for your reference:
+\end_layout
+
+\begin_layout Itemize
+InertialExplorer850_Manual.pdf
+\end_layout
+
+\begin_layout Itemize
+IMU-LCI.pdf
+\end_layout
+
+\begin_layout Itemize
+SPANBrochure.pdf
+\end_layout
+
+\begin_layout Part
+Introduction to Inertial Explorer
+\end_layout
+
+\begin_layout Standard
+Following section explains basics of using IE.
+ For more information please refer to Inertial Explorer Manual provided.
 \end_layout
 
 \begin_layout Section
@@ -359,7 +539,7 @@ I would like add Base Station Data
 
 \begin_deeper
 \begin_layout Itemize
-Don't check any options 
+Leave all options unchecked.
 \end_layout
 
 \end_deeper
@@ -373,7 +553,7 @@ Select base station GNSS data and make sure that
 \series bold
 NGB2
 \series default
- settings are
+ settings are:
 \end_layout
 
 \begin_deeper
@@ -404,8 +584,8 @@ NOTES
 
 \begin_layout Standard
 IE use a very strange naming convention for the height.
- Ant height will only be applied to export, Arms need to INCLUDE antenna
- height.
+ As antenna profile height will only be applied to export arms need to INCLUDE
+ antenna height.
  In other words to match GPS and IMU one need to: GPS (add_ht), Arms (add_ht),
  Export (no_ht!).
  This is VERY CONFUSING so I suggest: GPS_Rover (ht=0), Arms (add_ht), Export
@@ -457,13 +637,12 @@ File->Add precise Files
 \end_layout
 
 \begin_layout Itemize
-Set proper time and date, uncheck GLONASS and press Download for GPS data
- 
+Set proper time and date, uncheck GLONASS and press Download for GPS data;
 \end_layout
 
 \begin_layout Itemize
 Set proper time and date, check GLONASS and press Download for GLONASS data
- (some files will be overwritten)
+ (some files will be overwritten);
 \end_layout
 
 \begin_layout Itemize
@@ -473,7 +652,7 @@ Press OK to exit window In
 View->Project Overview
 \series default
 \emph default
- you should be able to see all the files you added
+ you should be able to see all the files you added.
 \end_layout
 
 \begin_layout Subsection
@@ -491,7 +670,7 @@ Process->Process GNSS
 \begin_layout Itemize
 Processing Method: 
 \emph on
-Differential GNSS
+Differential GNSS;
 \end_layout
 
 \begin_layout Itemize
@@ -499,7 +678,7 @@ Processing Direction:
 \emph on
 Both
 \emph default
- 
+;
 \end_layout
 
 \begin_layout Itemize
@@ -507,18 +686,22 @@ Profile GNSS:
 \emph on
 Ground Vehicle
 \emph default
-, don't change any Advanced..
- options 
+, don't change any 
+\emph on
+Advanced..
+
+\emph default
+ options;
 \end_layout
 
 \begin_layout Itemize
-Add description/User name
+Add description/User name.
 \end_layout
 
 \begin_layout Standard
 This will generate *.cmb file (combined GPS file), which is used in next
  step.
- Please copy and rename the file as G
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1491,11 +1674,15 @@ http://www.ordnancesurvey.co.uk/docs/gps/grid-inquest-executable.zip
 .
 \end_layout
 
-\begin_layout Section
+\begin_layout Part
 Appendixes
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -1542,6 +1729,79 @@ flushright
 resizebox{!}{
 \backslash
 textheigh}{%%UR STUFF HERE%}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Van experiment layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Van-experiment-layout-1-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename pic/VanLayout.pdf
+	width 12cm
+	clip
+	rotateOrigin leftTop
+	groupId large_img
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%
+\backslash
+resizebox{!}{
+\backslash
+textheight}{%Ur object here%}
 \end_layout
 
 \end_inset
@@ -1957,9 +2217,6 @@ name "tab:Lever-Arm-Values"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float table
 placement h
 wide false
@@ -1979,7 +2236,7 @@ width "100col%"
 special "none"
 height "1in"
 height_special "totalheight"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -2524,11 +2781,18 @@ name "tab:Quality-Number-description"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Float table
 placement h
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -2582,14 +2846,14 @@ rowcolor{lightgray}
 \begin_layout Plain Layout
 
 \series bold
-Duration of outage [s]
+Duration of GNSS outage [s]
 \series default
 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
-No GNSS information.
+Artificially generated, no valid GNSS information.
 \end_layout
 
 \end_inset
@@ -2776,6 +3040,579 @@ SPAN
 
 \begin_layout Plain Layout
 Approximate positional drift value per GNSS outage
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="8">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="2.5cm">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="1.5cm">
+<column alignment="center" valignment="top" width="1cm">
+<column alignment="center" valignment="top" width="1cm">
+<column alignment="center" valignment="top" width="1cm">
+<column alignment="center" valignment="top" width="1cm">
+<column alignment="center" valignment="middle" width="3cm">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Duration of GNSS outage [s]
+\series default
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Artificially generated, no valid GNSS information.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" rotate="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Drift value [m]
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+One way
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Combined (Two ways)
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+56
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+401
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+56
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+401
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="middle" rotate="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+cmidrule(lr){1-1}
+\backslash
+cmidrule(rl){2-4}
+\backslash
+cmidrule(rl){5-7}
+\end_layout
+
+\end_inset
+
+
+\series bold
+POSRS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.30?
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N/A
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.83
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.91
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+SPAN 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.80
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.90
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+127
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.43
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.50
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.83
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+rowcolor{lightgray}
+\end_layout
+
+\end_inset
+
+
+\series bold
+Microstrain
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+258
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+255
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2500
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+IMU positional drift during er GNSS outage, based on 2014 results
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset

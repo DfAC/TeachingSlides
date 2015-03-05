@@ -352,8 +352,8 @@ reference "sec:Simulating-GNSS-outage"
 
 ).
  Duration of those gaps should allow you to properly characterise each of
- the IMUs.
- All this data processing should allow you to answer the following:
+ the IMUs and combined with exploratory analysis of all results should allow
+ you to answer the following:
 \end_layout
 
 \begin_layout Standard
@@ -563,9 +563,7 @@ and go to
 \begin_layout Itemize
 Navigate to project folder and name processing accordingly (SPAN, POSRS,
  MicroStrain ect).
- 
-\emph on
-Please created a separate project file for each IMU (it can be in the same
+ Please created a separate project file for each IMU (it can be in the same
  folder).
  
 \end_layout
@@ -575,10 +573,17 @@ Please created a separate project file for each IMU (it can be in the same
 Select GNSS & IMU files
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+SPAN GNSS receiver is more advanced then POSRS one.
+ I suggest using SPAN GNSS data for all IMU datasets.
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 antenna height 0m, use antenna profile as per 
 \begin_inset CommandInset ref
-LatexCommand ref
+LatexCommand formatted
 reference "fig:Van-experiment-layout"
 
 \end_inset
@@ -637,15 +642,13 @@ NOTES
 \end_layout
 
 \begin_layout Standard
-To avoid any confusion choose proper antenna and select ht 0.00.
+To avoid any confusion choose proper antenna model and select ht 0.00.
  Note that, if you followed instruction correctly, your GNSS and IMU level
- arm will be calculated to antenna phase centre but output level arm will
- be estimated to ARP.
- IE use a very strange naming convention for the height.
- Antenna profile will not be applied to exported arms, hence you need to
- INCLUDE profile antenna height offset.
- This means that for export only 
-\begin_inset Formula $Arm_{exprt}^{Z}=Arm^{z}+AntProfile^{z}$
+ arm will be calculated to antenna ARP but output level arm will be estimated
+ to antenna phase centre .
+ This means that for export only your level arm has to be corrected using
+ equation 
+\begin_inset Formula $Arm_{exprt}^{Z}=Arm^{z}-AntProfile_{L1}^{z}$
 \end_inset
 
 .
@@ -656,7 +659,11 @@ reference "tab:Lever-Arm-Values"
 
 \end_inset
 
- and antenna profile from the software itself.
+ and antenna profile from the IE (
+\series bold
+View->Project Overview
+\series default
+) .
 \end_layout
 
 \begin_layout Section
@@ -704,12 +711,15 @@ File->Add precise Files
 \end_layout
 
 \begin_layout Itemize
-Set proper time and date, uncheck GLONASS and press Download for GPS data;
+Set proper time and date, check GLONASS and press Download for combined
+ GPS and GLONASS data (some files will be overwritten);
 \end_layout
 
 \begin_layout Itemize
-Set proper time and date, check GLONASS and press Download for GLONASS data
- (some files will be overwritten);
+
+\emph on
+Set proper time and date, uncheck GLONASS and press Download for GPS data
+ (clocks are higher resolution then a combined GPS and GLONASS ones);
 \end_layout
 
 \begin_layout Itemize
@@ -766,13 +776,9 @@ Add description/User name.
 \end_layout
 
 \begin_layout Standard
-This will generate *.cmb file (combined GPS file), which is used in next
- step.
- 
-\end_layout
-
-\begin_layout Standard
-To check quality of the position use following plots: 
+Successful processing will generate *.cmb file (combined GPS file), which
+ is used in Loosely Coupled (LC) solution.
+ To check quality of the position use following plots: 
 \end_layout
 
 \begin_layout Itemize
@@ -997,7 +1003,8 @@ reference "tab:Lever-Arm-Values"
 \end_inset
 
 .
- 
+ SPAN GNSS receiver is more advanced then POSRS one.
+ I suggest using SPAN GNSS data for all IMU datasets.
 \end_layout
 
 \begin_layout Subsection
@@ -1028,7 +1035,13 @@ update
 
 data 
 \emph on
-GNSS Combined
+External Trajectory; 
+\emph default
+Use 
+\emph on
+Browser External
+\emph default
+ to select *.cmb file.
 \end_layout
 
 \begin_layout Description
@@ -1083,76 +1096,6 @@ Rotation
 : 
 \emph on
 180,0,90 
-\end_layout
-
-\begin_layout Subsubsection
-Checking results
-\end_layout
-
-\begin_layout Standard
-Before you analyse LC results, following workflow in 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Processing-Workflow"
-
-\end_inset
-
-, its useful to familiarise yourself with the control plots you going to
- use to check quality of solution.
- 
-\end_layout
-
-\begin_layout Standard
-Plot 
-\emph on
-Attitude separation
-\emph default
- to check IMU initialisation.
- To check final position, and quality of LC results plot 
-\emph on
-Combined Separation, Combined Separation (fix)
-\emph default
- and
-\emph on
- IMU/GPS position misclosure
-\emph default
-.
- 
-\end_layout
-
-\begin_layout Standard
-Heading (orientation of axis) can be checked by plotting 
-\emph on
-Heading minus COG 
-\emph default
-and 
-\emph on
-Attitude(Azimuth/Heading)
-\emph default
-.
- To check lever arm in 
-\series bold
-\emph on
-Process->Process LC
-\series default
-\emph default
- go to 
-\series bold
-\emph on
-Advanced...->States 
-\series default
-\emph default
-and check
-\emph on
- Solve for lever arms.
- 
-\emph default
-After reprocessing the data plot
-\emph on
- IMU/IMU-GPS Level Arm
-\emph default
- and compare results with values given.
- 
 \end_layout
 
 \begin_layout Subsubsection
@@ -1249,6 +1192,75 @@ reference "sub:SPAN-Workflow"
  
 \end_layout
 
+\begin_layout Subsubsection
+Checking results
+\end_layout
+
+\begin_layout Standard
+To check quality of solution:
+\end_layout
+
+\begin_layout Itemize
+To check lever arm in 
+\series bold
+\emph on
+Process->Process LC
+\series default
+\emph default
+ go to 
+\series bold
+\emph on
+Advanced...->States 
+\series default
+\emph default
+and check
+\emph on
+ Solve for lever arms.
+ 
+\emph default
+After reprocessing the data plot
+\emph on
+ IMU/IMU-GPS Level Arm
+\emph default
+ and compare results with values given.
+ Make sure to reprocess data without 
+\emph on
+Solve for lever arms 
+\emph default
+for final reslts and remaining plots.
+\end_layout
+
+\begin_layout Itemize
+Plot 
+\emph on
+Attitude Separation
+\emph default
+ to check IMU initialisation.
+\end_layout
+
+\begin_layout Itemize
+Heading (orientation of axis) can be checked by p
+\emph on
+lotting Heading minus COG
+\emph default
+ and 
+\emph on
+Attitude(Azimuth/Heading).
+\end_layout
+
+\begin_layout Itemize
+To check final position, and quality of LC results plot 
+\emph on
+Combined Separation, Combined Separation (fix)
+\emph default
+ and
+\emph on
+ IMU/GPS position misclosure
+\emph default
+.
+ 
+\end_layout
+
 \begin_layout Subsection
 Processing SPAN
 \end_layout
@@ -1274,22 +1286,38 @@ Process->Process LC
 select
 \end_layout
 
-\begin_layout Itemize
-update data: 
+\begin_layout Description
+update
+\begin_inset space ~
+\end_inset
+
+data: 
 \emph on
 External Trajectory 
 \emph default
-(select *.cmb file created during POSRS processing)
+(select same *.cmb file as for POSRS processing)
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 SPAN Profile: 
 \emph on
 SPAN Ground (LCI) 
 \end_layout
 
-\begin_layout Itemize
-use POSRS lever arms from 
+\begin_layout Description
+Lever
+\begin_inset space ~
+\end_inset
+
+Arm
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+Offset use POSRS lever arms from 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "tab:Lever-Arm-Values"
@@ -1299,7 +1327,7 @@ reference "tab:Lever-Arm-Values"
 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 Body2IMU Rotation: 
 \emph on
 0,0,90
@@ -1414,31 +1442,28 @@ Process Loosely Coupled
  screen.
 \end_layout
 
+\begin_layout Subsubsection
+Checking results
+\end_layout
+
+\begin_layout Standard
+Same as for POSRS.
+\end_layout
+
 \begin_layout Subsection
 Processing Microstrain
 \end_layout
 
-\begin_layout Standard
-Please created a separate project file for SPAN (it can be in the same folder)
- following 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "sec:Processing-GNSS-data"
-
+\begin_layout Description
+update
+\begin_inset space ~
 \end_inset
 
-.
- There is no need to process GNSS data again, in 
-\series bold
-\emph on
-Process->Process LC 
-\series default
-\emph default
-select
+data External Trajectory; Use Browser External to select *.cmb file.
 \end_layout
 
-\begin_layout Itemize
-SPAN Profile: 
+\begin_layout Description
+Profile: 
 \emph on
 SPAN Ground (ADIS16488) 
 \end_layout
@@ -1470,8 +1495,16 @@ Automotive (Low Precision)
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
-use POSRS lever arms from 
+\begin_layout Description
+Lever
+\begin_inset space ~
+\end_inset
+
+Arm
+\begin_inset space ~
+\end_inset
+
+Offset use POSRS lever arms from 
 \begin_inset CommandInset ref
 LatexCommand formatted
 reference "tab:Lever-Arm-Values"
@@ -1481,7 +1514,7 @@ reference "tab:Lever-Arm-Values"
 
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
 Body2IMU Rotation: 
 \emph on
 180,0,90 

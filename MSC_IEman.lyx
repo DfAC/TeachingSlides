@@ -591,6 +591,10 @@ reference "fig:Van-experiment-layout"
 
 \end_layout
 
+\begin_layout Itemize
+Measured to APR
+\end_layout
+
 \end_deeper
 \begin_layout Itemize
 I would like add Base Station Data 
@@ -617,13 +621,17 @@ NGB2
 
 \begin_deeper
 \begin_layout Itemize
-antenna height 0.502m, type 
+antenna height 0.502m, profile 
 \emph on
 LEIAR25.R4
 \end_layout
 
 \begin_layout Itemize
 position 52° 57' 06.95636" N 1° 11' 02.39879" W 91.2006m
+\end_layout
+
+\begin_layout Itemize
+Measured to APR
 \end_layout
 
 \end_deeper
@@ -844,7 +852,11 @@ use
 \emph on
 Acceleration Profile
 \emph default
- plot to identify static periods.
+ or 
+\emph on
+Velocity Profile
+\emph default
+ plots to identify static periods.
 \end_layout
 
 \begin_layout Itemize
@@ -905,7 +917,7 @@ end{lstlisting}
 \begin_layout Itemize
 use 
 \series bold
-File->GPB Utility->Insert Static/Kinematic Markers
+View->GNSS Observations->Insert Static/Kinematic Markers
 \series default
  to import static data
 \end_layout

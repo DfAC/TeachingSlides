@@ -1,3 +1,15 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NOTE boxes
+\usepackage{tcolorbox}
+\usepackage{lipsum}
+%\begin{tcolorbox}[colback=red!25]{NOTES}
+\newcommand*{\NOTE}[1]{
+	\begin{tcolorbox}[colback=red!25,colframe=red!70!black,title=NOTES]
+		{#1}
+	\end{tcolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %SHORTHANDS
 %\newcommand*{\Myrange}[3]{$\textrm{\SIrange{#1}{#2}{#3}}$}
 

@@ -1,10 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %NOTE boxes
-\usepackage{tcolorbox}
-\usepackage{lipsum}
-%\begin{tcolorbox}[colback=red!25]{NOTES}
+\usepackage[most]{tcolorbox}
+%\usepackage{lipsum}
+
 \newcommand*{\NOTE}[1]{
-	\begin{tcolorbox}[colback=red!25,colframe=red!70!black,title=NOTES]
+	\begin{tcolorbox}[colback=red!25,colframe=red!70!black,fonttitle=\bfseries,
+		colbacktitle=red!85!black,enhanced,
+		attach boxed title to top center={yshift=-2mm},title=NOTES]
 		{#1}
 	\end{tcolorbox}
 }

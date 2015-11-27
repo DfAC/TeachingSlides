@@ -101,7 +101,7 @@
 	\item Provides RTCM Type 1, 2 \& 3 messages.
 	\item Normal accuracy: 1-2m. 
 	\item Typical latency: 4 seconds.
-	\item Single difference (DGPS) using GPS C/A code \& L1 carrier phase
+	\item Single difference (DGPS) using GPS C/A code
 	\end{itemize}	
 	
 \end{frame}
@@ -112,7 +112,7 @@
 		\item Provides RTCM Type 1, 3, 15 messages.
 		\item Normal accuracy: 1-2m. 
 		\item Typical latency: 4 seconds.
-		\item Single difference (DGPS) using GPS C/A, P code \& L1, L2 carrier phase
+		\item Single difference (DGPS) using GPS C/A and P code
 	\end{itemize}	
 \end{frame}	
 
@@ -131,11 +131,11 @@
 	\begin{itemize}	
 		\item Orbit and clock corrections in JPL GDGPS format
 		\item Normal accuracy: 0.1m planar. 
-		\item Typical latency: 2 seconds with 30 s update rate for clocks and 120s for orbits.
-		\item Precise Point Positioning (PPP) using GPS L1/L2 carrier phase.
+		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+		\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS .
 	\end{itemize}	
 	
-The reference station used in the Standard solution was located 322km distant at Kemaman.
+%The reference station used in the Standard solution was located 322km distant at Kemaman.
 \end{frame}	
 
 \begin{frame}[plain]{VERIPOS Ultra}
@@ -143,7 +143,7 @@ The reference station used in the Standard solution was located 322km distant at
 	\begin{figure}
 		
 		\includegraphics[height=0.8\textheight]{pic/Ultra.png}
-		\caption{VERIPOS Standard and Ultra solutions at a monitor site in Singapore.}
+		\caption{Standard and Ultra solutions at a monitor site in Singapore.}
 	\end{figure}
 	
 \end{frame}
@@ -153,8 +153,8 @@ The reference station used in the Standard solution was located 322km distant at
 	\begin{itemize}	
 		\item Orbit and clock corrections in VERIPOS OCDS format
 		\item Normal accuracy: 0.1m planar. 
-		\item Typical latency: 2 seconds with 30 s update rate for clocks and 120s for orbits.
-		\item Precise Point Positioning (PPP) using GPS and GLONASS L1/L2 carrier phase.
+		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+		\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS .
 	\end{itemize}	
 
 
@@ -191,10 +191,9 @@ Live demo...
 \begin{frame}{Practice}
 	
 	\begin{itemize}
-		\item DL5 will be restarted at 12:00 in order to converge properly.
+		\item LD5 will be restarted at 12:00 in order to converge properly.
 		\item You will start collecting RTK data after 14:00. 
-		\item VERIPOS Ultra uses a different technique. Instead of providing DGPS corrections for
-		distinct reference stations it uses global orbit \& clock correction message.
+		%\item VERIPOS Ultra uses a different technique. Instead of providing DGPS corrections for 		distinct reference stations it uses global orbit \& clock correction message.
 	\end{itemize}
 	
 
@@ -211,10 +210,12 @@ Live demo...
 				\toprule %\rowcolor{lightgray}
 				 Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
 				\midrule
-				NGB5 & ERF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.2065 & at point\\
-				NGB5 & ERF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.3865 & at ARP\footnote{Antenna heigh = 0.18m.}\\
-				NGB5 & ERF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.4280 & at antenna PCO\footnote{Ionsphere free antenna offset is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
-				\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.070524} & \textbf{01 11 1.427085} W & \textbf{91.480} & at antenna PCO\footnote{Converted from ETRF97 to ITRFT2008 at epoch 2015-12-04.} \\
+				NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.2065 & at point\\
+				NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.3865 & at ARP\footnote{Antenna heigh = 0.18m.}\\
+				NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.4280 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
+				\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.070524} & \textbf{01 11 1.427085} W & \textbf{91.480} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2015-12-04.} \\
+				\textbf{NGB5} & ITRF2008 & \textbf{5257.1178421} & \textbf{00111.0237848} W & \textbf{91.480} & at antenna PCO \footnote{Converted to DDMM.MMMMMMM to be compatible with NEMEA GGA string.} \\
+				
 				\bottomrule
 			\end{tabular}%
 			}
@@ -228,7 +229,9 @@ Live demo...
 
 \begin{frame}{How to read Veripos NMEA data}
 	
-	In VERIPOS PPP we solution quality by looking at last flag (as QC is always 5) for ex $GPGGA,183324.00,5257.1178371,N,00111.0236798,W,5,17,0.7,42.76,M,49.01,M,30.5,0268*54$.
+	In VERIPOS PPP we solution quality by looking at last flag (as QC is non informative for PPP) for ex:\\
+	
+\tiny{GPGGA,183324.00,5257.1178371,N,00111.0236798,W,\textbf{5},17,0.7,42.76,M,49.01,M,30.5,\textbf{0268}*54}.
 	
 	\begin{itemize}
 		\item 0268	$ULTRA^2$

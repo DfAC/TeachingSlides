@@ -1,7 +1,5 @@
-\documentclass[12pt]{beamer}
-%
-% Choose how your presentation looks.
-%
+\documentclass[11pt]{beamer}
+
 % For more themes, color themes and font themes, see:
 % http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
 %
@@ -16,12 +14,11 @@
 } 
 %remove navigation symbols at bottom
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}[frame number]
+%\setbeamertemplate{footline}[frame number]
 \setbeamertemplate{footline}[text line] {
 
-	\makebox[.7\paperwidth]{
-		\insertframenumber  /\inserttotalframenumber
-		\hfill
+	\makebox[.9\paperwidth]{
+		\hfill \insertframenumber /\inserttotalframenumber
 	%	\url{http://envirohack.herokuapp.com/}
 	}
 
@@ -47,7 +44,7 @@
 \usepackage{caption}
 %\usepackage{subcaption}
 
-\title[EnviroHack]{H24VSP Project 3 - Introduction to PPP}
+\title[EnviroHack]{H24VSP Project 3 - PPP using DL5}
 \author{Lukasz K Bonenberg}
 \institute{NGI}
 \date{\today}
@@ -59,40 +56,47 @@
 	\titlepage
 \end{frame}
 
-	% Uncomment these lines for an automatically generated outline.
-	\begin{frame}{Outline}
-	  \tableofcontents
-	\end{frame}
+% Uncomment these lines for an automatically generated outline.
+\begin{frame}{Outline}
+	\tableofcontents
+\end{frame}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
 \begin{frame}{Introduction}
-	In this project we will learn more Network RTK and PPP technique, usign Leica GS10 and maritime Veripos LD5 receiver with AsterRx chipset. The goal of the practical is to compare both method.
 	
-	\medskip
-	The aim for this presentation is:
+	Aim of the Project is to compare difference between Network RTK and PPP technique in:
 	\begin{itemize}
-		\item Refresh your knowledge and understanding of PPP technology.
-		\item Highlight differences between two methods. 
-		\item Explain practicalities of using Veripos LD5 receiver.
+		\item convergence time;
+		\item precision - estimated and actual after convergence; 
+		\item accuracy after convergence.
 	\end{itemize}
 	
+	 We will be using:
+	 	\begin{itemize}
+	 		\item Leica GS10;
+	 		\item maritime Veripos LD5 receiver with AsterRx chipset\footnote[frame]{For short introductory video see \url{http://bit.ly/VeriposLD5}.}.
+	 	\end{itemize}
+
 
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{VERIPOS Services}
 
 \begin{frame}{VERIPOS Services}
-	There are three different VERIPOS services:
+	VERIPOS offer following services\footnote[frame]{For additional information check \url{http://www.veripos.com/services.html} and for video \url{http://bit.ly/VeriposServices}.}:
 
 	\begin{itemize}
-		\item \textbf{VERIPOS Standard} uses single frequency DGPS with 1-2 metre accuracy.
-		\item \textbf{VERIPOS Standard Plus} uses dual-frequency DGPS with 1-2 metre accuracy. 
-		\item \textbf{VERIPOS Ultra/APEX} uses global orbit \& clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
+		\item \textbf{VERIPOS Standard} with single frequency DGPS and 1-2 metre accuracy.
+		\item {\color{gray}\textbf{Legacy VERIPOS Standard Plus} with dual-frequency DGPS for low latitude areas and 1-2 metre accuracy.} 
+		\item \textbf{VERIPOS Standard$^2$ } with single frequency combined GPS and GLONASS DGPS. 
+		\item \textbf{VERIPOS Ultra/APEX} using global orbit, clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
 	\end{itemize}
- All services provide coordinates in ITRF2008 and are using Inmarsat geostationary satellites 25E, 98W, 143.5E, AORE, AORW, IOR, POR to transmit corrections. 
+ All services provide coordinates in ITRF2008, with corrections transmitted via Inmarsat geostationary satellites 25E, 98W, 143.5E, AORE, AORW, IOR, POR\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}}.
 \end{frame}
 
 \begin{frame}{VERIPOS Standard}
@@ -107,13 +111,14 @@
 \end{frame}
 
 \begin{frame}{VERIPOS Standard Plus}
-	Standard Plus is intended to combat symptoms of ionospheric activity on DGPS and predominantly to be used at lower latitudes. 
+	Standard Plus is intended to combat symptoms of ionospheric activity on DGPS for lower latitudes. 
 	\begin{itemize}	
 		\item Provides RTCM Type 1, 3, 15 messages.
 		\item Normal accuracy: 1-2m. 
 		\item Typical latency: 4 seconds.
 		\item Single difference (DGPS) using GPS C/A and P code
 	\end{itemize}	
+	Note that this is legacy service, according to \url{http://www.veripos.com/services.html}.
 \end{frame}	
 
 \begin{frame}[plain]{VERIPOS Standard Plus}
@@ -125,20 +130,31 @@
 
 \end{frame}
 
+\begin{frame}{VERIPOS Standard$^2$}
+	
+	\begin{itemize}	
+		\item Provides RTCM Type 1, 2 \& 3 messages.
+		\item Normal accuracy: 1-2m. 
+		\item Typical latency: 4 seconds.
+		\item Single difference (DGPS) using GPS and GLONASS C/A code\footnote[frame]{It is possible to use GLONASS only with this service as well.}
+	\end{itemize}	
+	
+\end{frame}
+
 
 \begin{frame}{VERIPOS Ultra}
  
 	\begin{itemize}	
-		\item Orbit and clock corrections in JPL GDGPS format
+		\item Orbit and clock corrections in JPL GDGPS format.
 		\item Normal accuracy: 0.1m planar. 
 		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
 		\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS .
 	\end{itemize}	
-	
+	%Note that VERIPOS Ultra$^2$ is only available using Verify QC.
 %The reference station used in the Standard solution was located 322km distant at Kemaman.
 \end{frame}	
 
-\begin{frame}[plain]{VERIPOS Ultra}
+\begin{frame}{VERIPOS Ultra}
 	
 	\begin{figure}
 		
@@ -151,7 +167,7 @@
 \begin{frame}{VERIPOS $Apex^2$}
 	
 	\begin{itemize}	
-		\item Orbit and clock corrections in VERIPOS OCDS format
+		\item Orbit and clock corrections in VERIPOS OCDS format.
 		\item Normal accuracy: 0.1m planar. 
 		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
 		\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS .
@@ -172,28 +188,27 @@
 	
 \end{frame}
 
-
-
-
-
-
-\section{Processing details}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Live demo}
 
 \begin{frame}{Live demo}
 	
-Live demo...
-	
-	
+\centering
+{\large Live demo...}
 	
 \end{frame}
 
 
-\begin{frame}{Practice}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Practical work}
+
+\begin{frame}{Practice layout}
 	
 	\begin{itemize}
 		\item LD5 will be restarted at 12:00 in order to converge properly.
 		\item You will start collecting RTK data after 14:00. 
-		%\item VERIPOS Ultra uses a different technique. Instead of providing DGPS corrections for 		distinct reference stations it uses global orbit \& clock correction message.
+		\item You will download Veripos NMEA strings for Ultra and Apex$^2$ alongside data from GS10.
+		\item Make sure that Veripos NMEA file has been splitted into \$GPGGA and \$GPGST before leaving.
 	\end{itemize}
 	
 
@@ -214,7 +229,7 @@ Live demo...
 				NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.3865 & at ARP\footnote{Antenna heigh = 0.18m.}\\
 				NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.4280 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
 				\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.070524} & \textbf{01 11 1.427085} W & \textbf{91.480} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2015-12-04.} \\
-				\textbf{NGB5} & ITRF2008 & \textbf{5257.1178421} & \textbf{00111.0237848} W & \textbf{91.480} & at antenna PCO \footnote{Converted to DDMM.MMMMMMM to be compatible with NEMEA GGA string.} \\
+				\textbf{NGB5} & ITRF2008 & \textbf{5257.1178421} & \textbf{00111.0237848} W & \textbf{91.480} & at antenna PCO\footnote{Converted to DDMM.MMMMMMM to be compatible with NEMEA GGA string.} \\
 				
 				\bottomrule
 			\end{tabular}%
@@ -222,17 +237,21 @@ Live demo...
 			\caption{Coordinates of NGB5}
 		\end{minipage}
 	\end{table}
-	
+%in DDMM.MMMMMMM 7 decimal place is eq to 0.0018 m	
 \end{frame}
 
 
 
-\begin{frame}{How to read Veripos NMEA data}
+\begin{frame}{Veripos \$GPGGA NMEA strings}
 	
-	In VERIPOS PPP we solution quality by looking at last flag (as QC is non informative for PPP) for ex:\\
+	In Verpos provides two types of NMEA strings \$GPGGA and \$GPGST. \$GPGGA will behave differently in PPP mode with QA flag always 2 or 5. To obtain any information about solution we need to examine last flag before CRC(*).\\
 	
-\tiny{GPGGA,183324.00,5257.1178371,N,00111.0236798,W,\textbf{5},17,0.7,42.76,M,49.01,M,30.5,\textbf{0268}*54}.
+	\medskip
 	
+{\tiny{\$GPGGA,183324.00,5257.1178371,N,00111.0236798,W,\textbf{5},17,0.7,42.76,M,49.01,M,30.5,{\color{red}\textbf{0268}}*54}.}
+\medskip
+
+Values for the flag indicate:	
 	\begin{itemize}
 		\item 0268	$ULTRA^2$
 		\item 0281	$APEX^2$
@@ -240,15 +259,46 @@ Live demo...
 		\item 0081	APEX
 		\item 1006	$Standard^2$
 	\end{itemize}
+	%use  cut -d, -f15 *.txt | cut -d* -f1 | sort | uniq to extract data  
+\end{frame}
+
+\begin{frame}[plain]{Veripos \$GPGST NMEA strings}
+	
+	Example: \textit{\$GPGST,140545.00,3.81,0.02,0.01,81.00,0.02,0.01,0.02*57}
+
+	\begin{table}
+		\centering
+		\begin{minipage}[t]{\textwidth}%
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{lc} %{l|c|c|c|c}
+					\toprule %\rowcolor{lightgray}
+					Cell & Notes\tabularnewline
+					\midrule
+					0&Message ID \$GPGST\\
+					1&UTC of position fix\footnote{Notice 17s offset to GPS time.}\\
+					2&RMS value of the pseudorange or carrier phase (RTK/PPP) residuals\\
+					3&Error ellipse semi-major axis 1 sigma error, in meters\\
+					4&Error ellipse semi-minor axis 1 sigma error, in meters\\
+					5&Error ellipse orientation, degrees from true north\\
+					6&Latitude 1 sigma error, in meters\\
+					7&Longitude 1 sigma error, in meters\\
+					8&Height 1 sigma error, in meters\\
+					9&The checksum data, always begins with *\\
+					\bottomrule
+					\end{tabular}%
+				}
+			%	\caption{Coordinates of NGB5}
+				\end{minipage}
+				\end{table}
+
+
 	
 \end{frame}
 
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Taking things forward}
-\begin{Large} %make text large
-	Any Questions?
-\end{Large}
+\centering
+{\large ...Any Questions?}
 \end{frame}
 
 \end{document}

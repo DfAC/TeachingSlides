@@ -1,0 +1,236 @@
+\documentclass[12pt]{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+
+{
+  \usetheme{PaloAlto}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{whale} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+} 
+%remove navigation symbols at bottom
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{footline}[text line] {
+
+	\makebox[.7\paperwidth]{
+		\insertframenumber  /\inserttotalframenumber
+		\hfill
+	%	\url{http://envirohack.herokuapp.com/}
+	}
+
+}
+
+% add logo
+\usepackage{pgf}
+%coords are in relation to lower right corner
+\logo{\pgfputat{\pgfxy(-1.6,7.6)}{\pgfbox[center,base]{\includegraphics[width=2.5cm]{logo.png}}}}
+
+
+%I had problems compiling doc on X230 without next two lines
+\usepackage{etex}
+\reserveinserts{28}
+%On X530 it worked without problems
+
+%\usepackage[utf8x]{inputenc}
+\input{Preamble.tex}
+%\renewcommand{\baselinestretch}{1.2} %line spacing
+%{\setstretch{1.0}\color{blue} text bla bla } for section strech
+\renewcommand{\footnotesize}{\scriptsize}
+%\usepackage[demo]{graphicx}
+\usepackage{caption}
+%\usepackage{subcaption}
+
+\title[EnviroHack]{H24VSP Project 3 - Introduction to PPP}
+\author{Lukasz K Bonenberg}
+\institute{NGI}
+\date{\today}
+
+\begin{document}
+	
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+	% Uncomment these lines for an automatically generated outline.
+	\begin{frame}{Outline}
+	  \tableofcontents
+	\end{frame}
+
+
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+	In this project we will learn more Network RTK and PPP technique, usign Leica GS10 and maritime Veripos LD5 receiver with AsterRx chipset. The goal of the practical is to compare both method.
+	
+	\medskip
+	The aim for this presentation is:
+	\begin{itemize}
+		\item Refresh your knowledge and understanding of PPP technology.
+		\item Highlight differences between two methods. 
+		\item Explain practicalities of using Veripos LD5 receiver.
+	\end{itemize}
+	
+
+\end{frame}
+
+\section{VERIPOS Services}
+
+\begin{frame}{VERIPOS Services}
+	There are three different VERIPOS services:
+
+	\begin{itemize}
+		\item \textbf{VERIPOS Standard} uses single frequency DGPS with 1-2 metre accuracy.
+		\item \textbf{VERIPOS Standard Plus} uses dual-frequency DGPS with 1-2 metre accuracy. 
+		\item \textbf{VERIPOS Ultra/APEX} uses global orbit \& clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
+	\end{itemize}
+ All services provide coordinates in ITRF2008 and are using Inmarsat geostationary satellites 25E, 98W, 143.5E, AORE, AORW, IOR, POR to transmit corrections. 
+\end{frame}
+
+\begin{frame}{VERIPOS Standard}
+	
+	\begin{itemize}	
+	\item Provides RTCM Type 1, 2 \& 3 messages.
+	\item Normal accuracy: 1-2m. 
+	\item Typical latency: 4 seconds.
+	\item Single difference (DGPS) using GPS C/A code \& L1 carrier phase
+	\end{itemize}	
+	
+\end{frame}
+
+\begin{frame}{VERIPOS Standard Plus}
+	Standard Plus is intended to combat symptoms of ionospheric activity on DGPS and predominantly to be used at lower latitudes. 
+	\begin{itemize}	
+		\item Provides RTCM Type 1, 3, 15 messages.
+		\item Normal accuracy: 1-2m. 
+		\item Typical latency: 4 seconds.
+		\item Single difference (DGPS) using GPS C/A, P code \& L1, L2 carrier phase
+	\end{itemize}	
+\end{frame}	
+
+\begin{frame}[plain]{VERIPOS Standard Plus}
+	
+	\begin{figure}
+		\includegraphics[height=0.9\textheight]{pic/StdPlus.png}
+		%\caption{intro}
+	\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{VERIPOS Ultra}
+ 
+	\begin{itemize}	
+		\item Orbit and clock corrections in JPL GDGPS format
+		\item Normal accuracy: 0.1m planar. 
+		\item Typical latency: 2 seconds with 30 s update rate for clocks and 120s for orbits.
+		\item Precise Point Positioning (PPP) using GPS L1/L2 carrier phase.
+	\end{itemize}	
+	
+The reference station used in the Standard solution was located 322km distant at Kemaman.
+\end{frame}	
+
+\begin{frame}[plain]{VERIPOS Ultra}
+	
+	\begin{figure}
+		
+		\includegraphics[height=0.8\textheight]{pic/Ultra.png}
+		\caption{VERIPOS Standard and Ultra solutions at a monitor site in Singapore.}
+	\end{figure}
+	
+\end{frame}
+
+\begin{frame}{VERIPOS $Apex^2$}
+	
+	\begin{itemize}	
+		\item Orbit and clock corrections in VERIPOS OCDS format
+		\item Normal accuracy: 0.1m planar. 
+		\item Typical latency: 2 seconds with 30 s update rate for clocks and 120s for orbits.
+		\item Precise Point Positioning (PPP) using GPS and GLONASS L1/L2 carrier phase.
+	\end{itemize}	
+
+
+	
+\end{frame}	
+
+
+\begin{frame}[plain]{VERIPOS  $Apex^2$}
+	
+	\begin{figure}
+		
+		\includegraphics[height=0.8\textheight]{pic/Apex.png}
+		\caption{VERIPOS Apex solution at a monitor site in Aberdeen.}
+	\end{figure}
+	
+\end{frame}
+
+
+
+
+
+
+\section{Processing details}
+
+\begin{frame}{Live demo}
+	
+Live demo...
+	
+	
+	
+\end{frame}
+
+
+\begin{frame}{Practice}
+	
+	\begin{itemize}
+		\item DL5 will be restarted at 12:00 in order to converge properly.
+		\item You will start collecting RTK data after 14:00. 
+		\item VERIPOS Ultra uses a different technique. Instead of providing DGPS corrections for
+		distinct reference stations it uses global orbit \& clock correction message.
+	\end{itemize}
+	
+
+	
+\end{frame}
+
+
+\begin{frame}{NGB5}
+	\begin{table}
+		\centering
+		\begin{minipage}[t]{\textwidth}%
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{lccccc} %{l|c|c|c|c}
+				\toprule %\rowcolor{lightgray}
+				 Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
+				\midrule
+				NGB5 & ERF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.2065 & at point\\
+				NGB5 & ERF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.3865 & at ARP\footnote{Antenna heigh = 0.18m.}\\
+				NGB5 & ERF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.4280 & at antenna PCO\footnote{Ionsphere free antenna offset is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
+				\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.070524} & \textbf{01 11 1.427085} W & \textbf{91.480} & at antenna PCO\footnote{Converted from ETRF97 to ITRFT2008 at epoch 2015-12-04.} \\
+				\bottomrule
+			\end{tabular}%
+			}
+			\caption{Coordinates of NGB5}
+		\end{minipage}
+	\end{table}
+	
+\end{frame}
+
+
+
+
+\begin{frame}{Taking things forward}
+\begin{Large} %make text large
+	Any Questions?
+\end{Large}
+\end{frame}
+
+\end{document}

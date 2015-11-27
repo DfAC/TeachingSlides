@@ -1,0 +1,139 @@
+%My std preamble for the docs
+%\selectlanguage{british}%
+\usepackage[british]{babel}
+\usepackage{microtype} %better text
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{} %type 1 vector font
+%
+\usepackage{lettrine}
+\usepackage{listings} %Add list support
+\usepackage{colortbl} %colors in TABLES
+%\usepackage{tikz,amsmath, amssymb,bm,color}
+\usepackage{nicefrac}
+\usepackage{lastpage} %get last page
+
+%COLORS
+\usepackage{color}
+\definecolor{lightgray}{gray}{0.8} %for colortbl
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%FOOTNOTES
+%nice look after http://www.dedoimedo.com
+\usepackage[bottom,hang,splitrule]{footmisc} %\usepackage[bottom]{footmisc}
+\setlength{\footnotemargin}{0.35cm} %space between number and footnote text
+\setlength{\footnotesep}{0.2cm} %{12pt} %space between footnotes
+\setlength{\skip\footins}{0.3cm} % space between the text body and the footnotes
+%\setlength{\footskip}{0pt} dont do it. It will overflow page no
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TABLE SETTINGS
+\usepackage{colortbl} %colors in table
+\usepackage{rotating} %rotatins within tables
+\usepackage{multirow}
+\renewcommand{\arraystretch}{1.2} %add padding/spacing
+%\usepackage{adjustbox}%rotating and fitting into page
+%
+
+\usepackage{booktabs} % To thicken table lines
+%define thickness of table lines
+\let\mytoprule\toprule
+\renewcommand{\toprule}{\mytoprule[0.20em]}
+\let\mytoprule\bottomrule
+\renewcommand{\bottomrule}{\mytoprule[0.20em]}
+\let\mytoprule\midrule
+\renewcommand{\midrule}{\mytoprule[0.08em]}
+
+\usepackage{spreadtab} % for simple calculations
+
+%vertically and horizontally centered multicolumn cells with a fixed width. M{width}
+%\newcolumntype{M}[1]{>{\centering\hspace{0pt}}m{#1}}
+% each spanned cell has the same width. S{width of multicolumn cell}{number of spanned columns}
+%\newcolumntype{S}[2]{>{\centering\hspace{0pt}}m{(#1+(2\tabcolsep+\arrayrulewidth)*(1-#2))/#2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TikZ
+\usepackage{tikz}
+
+\colorlet{red}{red!50}
+\colorlet{green}{green!50}
+\colorlet{blue}{blue!50}
+\definecolor{yellow}{HTML}{FFFF00}
+\colorlet{yellow}{yellow!50}
+\definecolor{fiolet}{HTML}{7030A0}
+\colorlet{fiolet}{fiolet!50}
+\colorlet{bgd_main}{black!50}
+\colorlet{bgd}{bgd_main!75}
+\colorlet{bgd2}{bgd_main!50}
+\colorlet{bgd3}{bgd_main!25}
+\colorlet{bgd4}{bgd_main!15}
+
+\usetikzlibrary{shapes,arrows,calc,positioning}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Footnotes in Figs
+%\rule[raise-height]{width}{thickness}
+\newcommand*{\FigFootnote}[1]{
+\noindent \begin{flushleft}
+\rule[0.2ex]{0.4\columnwidth}{0.5pt}
+\par
+\footnotesize
+#1
+\footnotesize
+\end{flushleft}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%MATH, number display
+%need to install siunitx, l3kernel,l3packages
+\usepackage{siunitx} %this is for units display
+
+\sisetup{per-mode=fraction, tight-spacing = true , fraction-function = \nicefrac, quotient-mode = fraction}% %nicefrac \tfrac
+\sisetup{inter-unit-product = \ensuremath { { } \cdot { } } , exponent-product = \cdot }%
+\sisetup{input-product=x , output-quotient =  \ensuremath { { } \times{}}} %for 1x2x3
+%number grouping(3), std==true %\sisetup{group-digits = decimal} 
+\sisetup{group-minimum-digits = 4} %start grouping from 4 digits, in 3 no groups
+\sisetup{range-units = single,range-phrase = \,--\,} %2-3C not 2C-3C %, range-phrase = --
+\sisetup{separate-uncertainty=true} %2+-1 not 2(1)
+\sisetup{prefixes-as-symbols=true } % , scientific-notation = engineering false for 10^-9 ect ect , exp in multiple of 3
+\sisetup{range-phrase = \,-\, } % , refo of ranges
+%\sisetup{zero-decimal-to-integer, round-mode = places,round-precision = 3}
+%\sisetup{add-arc-degree-zero=true , add-arc-minute-zero=true ,add-arc-second-zero=true} %for angle settings
+
+%This is to auto convert ns,ms,us to 10^-xx s
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\psec}{\pico\second}
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\nsec}{\nano\second} 
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\usec}{\micro\second}
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\msec}{\milli\second} 
+
+%...AND SOME UNITS
+\DeclareSIUnit\dBm{dBm}
+\DeclareSIUnit\ppm{ppm} %{\num{1e-6}}%{ppm}
+\DeclareSIUnit\yr{yr} %{{361}\day}<-nice nice
+\DeclareSIUnit\cy{cycle} %phase cycle
+\DeclareSIUnit\epoch{epoch} %GPS/LL epoch
+\DeclareSIUnit\inch{"} %inch 
+\DeclareSIUnit\wk{week} %week
+\DeclareSIUnit\hr{hrs} %hours
+\DeclareSIUnit\min{minute} %hours
+\DeclareSIUnit\mile{mi}
+\DeclareSIUnit\Mcps{Mcps}
+\DeclareSIUnit\bit{bit}
+\DeclareSIUnit\chip{chip length}
+%Other units
+\newcommand*{\GBP}[1]{$\SI{#1}[\textsterling]{}$}
+
+
+%%%%%SHORTHANDS (Standard Sentences)
+%\newcommand*{\Myrange}[3]{$\textrm{\SIrange{#1}{#2}{#3}}$}
+
+%details of bar tracking name
+\newcommand*{\bsSys}{\textit{PASS Locator booking system}\xspace}
+
+
+%how much work per week
+\newcommand*{\wkWrk}[1]{$\SI{#1}{\hr\per\wk}$}
+
+%references
+\newcommand*{\tabref}[1]{shown in table \ref{#1} on page \pageref{#1}\xspace}
+\newcommand*{\vref}[1]{\ref{#1} on page \pageref{#1}\xspace}
+

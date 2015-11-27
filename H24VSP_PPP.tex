@@ -226,6 +226,21 @@ Live demo...
 
 
 
+\begin{frame}{How to read Veripos NMEA data}
+	
+	In VERIPOS PPP we solution quality by looking at last flag (as QC is always 5) for ex $GPGGA,183324.00,5257.1178371,N,00111.0236798,W,5,17,0.7,42.76,M,49.01,M,30.5,0268*54$.
+	
+	\begin{itemize}
+		\item 0268	$ULTRA^2$
+		\item 0281	$APEX^2$
+		\item 0068	ULTRA
+		\item 0081	APEX
+		\item 1006	$Standard^2$
+	\end{itemize}
+	
+\end{frame}
+
+
 
 \begin{frame}{Taking things forward}
 \begin{Large} %make text large

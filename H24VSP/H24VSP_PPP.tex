@@ -5,24 +5,22 @@
 %
 \mode<presentation>
 
-{
+{ %everthing in this bracket is commented out de-facto
   \usetheme{PaloAlto}      % or try Darmstadt, Madrid, Warsaw, ...
   \usecolortheme{whale} % or try albatross, beaver, crane, ...
   \usefonttheme{default}  % or try serif, structurebold, ...
   \setbeamertemplate{navigation symbols}{}
-  \setbeamertemplate{caption}[numbered]
+ %\setbeamertemplate{caption}[numbered]
 } 
 %remove navigation symbols at bottom
-\setbeamertemplate{navigation symbols}{}
+%\setbeamertemplate{navigation symbols}{}
 %\setbeamertemplate{footline}[frame number]
 \setbeamertemplate{footline}[text line] {
-
 	\makebox[.9\paperwidth]{
 		\hfill \insertframenumber /\inserttotalframenumber
 	%	\url{http://envirohack.herokuapp.com/}
 	}
-
-}
+}%\setbeamertemplate{footline}[text line]
 
 % add logo
 \usepackage{pgf}
@@ -44,7 +42,7 @@
 \usepackage{caption}
 %\usepackage{subcaption}
 
-\title[EnviroHack]{H24VSP Project 3 - PPP using DL5}
+\title[H24VSP]{H24VSP Project 3 - PPP using DL5}
 \author{Lukasz K Bonenberg}
 \institute{NGI}
 \date{\today}

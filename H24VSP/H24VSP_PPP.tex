@@ -1,0 +1,282 @@
+\documentclass[11pt]{beamer}
+
+%my colours
+
+
+\usetheme{metropolis}
+\metroset{everytitleformat = regular,progressbar=foot} %settings
+\mode<presentation>
+%\usecolortheme{dove} %dove
+% albatross, beaver, beetle, crane, default, dolphin, dove, orchid, rose, seagull, seahorse, whale, wolverine
+%dont use  fly, lily,
+%http://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf
+\setbeamercolor{title separator}{fg = UniBlue}
+\setbeamercolor{frametitle}{fg = deepBlue, bg=aBlue!70}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+
+%coords are in relation to lower right corner
+%\logo{\pgfputat{\pgfxy(0,6}{\pgfbox[right,top]{\includegraphics[width=2.5cm]{logo.png}}}}
+
+\usepackage{tikz}
+\addtobeamertemplate{frametitle}{}{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=north east,yshift=2pt] at (current page.north east) {\includegraphics[height=0.8cm]{logo.png}};
+\end{tikzpicture}}
+
+\input{Preamble.tex}
+%\renewcommand{\baselinestretch}{1.2} %line spacing
+%{\setstretch{1.0}\color{blue} text bla bla } for section strech
+\renewcommand{\footnotesize}{\scriptsize}
+%\usepackage[demo]{graphicx}
+\usepackage[font={small,it}]{caption}
+%\usepackage{subcaption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[H24VSP]{H24VSP Project 3}
+\subtitle{Introduction to PPP using DL5}
+\author{Lukasz K Bonenberg}
+\institute{NGI}
+\date{\today}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo/logo}}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Table of Contents}
+
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+\begin{frame}[fragile]{Introduction}
+
+	Aim of the Project is to compare difference between Network RTK and PPP technique in:
+	\begin{itemize}
+		\item convergence time;
+		\item precision - estimated and actual after convergence; 
+		\item accuracy after convergence.
+	\end{itemize}
+	
+	We will be using:
+	\begin{itemize}
+		\item Leica GS10;
+		\item maritime Veripos LD5 receiver with AsterRx chipset\footnote[frame]{For short introductory video see \url{http://bit.ly/VeriposLD5}.}.
+	\end{itemize}
+%\href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer Theme} by Benjamin Weiss.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Veripos Services}
+
+\begin{frame}[allowframebreaks]{Veripos Services}
+	Veripos offer hardware (receivers) in combination with following services\footnote[frame]{Also check \url{http://www.veripos.com/services.html} and for video \url{http://bit.ly/VeriposServices}.}:
+	
+	\begin{itemize}
+		\item \textbf{Veripos Standard} with single frequency DGPS and 1-2 metre accuracy.
+		\item {\color{gray}\textbf{Legacy Veripos Standard Plus} with dual-frequency DGPS for low latitude areas and 1-2 metre accuracy.} 
+		\item \textbf{Veripos Standard$^2$ } with single frequency combined GPS and GLONASS DGPS. 
+		\item \textbf{Veripos Ultra/APEX} using global orbit, clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
+	\end{itemize}
+	Corrections are transmitted via Inmarsat geostationary satellites - 25E, 98W, 143.5E, AORE, AORW, IOR, POR\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}}. All coordinates provided are in ITRF2008.
+\end{frame}
+
+\begin{frame}{Veripos Standard}
+	
+	\begin{itemize}	
+		\item Provides RTCM Type 1\footnote{DGPS corrections.}, 3\footnote{GPS reference station parameters.} messages.
+		\item Normal accuracy: 1-2m. 
+		\item Typical latency: 4 seconds\footnote{Typical correction update interval is 15 seconds.}.
+		\item Single difference (DGPS) using GPS C/A code
+	\end{itemize}	
+	
+\end{frame}
+
+\begin{frame}{Veripos Standard Plus}
+	Standard Plus is intended to support DGPS positioning for lower latitudes and combat ionospheric activity. 
+	\begin{itemize}	
+		\item Provides RTCM Type 1, 3, 15\footnote[frame]{Ground transmitter parameters including ionospheric delay information} messages.
+		\item Normal accuracy: 1-2m. 
+		\item Typical latency: 4 seconds.
+		\item Single difference (DGPS) using GPS C/A and P code
+	\end{itemize}	
+	Note that this is legacy service, according to \url{http://www.veripos.com/services.html}.
+\end{frame}
+
+\begin{frame}{Veripos Standard and Standard Plus}
+	\begin{figure}
+		\includegraphics[height=0.8\textheight]{pic/StdPlus.png}
+		\caption{Solutions at a monitor site in Malongo [Veripos]}
+	\end{figure}
+	
+\end{frame}
+
+
+\begin{frame}{Veripos Standard$^2$}
+	
+	\begin{itemize}	
+		\item Provides RTCM Type 1, 3, 31\footnote{DGPS GLONASS corrections.}, 32\footnote{GPS GLONASS reference station parameters.} messages.
+		\item Normal accuracy: 1-2m. 
+		\item Typical latency: 4 seconds.
+		\item Single difference (DGPS) using GPS and GLONASS C/A code\footnote[frame]{It is possible to use GLONASS only with this service as well.}
+	\end{itemize}	
+	
+\end{frame}
+
+\begin{frame}{Veripos Ultra}
+	\begin{columns}[T,onlytextwidth]
+		\column{0.5\textwidth}
+		\begin{itemize}	
+			\item Orbit and clock corrections in JPL GDGPS format.
+			\item Normal accuracy: 0.1m planar. 
+			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+			\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS.
+		\end{itemize}	
+		\column{0.5\textwidth}
+		\begin{figure}[T]
+			\vspace*{-1cm}
+			\includegraphics[height=0.7\textheight]{pic/Ultra.png}
+			\caption{Standard and Ultra solutions at a monitor site in Singapore.}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Veripos Apex$^2$}
+	\begin{columns}[T,onlytextwidth]
+		\column{0.5\textwidth}
+		\begin{itemize}	
+		\item Orbit and clock corrections in Veripos OCDS format.
+		\item Normal accuracy: 0.1m planar. 
+		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+		\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS.
+		\end{itemize}	
+		\column{0.5\textwidth}
+		\begin{figure}[T]
+			\vspace*{-1cm}
+			\includegraphics[height=0.8\textheight]{pic/Apex.png}
+			\caption{Veripos Apex solution at a monitor site in Aberdeen.}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Live demo}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Practical work}
+
+\begin{frame}{Practice layout}
+	
+	\begin{itemize}
+		\item LD5 will be restarted at 12:00 in order to converge properly.
+		\item You will start collecting RTK data after 14:00. 
+		\item You will download Veripos NMEA strings for Ultra and Apex$^2$ alongside data from GS10.
+		\item Make sure that Veripos NMEA file has been splitted into \$GPGGA and \$GPGST before leaving.
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{NGB5}
+	\begin{table}
+		\centering
+		\begin{minipage}[t]{\textwidth}%
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{lccccc} %{l|c|c|c|c}
+					\toprule %\rowcolor{lightgray}
+					Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
+					\midrule
+					NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.2065 & at point\\
+					NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.3865 & at ARP\footnote{Antenna heigh = 0.18m.}\\
+					NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.4280 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
+					\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.070524} & \textbf{01 11 1.427085} W & \textbf{91.480} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2015-12-04.} \\
+					\textbf{NGB5} & ITRF2008 & \textbf{5257.1178421} & \textbf{00111.0237848} W & \textbf{91.480} & at antenna PCO\footnote{Converted to DDMM.MMMMMMM to be compatible with NEMEA GGA string.} \\
+					
+					\bottomrule
+				\end{tabular}%
+			}
+			\caption{Coordinates of NGB5}
+		\end{minipage}
+	\end{table}
+	%in DDMM.MMMMMMM 7 decimal place is eq to 0.0018 m	
+\end{frame}
+
+
+
+\begin{frame}{Veripos \$GPGGA NMEA strings}
+	
+	In Verpos provides two types of NMEA strings \$GPGGA and \$GPGST. \$GPGGA will behave differently in PPP mode with QA flag always 2 or 5. To obtain any information about solution we need to examine last flag before CRC(*).\\
+	
+	
+	\begin{exampleblock}{Example}
+		{\tiny{\$GPGGA,183324.00,5257.1178371,N,00111.0236798,W,\textbf{5},17,0.7,42.76,M,49.01,M,30.5,{\color{red}\textbf{0268}}*54}.}
+	\end{exampleblock}
+	
+	Values for the flag indicate:	
+	\begin{description}
+		\item[0268] $ULTRA^2$
+		\item [0281]	$APEX^2$
+		\item [0068]	ULTRA
+		\item [0081]	APEX
+		\item [1006]	$Standard^2$
+	\end{description}
+	%use  cut -d, -f15 *.txt | cut -d* -f1 | sort | uniq to extract data  
+\end{frame}
+
+\begin{frame}[plain]{Veripos \$GPGST NMEA strings}
+
+	\begin{exampleblock}{Example}
+		{\textit{\$GPGST,140545.00,3.81,0.02,0.01,81.00,0.02,0.01,0.02*57}.}
+	\end{exampleblock}
+	\vspace*{-1cm}
+	\begin{table}
+		\centering
+		\begin{minipage}[t]{\textheight}%
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{lc} %{l|c|c|c|c}
+					\toprule %\rowcolor{lightgray}
+					Cell & Notes\tabularnewline
+					\midrule
+					0&Message ID \$GPGST\\
+					1&UTC of position fix\footnote{Notice 17s offset to GPS time.}\\
+					2&RMS value of the pseudorange or carrier phase (RTK/PPP) residuals\\
+					3&Error ellipse semi-major axis 1 sigma error, in meters\\
+					4&Error ellipse semi-minor axis 1 sigma error, in meters\\
+					5&Error ellipse orientation, degrees from true north\\
+					6&Latitude 1 sigma error, in meters\\
+					7&Longitude 1 sigma error, in meters\\
+					8&Height 1 sigma error, in meters\\
+					9&The checksum data, always begins with *\\
+					\bottomrule
+				\end{tabular}%
+			}
+			%	\caption{Coordinates of NGB5}
+		\end{minipage}
+	\end{table}
+	
+	
+	
+\end{frame}
+
+%Final slide
+\setbeamercolor{background canvas}{bg=blueBgd!60}
+\plain{Questions?}
+
+
+
+\end{document}

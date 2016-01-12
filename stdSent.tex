@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NOTE boxes
+\usepackage[most]{tcolorbox}
+%\usepackage{lipsum}
+
+\newcommand*{\NOTE}[1]{
+	\begin{tcolorbox}[colback=red!25,colframe=red!70!black,fonttitle=\bfseries,
+		colbacktitle=red!85!black,enhanced,
+		attach boxed title to top center={yshift=-2mm},title=NOTES]
+		{#1}
+	\end{tcolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SHORTHANDS
+%\newcommand*{\Myrange}[3]{$\textrm{\SIrange{#1}{#2}{#3}}$}
+
+%std sentences
+\newcommand*{\RefLoc}[1]{Section \vref{#1} provide more information.\xspace}
+\newcommand*{\refLoc}[1]{as explained in section \vref{#1}.\xspace}
+
+%HOW 2 reference Wikipedia Common Imaages and others
+\newcommand*{\wiki}[1]{ \FigFootnote{Adapted after {#1} / CC BY-SA 3.0}}
+\newcommand*{\wikiORG}[1]{ \FigFootnote{Work found at {#1} / CC BY-SA 3.0}}
+
+
+%defos for GNSS/IMU
+\newcommand*{\Q}{symmetric covariance-variance matrix Q\xspace}
+\newcommand*{\sday}{Sidereal day is equivalent to $\sdayVal$.\xspace}
+\newcommand*{\sdayVal}{$\SI{23.93447}{\hour}$\xspace}
+\newcommand*{\IGS}{IGS orbit products\xspace}
+\newcommand*{\amb}{the carrier-cycle integer ambiguity\xspace}
+
+%GRID
+\newcommand*{\LocalGrid}{Coordinates in the local grid (ENH) using arbitrary conversion and without applying the scale factor.\xspace}
+\newcommand*{\OSGB}{Coordinates are in the OSGB grid (ENH), with scale factor applied.\xspace}
+

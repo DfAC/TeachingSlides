@@ -1,7 +1,7 @@
-\documentclass[11pt]{beamer}
+\documentclass[11pt]{beamer} 
 
 
-\usetheme{metropolis}
+\usetheme{metropolis} %https://github.com/matze/mtheme
 \metroset{everytitleformat = regular,progressbar=foot} %settings
 \mode<presentation>
 %\usecolortheme{dove} %dove
@@ -17,7 +17,7 @@
 \usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
 
-
+%%LOGO
 %coords are in relation to lower right corner
 %\logo{\pgfputat{\pgfxy(0,6}{\pgfbox[right,top]{\includegraphics[width=2.5cm]{logo.png}}}}
 
@@ -33,7 +33,7 @@
 \renewcommand{\footnotesize}{\scriptsize}
 %\usepackage[demo]{graphicx}
 \usepackage[font={small,it}]{caption}
-\usepackage{subcaption}
+\usepackage{subcaption} %throws a lot of errors but compile
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -44,7 +44,9 @@
 %\textcolor{shadecolor}{	\item[Ogaja\_Matlab.7z] Matlab script. To be placed on-line after week2.}
 
 
-\title[TEQC MP]{Example of TEQC mulitpah results \\}
+\title[H24VLP]{H24VLP Project 1}
+\subtitle{Environmental impact on \\the positioning performance}
+
 \author{LKB}
 \institute{NGI}
 \date{\today}
@@ -61,16 +63,37 @@
 	%\end{frame}
 	
 \section{Introduction}
-	
-	\begin{frame}{Introductory notes}
-		TEQC tutorial can be found at:\\
-		\url{http://www.unavco.org/software/data-processing/TEQC/doc/UNAVCO_TEQC_Tutorial.pdf}\\
-		TEQC website is at:\\
-		\url{http://www.unavco.org/software/data-processing/TEQC/TEQC.html}\\
+
+	\begin{frame}[allowframebreaks]{Project 1}
+		Aim of work is to understand the impact of the environment on positioning performance. You will study 
+		\begin{itemize}
+			\item Positioning performance;
+			\item Number of satellites and Signal strength;
+			\item Multipath;
+		\end{itemize}
+		using data collected in three distinctive environments
+		\begin{itemize}
+			\item Open area;
+			\item Foliage (trees);
+			\item Close to buildings.
+		\end{itemize}
+		For the study we expect you to use:
+		\begin{itemize}
+			\item TEQC;
+			\item Matlab script visualising MP1, MP2;
+			\item Denghui Wang software;
+		\end{itemize}
+
+	\end{frame}
+
+
+	\begin{frame}{TEQC}
+		TEQC\footnote{\url{http://www.unavco.org/software/data-processing/TEQC/TEQC.html}. Latest binaries at at bottom of page.} allows translation, editing and quality control of collected GNSS data\footnote{Tutorials are available at \url{http://www.unavco.org/software/data-processing/TEQC/doc/UNAVCO_TEQC_Tutorial.pdf}}. \\
 		\medskip
-		TEQC can be downloaded from:\\
-		\url{http://www.unavco.org/software/data-processing/TEQC/development/TEQC_mingw_64.zip} (x64 - 64 bit Windows)\\
-		\url{http://www.unavco.org/software/data-processing/TEQC/development/TEQC_mingw_32.zip} (32 bit Windows)\\
+		For example \example{\textit{ teqc +qc +plot data.16o} will produce all outputs needed for matlab script}. You need binaries provided with Matlab script as recent binaries use non-compatible COMPACT3 format\footnote{\url{http://postal.unavco.org/pipermail/teqc/2013/001594.html}}.
+
+
+
 
 		
 	\end{frame}
@@ -145,30 +168,10 @@
 	\end{table}
 	
 \end{frame}
-
+} %{\sisetup{round-mode = places,round-precision = 3} 
 
 \section{Comparison examples}
 	
-
-\begin{frame}{Monday 12/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung012_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln012_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
 
 \begin{frame}{Monday 12/01/15, MP2}
 	\begin{figure}
@@ -186,26 +189,6 @@
 			\label{fig:sub2}
 		\end{subfigure}
 		\caption{Comparison of TEQC MP2 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Tuesday 13/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung013_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln013_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
 		% \label{fig:test}
 	\end{figure}
 \end{frame}
@@ -229,246 +212,6 @@
 		% \label{fig:test}
 	\end{figure}
 \end{frame}
-
-\begin{frame}{Wednesday 14/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung014_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln014_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Wednesday 14/01/15, MP2}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung014_qc_gps_mp2.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln014_qc_gps_mp2.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Thursday 15/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung015_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln015_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Thursday 15/01/15, MP2}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung015_qc_gps_mp2.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln015_qc_gps_mp2.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Friday 16/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung016_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln016_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Friday 16/01/15, MP2}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung016_qc_gps_mp2.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln016_qc_gps_mp2.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Saturday 17/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung017_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln017_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Saturday 17/01/15, MP2}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung017_qc_gps_mp2.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln017_qc_gps_mp2.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Saturday 17/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung017_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln017_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Sunday 18/01/15, MP2}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung018_qc_gps_mp2.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln018_qc_gps_mp2.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Sunday 18/01/15, MP1}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung018_qc_gps_mp1.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/kiln018_qc_gps_mp1.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP1 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Sunday 18/01/15, MP2}
-	\begin{figure}
-		\centering
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung018_qc_gps_mp2.png}
-			\caption{HUNG, no MP}
-			\label{fig:sub1}
-		\end{subfigure}%
-		\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{pic/hung018_qc_gps_mp2.png}
-			\caption{KILN, suspected MP}
-			\label{fig:sub2}
-		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
-		% \label{fig:test}
-	\end{figure}
-\end{frame}	
 
 	%\section{Conclusions}
 	

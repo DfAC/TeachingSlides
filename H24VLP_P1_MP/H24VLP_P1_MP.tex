@@ -58,9 +58,9 @@
 	\end{frame}
 	
 	% Uncomment these lines for an automatically generated outline.
-	%\begin{frame}{Outline}
-	%  \tableofcontents
-	%\end{frame}
+	\begin{frame}{Outline}
+	  \tableofcontents
+	\end{frame}
 	
 \section{Introduction}
 
@@ -80,8 +80,8 @@
 		For the study we expect you to use:
 		\begin{itemize}
 			\item TEQC;
-			\item Matlab script visualising MP1, MP2;
-			\item Denghui Wang software;
+			\item Matlab script visualising multipath;
+			\item WangSEU software;
 		\end{itemize}
 
 	\end{frame}
@@ -90,57 +90,46 @@
 	\begin{frame}{TEQC}
 		TEQC\footnote{\url{http://www.unavco.org/software/data-processing/TEQC/TEQC.html}. Latest binaries at at bottom of page.} allows translation, editing and quality control of collected GNSS data\footnote{Tutorials are available at \url{http://www.unavco.org/software/data-processing/TEQC/doc/UNAVCO_TEQC_Tutorial.pdf}}. \\
 		\medskip
-		For example \example{\textit{ teqc +qc +plot data.16o} will produce all outputs needed for matlab script}. You need binaries provided with Matlab script as recent binaries use non-compatible COMPACT3 format\footnote{\url{http://postal.unavco.org/pipermail/teqc/2013/001594.html}}.
+		For example \alert{\textit{ teqc +qc +plot data.16o}} will produce all outputs needed for Matlab script. Use binaries provided with Matlab script as recent ones use non-compatible COMPACT3 format \footnote{\url{http://postal.unavco.org/pipermail/teqc/2013/001594.html}}. Other examples are available in \textit{TEQC\_intro.pdf} introductory document by Sean Ince.
 
-
-
-
-		
 	\end{frame}
-	
-	\begin{frame}{Support files}
-		Following files can be found at H24VLP Moodle website (\url{http://moodle.nottingham.ac.uk/course/view.php?id=26398}):
-		\begin{description}
-			\item[TEQC\_intro.pdf] TEQC introductory document by Sean Ince;
-			\item[MP\_TEQC.pdf] This presentation;
-			\item[extractRinex4Msc.bat] Script (batch file) for RINEX extraction and TEQC QC analysis required for the practical;
-			\item[extractMPdata.bat] Script to convert COMPACT2 format to csv file readable by Excel. See following slide for details.
-			\item[ExtractSNR.py] Python script, part of extractMPdata.bat;
-			\item[2006\_Ogaja.pdf] A paper discussing multipath analysis' in Matlab using TEQC QC output;
-			\item[Matlab.zip] Matlab script, discussed in the paper above. Use \textit{main.m} to run it.
-		\end{description}
-		
+
+	\begin{frame}{Matlab}
+		Provided Matlab script\footnote{Available at H24VLP Moodle website.} provides visualisation of the data.\\
+		To run it use \textit{main.m} and select any of COMPACT2 files created by teqc. You can save created plots.\\
+		We expect that you will use this information to identify satellites to analyse.
+		\medskip
+		Further description is available in \textit{2006\_Ogaja.pdf}.
 	\end{frame}	
 
-
-	\begin{frame}[allowframebreaks]{How to use my script}
-		To use \textit{extractMPdata.bat}, script to convert COMPACT2 format to csv file readable by Excel, you need to:
-		\begin{itemize}
-			\item copy both extractMPdata.bat and ExtractSNR.py to same folder
-			\item install python 2.7.x (\url{https://www.python.org/downloads/release/python-279/}
-			\item install GPSToolkit (\url{(http://www.gpstk.org})
-			\item add GPSToolkit to your PATH. 
-				\begin{itemize}
-					\item PATH will be under User variables
-					\item append \path{;PATH\TO\GPSToolkit\bin} the end of the PATH variable.
-					\item Go to COMPUTER$\rightarrow$PROPERTIES$\rightarrow$Advanced Properties$\rightarrow$Environmental Variable
-					\item \textbf{DON'T OVERWRITE ORIGINAL PATH variable !!!}
-				\end{itemize}
-			\item run extractMPdata.bat in the same folder as TEQC QC output
-		\end{itemize}
-		
-	\end{frame}	
+	\begin{frame}[allowframebreaks]{WangSEU}
+		WangSEU is a software created by Denghui Wang, visiting PhD student from Southeast University, Nanjing, China. You will use it to output relevant characteristics. Software outputs separate CSV file for each satellite with the following columns:\\
+\tiny{measurements epoch,  GPS week second,SV\_ID,Elev[deg],Az[deg], MP1,MP2,SN1,SN2, SV tracked for}
+	\begin{exampleblock}{Example output}{
+\tiny{
+Epoch,1,GPSSecond,305969,Sat, 10,Ele, 69.46,Azi,147.97,MP1,-13.4718,MP2,-23.1764,SN1,50.25,SN2,45.40,Num,1,\\
+Epoch,2,GPSSecond,305970,Sat, 10,Ele, 69.45,Azi,147.97,MP1,-13.4753,MP2,-23.1607,SN1,50.30,SN2,45.15,Num,2,\\
+Epoch,3,GPSSecond,305971,Sat, 10,Ele, 69.44,Azi,147.97,MP1,-13.4779,MP2,-23.1643,SN1,50.40,SN2,45.35,Num,3,\\
+Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767,SN1,50.45,SN2,45.35,Num,4,\\
+}
+		}
+	\end{exampleblock}
 	
+
+%Go to COMPUTER$\rightarrow$PROPERTIES$\rightarrow$Advanced Properties$\rightarrow$Environmental Variable
+	\end{frame}
+
 	\begin{frame}{Workflow}
-		In order to obtain multipath characteristics please follow those steps:
+		I suggest following workflow for your analysis:
 		
 		\begin{itemize}
-			\item Convert data to RINEX using TEQC (see my batch file or Sean's introduction);
-			\item {Extract QC characteristics  (TEQC +qc obs file.15o or see my batch file )};
-			\item Examine mp1 and mp2 files (using my python script for example);
-			\item Plot results, for example in Excel;
-			\item \textit{Use Ogaja Matlab script for additional analysis and visual representation of results;}
+			\item Extract QC characteristics from RINEX data using \textit{ teqc +qc +plot data.16o};
+			\item Use Matlab script for initial visualisation of results;
+			%\item \textcolor{shadecolor}{Examine relevant files and teqc summary file};
+			\item Use software to output relevant data into CSV file;
+			\item Use Matlab script for initial visualisation of results;
 			\item \textbf{Analyse data and draw conclusions.}
+			\item \alert{Prepare and present a story about your findings.}
 		\end{itemize}
 
 	\end{frame}
@@ -148,7 +137,7 @@
 %changing settings for this area
 {\sisetup{round-mode = places,round-precision = 3} 
 
-\begin{frame}{Multipath Test}
+\begin{frame}{Point coordinates (truth)}
 	\begin{table}
 		\centering
 		\begin{minipage}[t]{\textwidth}%
@@ -170,53 +159,90 @@
 \end{frame}
 } %{\sisetup{round-mode = places,round-precision = 3} 
 
-\section{Comparison examples}
-	
 
-\begin{frame}{Monday 12/01/15, MP2}
+\section{Comparison examples}
+
+	\begin{frame}{Visualisations}
+		Following examples have been carried out by PhD students at NGI and show possible visualisations of multipath:
+		
+		\begin{itemize}
+			\item Matlab output using OS data (Jareer Mohammed);
+			\item Denghui Wang visualisation;
+			\item Jareer Mohammed visualisation;
+		\end{itemize}
+
+	\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]{Matlab output}
+%Monday 12/01/15, MP2
 	\begin{figure}
 		\centering
 		\begin{subfigure}{.5\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{pic/hung012_qc_gps_mp2.png}
 			\caption{HUNG, no MP}
-			\label{fig:sub1}
+			%\label{fig:sub1}
 		\end{subfigure}%
 		\begin{subfigure}{.5\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{pic/kiln012_qc_gps_mp2.png}
 			\caption{KILN, suspected MP}
-			\label{fig:sub2}
+			%\label{fig:sub2}
 		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
+		\caption{TEQC MP2, day 1}
 		% \label{fig:test}
 	\end{figure}
-\end{frame}
-
-\begin{frame}{Tuesday 13/01/15, MP2}
+%Tuesday 13/01/15, MP2
 	\begin{figure}
 		\centering
 		\begin{subfigure}{.5\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{pic/hung013_qc_gps_mp2.png}
 			\caption{HUNG, no MP}
-			\label{fig:sub1}
+			%\label{fig:sub1}
 		\end{subfigure}%
 		\begin{subfigure}{.5\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{pic/kiln013_qc_gps_mp2.png}
 			\caption{KILN, suspected MP}
-			\label{fig:sub2}
+			%\label{fig:sub2}
 		\end{subfigure}
-		\caption{Comparison of TEQC MP2 outputs}
+		\caption{TEQC MP2, day 2}
 		% \label{fig:test}
 	\end{figure}
 \end{frame}
 
-	%\section{Conclusions}
+
+
+\begin{frame}{Denghui Wang}%{Daily repetition}
+	\centering
+	\includegraphics[height=.35\textheight]{pic/DW_reporbits.png}
+	\captionof{figure}{Example of visualisation}
+	\includegraphics[height=.4\textheight]{pic/DW_mp.png} 
+	\captionof{figure}{Example of visualisation}
+\end{frame}
+
+\begin{frame}{Jareer Mohammed}{Daily repetition}
+	\centering
+	\includegraphics[width=0.5\textwidth]{pic/hung012_qc_gps_mp2.png}
+	\includegraphics[width=0.5\textwidth]{pic/kiln012_qc_gps_mp2.png}
+	\captionof{figure}{Example of visualisation}
+\end{frame}
+
+
+	\section{Conclusions}
 	
-	%\begin{frame}{Conclusions}
-	%	\lipsum
-	%\end{frame}
-	
+	\begin{frame}{List of files provided}
+			\begin{description}
+			\item[H24VLP\_P1\_MP.pdf] This presentation;
+			\item[TEQC\_intro.pdf] TEQC introductory document by Sean Ince;
+			\item[teqc.exe] Old teqc 64bit Windows binary;
+			\item[2006\_Ogaja.pdf] A paper discussing multipath analysis' in Matlab using TEQC QC output;
+			\item[Matlab.zip] Matlab script, discussed in the paper above. Use \textit{main.m} to run it;
+			\item[WangSEU.zip] Matlab script;
+		\end{description}
+	\end{frame}
+
 \end{document}

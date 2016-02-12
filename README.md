@@ -7,6 +7,8 @@ Teaching material for MSc courses at the University of Nottingham for following 
 
 ## Slides status
 
+Tick indicates that slides have been updated for this year lectures.
+
 - [x] **H24VSP_PPP** - H24VSP Project 3 (NRTK vs PPP) introduction slides
-- [ ] **H24VLP_P1_MP** - H24VLP Project 1 (Multipath) introduction slides
+- [x] **H24VLP_P1_MP** - H24VLP Project 1 (Multipath) introduction slides
 - [ ] **H24VLP_P2** -  H24VLP Project 2 Sensor integration lecture notes

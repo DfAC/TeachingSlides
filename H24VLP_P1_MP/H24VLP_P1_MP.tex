@@ -37,6 +37,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\newcommand{\MatlabRef}{\footnote{\url{https://github.com/DfAC/TEQCSPEC}.}}
+%\newcommand{\thisDocRef}{\footnote{Presentation is available at \url{https://github.com/DfAC/TeachingSlides/} and Moodle.}}
 %\usepackage{lipsum} % for dummy text only
 
 %Grey text
@@ -59,7 +61,7 @@
 	
 	% Uncomment these lines for an automatically generated outline.
 	\begin{frame}{Outline}
-	  \tableofcontents
+		\tableofcontents
 	\end{frame}
 	
 \section{Introduction}
@@ -80,7 +82,7 @@
 		For the study we expect you to use:
 		\begin{itemize}
 			\item TEQC;
-			\item Matlab script visualising multipath;
+			\item Matlab script visualising multipath\MatlabRef;
 			\item WangSEU software;
 		\end{itemize}
 
@@ -94,17 +96,19 @@
 
 	\end{frame}
 
-	\begin{frame}{Matlab}
-		Provided Matlab script\footnote{Available at H24VLP Moodle website.} provides visualisation of the data.\\
-		To run it use \textit{main.m} and select any of COMPACT2 files created by teqc. You can save created plots.\\
-		We expect that you will use this information to identify satellites to analyse.
+
+
+	\begin{frame}{TEQCSPEC}
+		This matlab script visualise \textit{teqc qc data}. To run it use \textit{main.m} and select any of COMPACT2 files created by teqc. You need to manually save plots created by the script. We expect that you will use this information to identify satellites to analyse.
 		\medskip
-		Further description is available in \textit{2006\_Ogaja.pdf}.
+		Further description is available in \textit{2006\_Ogaja.pdf}. Script itself is available at H24VLP Moodle website or Github\MatlabRef.
 	\end{frame}	
 
 	\begin{frame}[allowframebreaks]{WangSEU}
-		WangSEU is a software created by Denghui Wang, visiting PhD student from Southeast University, Nanjing, China. You will use it to output relevant characteristics. Software outputs separate CSV file for each satellite with the following columns:\\
-\tiny{measurements epoch,  GPS week second,SV\_ID,Elev[deg],Az[deg], MP1,MP2,SN1,SN2, SV tracked for}
+
+	WangSEU is a software created by Denghui Wang, \textit{visiting PhD student from Southeast University, Nanjing, China}. You will use it to output relevant characteristics. Software outputs separate CSV file for each satellite\footnote{Note that $SV_{GLONASS} =  SV_{ID} + 60$ to differentiate from GPS. For example SV64 is GLONASS 4 while SV4 is GPS 4.} with the following columns:\\
+\tiny{measurements epoch,GPS week second,SV\_ID,Elev[deg],Az[deg], MP1,MP2,SN1,SN2, SV tracked for}\\
+\medskip
 	\begin{exampleblock}{Example output}{
 \tiny{
 Epoch,1,GPSSecond,305969,Sat, 10,Ele, 69.46,Azi,147.97,MP1,-13.4718,MP2,-23.1764,SN1,50.25,SN2,45.40,Num,1,\\
@@ -114,9 +118,10 @@ Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767
 }
 		}
 	\end{exampleblock}
-	
 
-%Go to COMPUTER$\rightarrow$PROPERTIES$\rightarrow$Advanced Properties$\rightarrow$Environmental Variable
+%To produce output files run \textit{WangSEU.exe} and from top menu select \textit{Read Rinex File$\rightarrow$Read single station RINEX file}.}
+
+
 	\end{frame}
 
 	\begin{frame}{Workflow}
@@ -160,15 +165,16 @@ Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767
 } %{\sisetup{round-mode = places,round-precision = 3} 
 
 
+
 \section{Comparison examples}
 
 	\begin{frame}{Visualisations}
 		Following examples have been carried out by PhD students at NGI and show possible visualisations of multipath:
 		
 		\begin{itemize}
-			\item Matlab output using OS data (Jareer Mohammed);
-			\item Denghui Wang visualisation;
-			\item Jareer Mohammed visualisation;
+			\item Sample Matlab output using OS data (Jareer Mohammed);
+			\item Sample Denghui Wang visualisation;
+			\item Sample Jareer Mohammed visualisation;
 		\end{itemize}
 
 	\end{frame}
@@ -219,30 +225,55 @@ Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767
 \begin{frame}{Denghui Wang}%{Daily repetition}
 	\centering
 	\includegraphics[height=.35\textheight]{pic/DW_reporbits.png}
-	\captionof{figure}{Example of visualisation}
+	\captionof{figure}{Visualisation} %to make images on top of each other
 	\includegraphics[height=.4\textheight]{pic/DW_mp.png} 
-	\captionof{figure}{Example of visualisation}
+	%\captionof{figure}{Example of visualisation}
 \end{frame}
 
-\begin{frame}{Jareer Mohammed}{Daily repetition}
-	\centering
-	\includegraphics[width=0.5\textwidth]{pic/hung012_qc_gps_mp2.png}
-	\includegraphics[width=0.5\textwidth]{pic/kiln012_qc_gps_mp2.png}
-	\captionof{figure}{Example of visualisation}
+\begin{frame}{Jareer Mohammed}%{Daily repetition}
+
+	\begin{figure}
+		\centering
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{pic/2_GS10_test_option_12.png}
+			\caption{Open sky}
+			%\label{fig:sub1}
+		\end{subfigure}%
+		\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{pic/2_GS09_test_option_12.png}
+			\caption{Urban area}
+			%\label{fig:sub2}
+		\end{subfigure}
+		\caption{Comparison for GPS SV2\MatlabRef}
+		% \label{fig:test}
+	\end{figure}
 \end{frame}
 
+\section{Conclusions}
 
-	\section{Conclusions}
-	
-	\begin{frame}{List of files provided}
-			\begin{description}
-			\item[H24VLP\_P1\_MP.pdf] This presentation;
-			\item[TEQC\_intro.pdf] TEQC introductory document by Sean Ince;
-			\item[teqc.exe] Old teqc 64bit Windows binary;
-			\item[2006\_Ogaja.pdf] A paper discussing multipath analysis' in Matlab using TEQC QC output;
-			\item[Matlab.zip] Matlab script, discussed in the paper above. Use \textit{main.m} to run it;
-			\item[WangSEU.zip] Matlab script;
-		\end{description}
+
+	\begin{frame}{List of files}
+			
+		Following files are available on accompanying Moodle site:
+
+		\begin{description}
+		\item[H24VLP\_P1\_MP.pdf] This presentation;
+		\item[TEQC\_intro.pdf] Introduction to TEQC (Sean Ince);
+		\item[teqc.zip] Old teqc 64bit Windows binary for Matlab script;
+		\item[2006\_Ogaja.pdf] Paper describing TEQCSPEC Matlab script;
+		\item[Matlab.zip] TEQCSPEC Matlab script. Use \textit{main.m} to run it;
+		\item[WangSEU.zip] Matlab script;
+	\end{description}
+
 	\end{frame}
+
+
+%Final slide
+\setbeamercolor{background canvas}{bg=blueBgd!60}
+\plain{Good luck}
+
+
 
 \end{document}

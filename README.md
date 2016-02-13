@@ -12,3 +12,8 @@ Tick indicates that slides have been updated for this year lectures.
 - [x] **H24VSP_PPP** - H24VSP Project 3 (NRTK vs PPP) introduction slides
 - [x] **H24VLP_P1_MP** - H24VLP Project 1 (Multipath) introduction slides
 - [ ] **H24VLP_P2** -  H24VLP Project 2 Sensor integration lecture notes
+
+
+## Supporting repos
+
+[TEQCSPEC repo](https://github.com/DfAC/TEQCSPEC) contains Matlab code used at 24VSP Satellite Based Positioning Practical Project 1 (Multipath).

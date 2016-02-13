@@ -1,5 +1,7 @@
-\documentclass[11pt]{beamer} 
 
+%TeXstudio produce a LOT of warning yet still compile.
+
+\documentclass[11pt]{beamer} 
 
 \usetheme{metropolis} %https://github.com/matze/mtheme
 \metroset{everytitleformat = regular,progressbar=foot} %settings
@@ -13,14 +15,13 @@
 
 \usepackage{booktabs}
 \usepackage[scale=2]{ccicons}
-
 \usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
+%\usepackage[demo]{graphicx}
+\usepackage[font={small,it}]{caption}
+\usepackage{subcaption} %throws a lot of errors but compile
 
 %%LOGO
-%coords are in relation to lower right corner
-%\logo{\pgfputat{\pgfxy(0,6}{\pgfbox[right,top]{\includegraphics[width=2.5cm]{logo.png}}}}
-
 \usepackage{tikz}
 \addtobeamertemplate{frametitle}{}{%
 \begin{tikzpicture}[remember picture,overlay]
@@ -30,24 +31,21 @@
 \input{Preamble.tex}
 %\renewcommand{\baselinestretch}{1.2} %line spacing
 %{\setstretch{1.0}\color{blue} text bla bla } for section strech
-\renewcommand{\footnotesize}{\scriptsize}
-%\usepackage[demo]{graphicx}
-\usepackage[font={small,it}]{caption}
-\usepackage{subcaption} %throws a lot of errors but compile
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\MatlabRef}{\footnote{\url{https://github.com/DfAC/TEQCSPEC}.}}
-%\newcommand{\thisDocRef}{\footnote{Presentation is available at \url{https://github.com/DfAC/TeachingSlides/} and Moodle.}}
+\renewcommand{\footnotesize}{\scriptsize} %change footnote sizes
+\newcommand{\MatlabRef}{\footnote{History of changes at \url{https://github.com/DfAC/TEQCSPEC}.}}
+\newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/}.}}
 %\usepackage{lipsum} % for dummy text only
 
 %Grey text
-%\definecolor{shadecolor}{RGB}{190,190,190}
+\definecolor{shadecolor}{RGB}{190,190,190}
 %\textcolor{shadecolor}{	\item[Ogaja\_Matlab.7z] Matlab script. To be placed on-line after week2.}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \title[H24VLP]{H24VLP Project 1}
-\subtitle{Environmental impact on \\the positioning performance}
+\subtitle{Environmental impact on \\the GNSS positioning performance}
 
 \author{LKB}
 \institute{NGI}
@@ -66,8 +64,8 @@
 	
 \section{Introduction}
 
-	\begin{frame}[allowframebreaks]{Project 1}
-		Aim of work is to understand the impact of the environment on positioning performance. You will study 
+	\begin{frame}[allowframebreaks]{Project Introduction}
+		Aim of the project is to understand the impact of the environment on positioning performance. You will study 
 		\begin{itemize}
 			\item Positioning performance;
 			\item Number of satellites and Signal strength;
@@ -77,50 +75,14 @@
 		\begin{itemize}
 			\item Open area;
 			\item Foliage (trees);
-			\item Close to buildings.
+			\item heavy multipath - between two buildings.
 		\end{itemize}
 		For the study we expect you to use:
 		\begin{itemize}
-			\item TEQC;
-			\item Matlab script visualising multipath\MatlabRef;
-			\item WangSEU software;
+			\item TEQC command line software;
+			\item TEQCSPEC Matlab script visualising multipath;
+			\item WangSEU VC++ software;
 		\end{itemize}
-
-	\end{frame}
-
-
-	\begin{frame}{TEQC}
-		TEQC\footnote{\url{http://www.unavco.org/software/data-processing/TEQC/TEQC.html}. Latest binaries at at bottom of page.} allows translation, editing and quality control of collected GNSS data\footnote{Tutorials are available at \url{http://www.unavco.org/software/data-processing/TEQC/doc/UNAVCO_TEQC_Tutorial.pdf}}. \\
-		\medskip
-		For example \alert{\textit{ teqc +qc +plot data.16o}} will produce all outputs needed for Matlab script. Use binaries provided with Matlab script as recent ones use non-compatible COMPACT3 format \footnote{\url{http://postal.unavco.org/pipermail/teqc/2013/001594.html}}. Other examples are available in \textit{TEQC\_intro.pdf} introductory document by Sean Ince.
-
-	\end{frame}
-
-
-
-	\begin{frame}{TEQCSPEC}
-		This matlab script visualise \textit{teqc qc data}. To run it use \textit{main.m} and select any of COMPACT2 files created by teqc. You need to manually save plots created by the script. We expect that you will use this information to identify satellites to analyse.
-		\medskip
-		Further description is available in \textit{2006\_Ogaja.pdf}. Script itself is available at H24VLP Moodle website or Github\MatlabRef.
-	\end{frame}	
-
-	\begin{frame}[allowframebreaks]{WangSEU}
-
-	WangSEU is a software created by Denghui Wang, \textit{visiting PhD student from Southeast University, Nanjing, China}. You will use it to output relevant characteristics. Software outputs separate CSV file for each satellite\footnote{Note that $SV_{GLONASS} =  SV_{ID} + 60$ to differentiate from GPS. For example SV64 is GLONASS 4 while SV4 is GPS 4.} with the following columns:\\
-\tiny{measurements epoch,GPS week second,SV\_ID,Elev[deg],Az[deg], MP1,MP2,SN1,SN2, SV tracked for}\\
-\medskip
-	\begin{exampleblock}{Example output}{
-\tiny{
-Epoch,1,GPSSecond,305969,Sat, 10,Ele, 69.46,Azi,147.97,MP1,-13.4718,MP2,-23.1764,SN1,50.25,SN2,45.40,Num,1,\\
-Epoch,2,GPSSecond,305970,Sat, 10,Ele, 69.45,Azi,147.97,MP1,-13.4753,MP2,-23.1607,SN1,50.30,SN2,45.15,Num,2,\\
-Epoch,3,GPSSecond,305971,Sat, 10,Ele, 69.44,Azi,147.97,MP1,-13.4779,MP2,-23.1643,SN1,50.40,SN2,45.35,Num,3,\\
-Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767,SN1,50.45,SN2,45.35,Num,4,\\
-}
-		}
-	\end{exampleblock}
-
-%To produce output files run \textit{WangSEU.exe} and from top menu select \textit{Read Rinex File$\rightarrow$Read single station RINEX file}.}
-
 
 	\end{frame}
 
@@ -136,8 +98,63 @@ Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767
 			\item \textbf{Analyse data and draw conclusions.}
 			\item \alert{Prepare and present a story about your findings.}
 		\end{itemize}
+	\end{frame}
+
+
+\section{Software}
+
+	\begin{frame}{TEQC}
+		TEQC\footnote{\url{http://www.unavco.org/software/data-processing/TEQC/TEQC.html}. Latest binaries at at bottom of page.} allows translation, editing and quality control of collected GNSS data\footnote{Tutorials are available at \url{http://www.unavco.org/software/data-processing/TEQC/doc/UNAVCO_TEQC_Tutorial.pdf}}. \\
+		\medskip
+		For example \alert{\textit{ teqc +qc +plot data.16o}} will produce all outputs needed for Matlab script. Use binaries provided with Matlab script as recent ones use non-compatible COMPACT3 format \footnote{\url{http://postal.unavco.org/pipermail/teqc/2013/001594.html}}. Other examples are available in \textit{TEQC\_intro.pdf} introductory document by Sean Ince.
 
 	\end{frame}
+
+
+
+	\begin{frame}{TEQCSPEC}
+		This matlab script visualise \textit{teqc qc data} using COMPACT2 files created by TEQC. We expect that you will utilise script to identify satellites to analyse. To create plots:
+		\begin{itemize}
+			\item run \textit{main.m} (F5) selecting script folder as active;
+			\item select requested teqc COMPACT2 files;
+			\item plots 5-6 visualise multipath on skyplot;
+			\item \textcolor{shadecolor}{explore other plots;}
+			\item save plots.
+		\end{itemize}
+
+		Further description is available in \textit{2006\_Ogaja.pdf}, available, with scripts, at H24VLP Moodle website\MatlabRef.
+	\end{frame}	
+
+	\begin{frame}[allowframebreaks]{WangSEU}
+
+	WangSEU is a software created by Denghui Wang, \textit{visiting PhD student from Southeast University, Nanjing, China}. You will use it to output relevant characteristics from RINEX\footnote{you need RINEX 2.11 \textit{*.??o, *.??p *.??n} files.}. Software outputs separate CSV file for each satellite\footnote{Note that $SV_{GLONASS} =  SV_{ID} + 60$ to differentiate from GPS. For example SV64 is GLONASS 4 while SV4 is GPS 4.} with the following columns:\\
+
+	\resizebox{\textwidth}{!}{%fit to page
+		\begin{tabular}{cccccccccc} %{l|c|c|c|c}
+			%\toprule %\rowcolor{lightgray}
+			Epoch[s] & GPS week [s] & SV ID & Elev[deg] & Az[deg] &  MP1 & MP2 & SN1 & SN2 &  SV lock [s] \\
+			%\midrule
+		\end{tabular}%
+	} %resizebox{}
+
+To produce CSV output:
+ 
+\begin{itemize}
+	\item start \textit{WangSEU.exe}
+	\item from top menu select \textit{Read Rinex File $\rightarrow$ Read single station RINEX file}
+\end{itemize}
+
+	\begin{exampleblock}{Example output}{
+{\tiny
+Epoch,1,GPSSecond,305969,Sat, 10,Ele, 69.46,Azi,147.97,MP1,-13.4718,MP2,-23.1764,SN1,50.25,SN2,45.40,Num,1,\\
+Epoch,2,GPSSecond,305970,Sat, 10,Ele, 69.45,Azi,147.97,MP1,-13.4753,MP2,-23.1607,SN1,50.30,SN2,45.15,Num,2,\\
+Epoch,3,GPSSecond,305971,Sat, 10,Ele, 69.44,Azi,147.97,MP1,-13.4779,MP2,-23.1643,SN1,50.40,SN2,45.35,Num,3,\\
+Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767,SN1,50.45,SN2,45.35,Num,4,\\
+} %end of text
+		} %end of block
+	\end{exampleblock}
+	\end{frame}
+
 
 %changing settings for this area
 {\sisetup{round-mode = places,round-precision = 3} 
@@ -151,10 +168,10 @@ Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767
 					\toprule %\rowcolor{lightgray}
 					ID & $E[m]$ & $N[m]$ & Ht Ort [m]\footnote{Geoid undulation is \num{48.523}m} & Notes \\
 					\midrule
-					JUB7 & \num{454729.5517} & \num{339338.9003} & \num{28.9802} & Open Space\\
+					JUB7 & \num{454729.5517} & \num{339338.9003} & \num{28.9802} & Open Area\\
 					JUB8 & \num{454682.3444} & \num{339523.0937} & \num{27.8030} & Trees\\
-					JUB9 & \num{454849.2113} & \num{339695.8759} & \num{29.9054} & MP for Group 1\\
-					JUB10 & \num{454851.6669} & \num{339697.2905} & \num{29.8658} & MP for Group 2\\
+					UrbanA & \num{454853.269} & \num{339696.63} & \num{29.89} & MP area for Group A\\
+					UrbanB & \num{454858.511} & \num{339697.517} & \num{29.854} & MP area for Group B\\
 				\end{tabular}%
 			}
 			\caption{OSGB coordinates for the Project 1}
@@ -246,27 +263,27 @@ Epoch,4,GPSSecond,305972,Sat, 10,Ele, 69.43,Azi,147.96,MP1,-13.4686,MP2,-23.1767
 			\caption{Urban area}
 			%\label{fig:sub2}
 		\end{subfigure}
-		\caption{Comparison for GPS SV2\MatlabRef}
+		\caption{Comparison for GPS SV2}
 		% \label{fig:test}
 	\end{figure}
 \end{frame}
 
-\section{Conclusions}
+\section{Summary}
 
 
-	\begin{frame}{List of files}
-			
-		Following files are available on accompanying Moodle site:
+	\begin{frame}{Supporting files}
+	You will study the impact of the environment on positioning performance using software provided. We expect you to produce own graphs using outputs from the provided software. Following files can be found on the accompanying Moodle site:
 
 		\begin{description}
-		\item[H24VLP\_P1\_MP.pdf] This presentation;
+		\item[H24VLP\_P1\_MP.pdf] This presentation\thisDocRef;
 		\item[TEQC\_intro.pdf] Introduction to TEQC (Sean Ince);
-		\item[teqc.zip] Old teqc 64bit Windows binary for Matlab script;
+		\item[teqc.zip] Old teqc 64bit Windows binary to produce Matlab script inputs;
 		\item[2006\_Ogaja.pdf] Paper describing TEQCSPEC Matlab script;
-		\item[Matlab.zip] TEQCSPEC Matlab script. Use \textit{main.m} to run it;
-		\item[WangSEU.zip] Matlab script;
+		\item[Matlab.zip] TEQCSPEC Matlab script\MatlabRef. Use \textit{main.m} to run it;
+		\item[WangSEU.zip] VC++ binary producing CSV files from RINEX.
 	\end{description}
 
+	%For older versions please refer to the GitHub site.
 	\end{frame}
 
 

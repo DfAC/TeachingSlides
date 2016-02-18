@@ -1,6 +1,5 @@
-%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[british]{book}
+\documentclass[british,DIV=calc, paper=a4, fontsize=12pt, onecolumn]{scrartcl}	
+%\documentclass[british]{book}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{geometry}
@@ -23,7 +22,7 @@
  breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
  {hyperref}
  
-\hypersetup{pdftitle={Inertial Explorer Manual},
+\hypersetup{pdftitle={H24VLP Project 2},
  pdfauthor={Lukasz K Bonenberg},
  pdfsubject={teaching},
  pdfkeywords={Integration, GNSS, IMU, LC}}
@@ -61,6 +60,12 @@
 \makeatletter
 \@addtoreset{section}{part}
 \makeatother 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT STARTED
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{titlepage}
 \title{\includegraphics[width=7cm]{pic/00_logo}\vspace*{5cm}
 \\
@@ -73,9 +78,10 @@ H24VLP Location Technology\\
 \end{titlepage}
 \pagebreak{}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%FRONT MATTER
-\frontmatter %to get i,ii
+%\frontmatter %to get i,ii
 \setcounter{page}{1}
 
 %intro table of content
@@ -85,7 +91,7 @@ H24VLP Location Technology\\
 	\addtocontents{toc}{~\hfill\textbf{Page}\par} % ?Page? on top of the page numbers in toc/lof/lot
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAIN DOC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\mainmatter %so we can get proper numbering again
+%\mainmatter %so we can get proper numbering again
 
 
 \chapter{Introduction}

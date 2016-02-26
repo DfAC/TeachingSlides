@@ -1,3 +1,9 @@
+%TODO:
+% should I add GS10 data for students to check?
+% correct document
+% add new template
+
+
 \documentclass[british]{book}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
@@ -53,13 +59,9 @@
 \usepackage{fancyhdr}
 
 
-
 \renewcommand{\footnotesize}{\scriptsize} %change footnote sizes
-\newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/tree/master/H24VLP_IMS}.}}
-
-
-
-
+\newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/tree/master/H24VLP_P2_IMU}.}}
+\newcommand{\moreInfo}[1]{\footnote{For more details check \url{#1}.}}
 
 
 \begin{document}
@@ -75,11 +77,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{titlepage}
-\title{\includegraphics[width=7cm]{./../logo.png}\vspace*{5cm}
+\title{\includegraphics[width=7cm]{./../bigLogo.png}\vspace*{5cm}
 \\
-H24VLP Location Technology\\
-\textbf{Project 2}\\
-\textbf{Introduction to Inertial Explorer}}
+\textbf{H24VLP Location Technology\\ Project 2}
+\\Integration of GNSS and INS
+}
 \author{Dr Lukasz Kosma Bonenberg}
 \maketitle
 \thispagestyle{empty}%no number on this page
@@ -90,13 +92,13 @@ H24VLP Location Technology\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%FRONT MATTER
 %\frontmatter %to get i,ii
-\setcounter{page}{1}
+%\setcounter{page}{1}
 
 %intro table of content
 	
-	\setcounter{tocdepth}{2} %how deep are we going to go
+	\setcounter{tocdepth}{1} %how deep are we going to go
 	\tableofcontents
-	\addtocontents{toc}{~\hfill\textbf{Page}\par} % ?Page? on top of the page numbers in toc/lof/lot
+	%\addtocontents{toc}{~\hfill\textbf{Page}\par} % ?Page? on top of the page numbers in toc/lof/lot
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MAIN DOC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %\mainmatter %so we can get proper numbering again
@@ -111,7 +113,7 @@ Welcome to the second Project of H24VLP Location Technology Practical. We will f
 	\item Practical understanding of the IMU;
 	\item Practical understanding of the IMS;
 	\item Ability to process and analyse the IMS dataset;
-	\item Understand the advantages and limitations of integrated GNSS and INU system;
+	\item Understand the advantages and limitations of integrated GNSS and INU system.
 
 \end{itemize}
 
@@ -144,7 +146,7 @@ This practical will span two supervised lab classes, with aim to provide you wit
 	\item [{Week~3}] Group presentation.
 \end{description}
 
-\subsection{Dataset description}
+\section{Dataset description}
 
 Approximately 90 minutes trajectory have been collected using NGI van, demonstrated to you earlier. Trial was run in around Nottingham (see figure \ref{fig:Van-trajectory}) starting and ending with a static period\footnote{You will explore both GNSS and IMU data to identify those periods properly.}. NGB2 was used as a reference station for the duration of the trials.
 Figure \ref{Van-experiment-layout} and table \ref{Lever-Arm-Values} demonstrate experimental setup used.
@@ -158,7 +160,7 @@ All collected data has been converted to \emph{Inertial Explorer} native format.
 	\end{description}
 
 
-\subsection{Supporting Document on Moodle}
+\section{Supporting Document on Moodle}
 
 Following document are also provided for your reference:
 
@@ -167,175 +169,204 @@ Following document are also provided for your reference:
 	\item [{SPAN.pdf}] Document outlining SPAN characteristics;
 	\item [{Microstrain.pdf}] Document outlining Microstrain characteristics;
 	\item [{InertialExplorer850\_Manual.pdf}] Full manual for IE 8.50;
-	\item [{H24VLP\_P2.pdf}] This document\footnote{For vers};
+	\item [{H24VLP\_P2\_IMU.pdf}] This document\thisDocRef.
 	\end{description}
 
+\section{Handling of data}
 
+You are being provided with all relevant data from onset of your project. I suggest:
 
-
-
-
-
-\subsection{Handling of data}
-During the fist week you will be provided with all relevant data files, which you should copy to local folder on your computer. Please make a backup of all your work before leaving the Photogrammetry Lab. This should include all RAW data files and any \emph{Inertial Explorer} generated files. It is recommended that all project files are placed in the same directory.
-
-
-
-
-
-You will first process GNSS data (as outlined in sections \ref{sec:Processing-GNSS-data}) to create good GNSS trajecotry to be used for processing each IMU separately (section \ref{sec:Processing-Loosely-Coupled}). After obtaining understanding of each system performance you will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set (section \ref{sec:Simulating-GNSS-outage}). Duration of those gaps should allow you to properly characterise each of the IMUs and combined with exploratory analysis of all results should allow you to answer the following:\\
-\textbf{Characterise the performance of each integrated GNSS and INS system for navigation and tracking applications.}\\
-We expect you to both visualise and summarise your work. While a brief description of outputs provided by IE can be found in section \ref{sec:Exporting-final-results}, you are expected to show your own judgement and expertise in selecting output supporting your narrative. It is likely that IE output will be sufficient for that, but you are welcome to summarise some of the results in the tables or plot additional graphs using comparing exported coordinates.
-
-
-
-
+\begin{itemize}
+	\item Keep all your data in a single project folder structure which you can backup on your own computer before leaving the Photogrammetry Lab;
+	\item Place all given data file in the same  \\RAW subfolder
+	\item Create the separate project file for each IMU and put them in the project folder (main folder of the \\RAW subfolder);
+	\item Please name each project accordingly (GNSS, SPAN, POSRS, MicroStrain ect); 
+	\item IE is producing a large number of files - the critical ones are \textit{*.cfg}, all other ones can be restored from RAW data.
+\end{itemize}
 
 
 \section{Workflow}
-In order to process the data, you will be required to:
+
+In order to process and understand the data, you will have to:
 
 \begin{enumerate}
-	\item Create a separate project for each IMU (SPAN,	POSRS, MicroStrain);
-	\item Process GNSS data, ideally using SPAN receiver, until you satisfied with results;
+	%\item Create a separate project for GNSS processing and for each IMU (SPAN,	POSRS, MicroStrain), \refLoc{sec:sec:Create-an-new};
+	\item Process SPAN vs NGB2 data, \refLoc{sec:Processing-GNSS-data}. The aim of this step is to: 
 	\begin{enumerate}
 		\item Identify static periods for IMU processing;
-		\item Rename final GNSS results as GNSS.cmb.
+		\item Create an ideal GNSS trajectory, that will be used in next steps.
 	\end{enumerate}
-	\item Process LC IMU data:
+	\item Process Loosely Coupled (LC) IMU and GNSS data. You will:
 	\begin{enumerate}
-		\item Process POSRS, using GNSS.cmb and within static periods ranges, as described in \ref{sub:Processing-POSRS};
-		\item Process SPAN, using GNSS.cmb and transferring alignment from POSRS, as described in \ref{sub:Processing-SPAN};
-		\item Process Microstrain, using GNSS.cmb and transferring alignment from POSRS, as described in \ref{sub:Processing-Microstrain}).
+		\item Process POSRS, using GNSS.cmb \footnote{This is trajectory created in the previous step.}, \refLoc{sub:Processing-POSRS};
+		\item Process SPAN, using GNSS.cmb and by transferring alignment from POSRS, \refLoc{sub:Processing-SPAN};
+		\item Process Microstrain, using GNSS.cmb and transferring alignment from POSRS, \refLoc{sub:Processing-Microstrain}).
 	\end{enumerate}
-	\item Process IMU data only:
+	\item Process only IMU data (without GPS data) for each sensor, \refLoc{Processing-IMU-on-its-own}. You will use this to estimate the required GNSS gaps for each IMU system. Use this step to better understand limitations of each sensor. 
+	\item You will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set for each sensor, \refLoc{Simulating-GNSS-outage}. The aim here is: 
 	\begin{enumerate}
-		\item Process each IMU using transfer alignment as described in section \ref{Processing-IMU-on-its-own};
-		\item Draw estimation of required GNSS gaps for each IMU system.
+	\item Verify your understanding of last step;
+	\item Demonstrate the performance of each integrated GNSS and INS system for navigation, by highlighting differences between systems.
+	\item Duration of GNSS gaps, combined with exploratory analysis of all results should allow you to \textbf{Characterise the performance of each integrated GNSS and INS system for navigation and tracking applications}.
 	\end{enumerate}
-	\item Introduce GNSS data gaps  as described in section %\ref{Processing-IMU-on-its-own};
-	\item Export plots, data ect.
-	\item Draw conclusions.
+	\item Draw conclusions and prepare presentation by visualising and summarising your work. While a brief description of outputs provided by IE can be found in section \ref{sec:Exporting-final-results}, you are expected to show your own judgement and expertise in selecting output supporting your narrative. It is likely that IE output will be sufficient for that, but you are welcome to summarise some of the results in the tables or plot additional graphs using comparing exported coordinates.
 \end{enumerate}
 
 
-
-\chapter{Introduction to Inertial Explorer}
-Following section explains basics of using IE. If you require additional information please refer to Inertial Explorer Manual provided.
+Following section will explain the basics of using IE, which should be sufficient to carry out the required task. If you need more information check the \textbf{Inertial Explorer Manual} provided.
 
 
 
-\section{Creating a project}\label{sec:Create-an-new}
+\chapter{Processing GNSS data}\label{sec:Processing-GNSS-data}
 
-You need to create a separate project file for each IMU and put them in the same folder. Please name each project accordingly (SPAN, POSRS, MicroStrain ect).\\
-\bigskip
 
-To create a new project open \emph{Inertial Explorer }and go to\textbf{\emph{ File->New Project->Project Wizard}}
+To compare performance of IMU component, we will use the same GNSS data set for each project - SPAN GNSS data, collected at 1Hz observation rate.
+
+\section{Creating a new project}\label{sec:Create-an-new}
+
 \begin{itemize}
-	\item Navigate to project folder and create a new project (call it SPAN, POSRS, MicroStrain ect). 
-	\item For SPAN project
+	\item Open \emph{Inertial Explorer} and go to \textbf{\emph{File->New Project->Project Wizard}};
+	\item Navigate to project folder and create a new project - GNSS;
+	\item We will use SPAN GNSS data as a rover;
 	\begin{enumerate}
-		\item Select required GNSS \& IMU files (SPAN\_54.{*})
-		\item antenna height 0m, Measured to APR, use antenna profile as per figure \ref{fig:Van-experiment-layout}
-		\item Next
-		\item I would like add Base Station Data
-		\item Add Station From File
-		\item Select NGB2.{*} files as base 
-		\item antenna height 0.502m, profile \emph{LEIAR25.R4}
-		\item position 52\textdegree{}57'06.95636"N 1\textdegree{}11'02.39879"W 91.2006m
-		\item Measured to APR
-		\item NEXT, NEXT, Finish, Finish
+		\item Select required GNSS \& IMU files (SPAN\_54.{*});
+		\item antenna height 0m, Measured to APR, use antenna profile as per figure \ref{fig:Van-experiment-layout};
+		\item Next;
 	\end{enumerate}
-	\item For other projects (POSRS, Microstrain)
-		\begin{enumerate}
-			\item Select required IMU files only ({*}.imr)
-			\item antenna height 0m, Measured to APR, use antenna profile as for SPAN
-			\item Next
-			\item I would like add Base Station Data
-			\item Finish, Next, Finish
-		\end{enumerate}
+	\item We will use NGB2 as reference station;
+	\begin{enumerate}
+		\item Select \textit{I would like add Base Station Data};
+		\item Select \textit{Add Station From File} and select NGB2.{*} files;
+		\item antenna height 0.502m, profile \emph{LEIAR25.R4};
+		\item position 52\textdegree{}57'06.95636"N  1\textdegree{}11'02.39879"W  91.2006m;
+		\item Measured to APR;
+		\item NEXT, NEXT, Finish, Finish.
+	\end{enumerate}
 \end{itemize}
 
-\section{Processing SPAN GNSS data}\label{sec:Processing-GNSS-data}
 
-As you are only interested in performance of IMU component, you will use the same GNSS data set for each project. To start with check your data overlap using \textbf{\emph{Output->Plot Results}}and selecting\emph{ File Data Coverage }plot. Does rover and base station data overlap? What about IMU data?
+\section{Processing GNSS data}\label{sec:GPS-process}
 
-\subsection{Precise Clocks/Orbits}
-The precise orbits/clocks latency is 12-18 days and the GPS rapid ones its less then a day. If observation are available and you haven't downloaded them in last step, use \textbf{\emph{File->Add precise Files}} 
-\begin{itemize}
-	\item Set proper time and date, check GLONASS and press Download for combined GPS and GLONASS data (some files will be overwritten);
-	\item \emph{Set proper time and date, uncheck GLONASS and press Download for GPS data (clocks are higher resolution then a combined GPS and
-	GLONASS ones);}
-	\item Press OK to exit window.
-	\item In \textbf{\emph{View->Project Overview}} you should be able to see all the files you added.
-\end{itemize}
+To process data select \textbf{\emph{Process->Process GNSS}} or press \textbf{\emph{F5}}
 
-\subsection{Processing GNSS data}
-
-Go to\emph{ }\textbf{\emph{Process->Process GNSS}}
 \begin{itemize}
 	\item Processing Method: \emph{Differential GNSS;}
 	\item Processing Direction: \emph{Both};
 	\item Profile GNSS: \emph{Ground Vehicle}, don't change any \emph{Advanced..}
 	options;
-	\item Add description/User name.
+	\item Make sure th add description/User name - we can recover previous settings so description is very important.
 \end{itemize}
 
-To check quality of the position first check overview summary using \textbf{\emph{View->Processing summary}} and then use following plots (\textbf{\emph{output->Plot Results}} or F7): 
+
+\subsection{Understand the data}
+
+With complex dataset it is important to fully understand the dataset. First check overview summary using \textbf{\emph{View->Processing summary}}. To visualise data go to \textbf{\emph{Output->Plot Results} or press \textbf{F7}}.
 
 \begin{itemize}
-	\item Combined Separation
-	\item Combined Separation(Fix)
-	\item Estimated Position Accuracy
-	\item Quality factor
-	\item Float/Fixed Ambiguity Status
+	\item Lets start with looking at data overlap by selecting\emph{ File Data Coverage} plot. 
+	\item Check plot settings.
+	\item To check quality of the position use the following plots:
+	\begin{itemize}
+		\item Combined Separation
+		\item Combined Separation(Fix)
+		\item Estimated Position Accuracy
+		\item Quality factor
+		\item Float/Fixed Ambiguity Status
 \end{itemize}
-
-To check baseline data use following plots:
-
-\begin{itemize}
-	\item Local Level Vector (pay attention to height component !)
-	\item Distance Separation
-	\item RMS - Carrier Phase
+	\item To obtian more information about our baseline use the following plots:
+	\begin{itemize}
+		\item Local Level Vector - check the height component, is there anything you should be concerned with?
+		\item Distance Separation
+		\item RMS - Carrier Phase
+	\end{itemize}
 \end{itemize}
-
-\subsection{Introducing static data in GNSS processing}
-
-For the initialisation of IMU we need to identify static periods at the beginning and end of dataset. We can do using GNSS data only, and also try to improve its accuracy:
-
-\begin{itemize}
-\item use \emph{Acceleration Profile} or \emph{Velocity Profile} plots to
-identify static periods.
-\item create new file Static.txt with each row identifying static period as NAME~START\_TIME~END\_TIME~NOTE (see IE manual page 32 for details). Compare example below: 
-	\begin{lstlisting} [language=Matlab,backgroundcolor=\color{lightgray},frame=single,basicstyle=\footnotesize,numbers=left,numbersep=5pt, numberstyle=\tiny\color{mygray}]
-		NGI_Start 201200.0 203505.0 Intial_Period_NGB_Yard
-		NGI_End 221200.0 223505.0 End_Period_NGB_Yard
-	\end{lstlisting}
-\item use \textbf{View->GNSS Observations->Remote->Insert Static/Kinematic Markers} and select \textit{Use user generated file to define static periods} to import static data
-\item plot \textit{File data coverage} to check if data is properly changed;
-\item process GNSS data again
-\item Use \emph{Static Session Convergence} plot to assess each period
-\item Use any of plots described in previous section to compare results.
-\end{itemize}
-
-Once you happy with identified static periods (they should be between 5-10 min long) note beginning and end of whole dataset (that is from first static period to end of last static period identified). Whole processing  generated SPAN.cmb file (combined GPS file). You are going to be using this file later, so please make a copy of it and re-namne it, for example GoodData.cmb. You should not need to re-process GNSS.
 
 \NOTE{
 Every plot have menu accessible by right clicking on it. Selecting \emph{Properties }allows to modify plot display\emph{.} Plot range can be modified from same menu using \emph{X-Axis} and \emph{Y-Axis. Apply to All }subcommand match all open plots to the current one.\emph{ Compute statistics for... }provide quantification of plot data. Use \textbf{\emph{Ctr+C}} to copy window content. If you ever close background map, use \textbf{\emph{Output->Show Map window }}.
 }
 
 
-\section{Processing Loosely Coupled GNSS/IMU data\label{sec:Processing-Loosely-Coupled}}
 
-To process  Loosely Coupled GNSS/IMU data use \textbf{\emph{Process->Process LC}}. For every dataset, you should select \textbf{\emph{Advanced->System}} and in \textit{IMU Time Range} input beginning and end of correct dataset (that is from first static period to end of last static period identified in section \ref{sec:Processing-GNSS-data}).
+\section{Improving GNSS data}
 
-\NOTE{
-To verify static periods always plot \emph{File Data Coverage} and \emph{Velocity profile}. Before proceeding check orientation of axis and level arms (those are values AFTER the rotation) are as provided in table \ref{tab:Lever-Arm-Values}. 
-}
+This section discuss how we can improve quality of the data.
 
-Following subsection explain settings and workflow for each sensor.
 
-\subsection{Processing POSRS\label{sub:Processing-POSRS}}
+\subsection{Precise Clocks/Orbits}
+
+The precise orbits/clocks latency is 12-18 days, with the rapid product available for GPS rapid within the day\moreInfo{http://bit.ly/IGS_products}. This is useful for baselines exceeding 15km or if you suspect problems with broadcast ephemerides. It will automatically download files relevant to the current project. To do so 
+
+\begin{itemize}
+	\item Select \textbf{\emph{File->Add precise Files}};
+	\item Check if time and date is correct, tick GLONASS and press Download for combined GPS and GLONASS data (some files might be overwritten)\footnote{GPS only data provide higher resolution clocks, which might be useful for PPP.};
+	\item Press OK to exit window;
+	\item In \textbf{\emph{View->Project Overview}} you should be able to see all the files you added;
+	\item Re-process GPS data,\refLoc{sec:GPS-process}.
+\end{itemize}
+
+
+\subsection{Introducing static data in GNSS processing}
+
+For the successful initialisation of IMUs we need to identify the static periods at the beginning and the end of dataset. We can do using GNSS data only, improving its accuracy in the process - IE is using extended kalman filter (EKF)\moreInfo{https://getpocket.com/a/read/1008419114} for calculations and will use different settings based on the rover static or kinematic status.
+%http://bilgin.esme.org/BitsAndBytes/KalmanFilterforDummies
+
+
+\subsubsection{Looking for static periods\label{sec:Static-periods}}
+
+\begin{itemize}
+\item use \emph{Acceleration Profile} or \emph{Velocity Profile} plots to identify static periods.
+\item create new file Static.txt with each row identifying static period as NAME~START\_TIME~END\_TIME~NOTE (see IE manual page 32 for details or follow this example: 
+	\begin{lstlisting} [language=Matlab,backgroundcolor=\color{lightgray},frame=single,basicstyle=\footnotesize,numbers=left,numbersep=5pt, numberstyle=\tiny\color{mygray}]
+		NGI_Start 201200.0 203505.0 Intial_Period_NGB_Yard
+		NGI_End 221200.0 223505.0 End_Period_NGB_Yard
+	\end{lstlisting}
+\item use \textbf{View->GNSS Observations->Remote->Insert Static/Kinematic Markers} and select \textit{Use user generated file to define static periods} to import static data;
+\item plot \textit{File data coverage} to check if data is properly changed;
+\item process GNSS data again;
+\item Assess each static period using \emph{Static Session Convergence} plots; 
+\item .
+\end{itemize}
+
+. Once you happy with identified static periods (they should be between 5-10 min long) compare results using any other plots that we discussed. Similar as in last project you can use to plots to indentify the poor satelites, fine tune processing parameters or change cut off angle. Once you happy with results save and exit the project. As an extra precaution you might consider making a copy of \textit{GNSS.cmb} and re-naming it, for example as \textit{GoodData.cmb}. 
+
+ so far note beginning and end of whole dataset (that is from first static period to end of last static period identified). Whole processing  generated SPAN.cmb file (combined GPS file). You are going to be using this file later, so please make a copy of it and re-namne it, for example GoodData.cmb. 
+
+
+
+\chapter{Processing LC GNSS/IMU data\label{sec:Processing-Loosely-Coupled}}
+
+To compare performance of IMU component, we will use the same GNSS data set for each project - created in last section. You should not need to re-process GNSS - should you do so you will have to re-process all LC project as well.  
+
+Following subsection will explain detailed settings and workflow for each sensor. The general workflow is the same:
+
+\begin{itemize}
+	\item To create a new project 
+	\begin{enumerate}
+		\item Navigate to project folded and name project (POSRS, SPAN, Microstrain);
+		\item Select required GNSS \& IMU files (for ex POSRS.{*});
+		\item antenna height 0m, Measured to APR, use antenna profile as for SPAN as this is GNSS rover data you are using;
+		\item There is not need to add base station data;
+		\item Finish.
+	\end{enumerate}
+	\item To process Loosely Coupled GNSS/IMU solution go to \textbf{\emph{Process->Process LC}}
+		\begin{enumerate}
+			\item Select required IMU files only ({*}.imr);
+			\item Check orientation of axis and level arms (those are values AFTER the rotation) following table \ref{tab:Lever-Arm-Values};
+			\item in \textbf{Advanced...}:
+			\begin{itemize}
+			 	\item select proper time period for the dataset from first static period to end of last static period identified in section \ref{sec:Static-periods}.
+			 	\item select proper method for forward and backward initial alignment
+			 	\item press OK.
+			 \end{itemize} 
+			\item Change description and user;
+			\item Click process.
+		\end{enumerate}
+\end{itemize}
+
+
+
+
+\section{Processing POSRS\label{sub:Processing-POSRS}}
 
 In \textbf{\emph{Process->Process LC}} choose:
 \begin{description}
@@ -345,7 +376,7 @@ In \textbf{\emph{Process->Process LC}} choose:
 	\item [{Body~to~IMU~Rotation:}] \emph{180,0,90 }
 	\end{description}
 	
-\subsubsection{POSRS Workflow\label{sub:POSRS-Workflow}}
+\subsection{POSRS Workflow\label{sub:POSRS-Workflow}}
 
 \begin{enumerate}
 	\item Run all automatic. There should be small separation between pitch and roll (70 arc-sec), aligned with large jumps in heading at the beginning and the end (up to 700 arc-sec). This tend to indicate weak starting (and finishing) angle estimate. Everything else should be smooth (within 70 arc-sec).
@@ -364,9 +395,10 @@ In \textbf{\emph{Process->Process LC}} choose:
 	\item Results should be within 10 arc-sec for heading and 2 arc-sec for rest. There should be no separation between pitch and roll. Heading separation should be largest in the middle and no jumps at the beginning/end. 
 \end{enumerate}
 
-\subsubsection{Checking results}
+\subsection{Checking results}
 
 To check quality of solution:
+
 \begin{itemize}
 	\item To check lever arm in \textbf{\emph{Process->Process LC}} go to \textbf{\emph{Advanced...->States }}and check\emph{ Solve for lever arms. }After reprocessing the data plot\emph{ IMU/IMU-GPS Level Arm} and compare results with values given. Make sure to reprocess data without \emph{Solve for lever arms }for final results and remaining plots.
 	\item Plot \emph{Attitude Separation} to check IMU initialisation.
@@ -374,7 +406,7 @@ To check quality of solution:
 	\item To check final position, and quality of LC results plot \emph{Combined Separation, Combined Separation (fix)} and\emph{ IMU/GPS position misclosure}. 
 \end{itemize}
 
-\subsection{Processing SPAN}\label{sub:Processing-SPAN}
+\section{Processing SPAN}\label{sub:Processing-SPAN}
 
 In \textbf{\emph{Process->Process LC}} select:
 \begin{description}
@@ -385,7 +417,7 @@ In \textbf{\emph{Process->Process LC}} select:
 	\item [{Body2IMU}] Rotation: \emph{0,0,90}
 \end{description}
 
-\subsubsection{SPAN Workflow\label{sub:SPAN-Workflow}}
+\subsection{SPAN Workflow\label{sub:SPAN-Workflow}}
 
 \begin{enumerate}
 \item Run all automatic. This is purely to check if data is ok.
@@ -393,11 +425,11 @@ In \textbf{\emph{Process->Process LC}} select:
 \item If all is correct transfer alignment from POSRS as described in section \ref{sub:Processing-POSRS}.
 \end{enumerate}
 
-\subsubsection{Checking results}
+\subsection{Checking results}
 
 Same as for POSRS.
 
-\subsection{Processing Microstrain}\label{sub:Processing-Microstrain}
+\section{Processing Microstrain}\label{sub:Processing-Microstrain}
 
 In \textbf{\emph{Process->Process LC}} select:
 \begin{description}
@@ -411,20 +443,25 @@ In \textbf{\emph{Process->Process LC}} select:
 	\item [{Body2IMU}] Rotation: \emph{180,0,90 }
 \end{description}
 
-Follow section \ref{SPAN-Workflow} to obtain all results. Bear in mind that this sensor is of much lower accuracy the other ones and it might be more logical to focus on the small set of data.
+Follow section \ref{SPAN-Workflow} to obtain all results. Bear in mind that this sensor is of much lower accuracy the other ones and it might be more logical to focus on the smaller subset of the data.
 
-\section{Processing IMU on its own}\label{Processing-IMU-on-its-own}
-After defining starting and ending orientation and position for IMU (using \emph{Transfer Alignment}) it is possible to process IMU only data. To do so:
+\chapter{Processing IMU on its own}\label{Processing-IMU-on-its-own}
+
+To assess the duration of the gaps (outages) in the GNSS data you will first assess the quality of IMU by processing it on its own. Results will show you system fee-wheeling performance. I advice to copy and rename project control file for each IMU. To run each IMU you need to define starting and ending orientation and position for IMU - this is what you did already in previous section using \emph{Transfer Alignment}. With those setting sin place it is possible to process IMU only data. 
+
 \begin{enumerate}
-	\item In \textbf{Process->Process LC} check \textbf{Process IMU Data only }box;
-	\item Depending on desired outcome select Both/Forward/Reverse in \textbf{Processing Direction};
+	\item In \textbf{Process->Process LC} check \textbf{Process IMU Data only} box;
+	\item Depending on desired outcome select Both in \textbf{Processing Direction};
 	\item Provide proper description;
 	\item Click \textbf{Process}.
 \end{enumerate}
 
-\section{Simulating GNSS outage\label{sec:Simulating-GNSS-outage}}
+For higher end IMUs it might be worthwile to select Forward/Reverse settings instead of in Both \textbf{Processing Direction}. Analyse data using plots from last section. Once you have the understanding of sensors accuracy and of duration of GNSS outages you want to introduce head to next section.
 
-As a part of your assignment you will simulate a GNSS outage. To do this you need to remove epochs from GNSS generated trajectory (see section \ref{sec:Processing-GNSS-data} for more details). Each epoch is saved in following record
+
+\chapter{Simulating the GNSS outage\label{sec:Simulating-GNSS-outage}}
+
+To simulate a GNSS outage you need to remove epochs from GNSS generated trajectory - GNSS.cmb file, \refLoc{ssec:GPS-process}. In {*}.cmb each epoch is represented as:
 
 \begin{lstlisting} [language=Matlab,backgroundcolor=\color{lightgray},frame=single,basicstyle=\footnotesize,numbers=left,numbersep=5pt, numberstyle=\tiny\color{mygray}]
 Out {Tim: 121252.00 121252.000000 1777 			  %GPS second HHMMSS.SSS GPS Week
@@ -442,30 +479,41 @@ Cov: -4.00800e-004 7.41043e-005 ...
 }
 \end{lstlisting}
 
-Delete \emph{Out\{...\}} to remove whole epoch. Make sure you don't remove static data used by IMU to initialise. Start with small data gaps and slowly increase their duration. Make sure you copy and rename relevant {*}.cmb file and you work on COPY! I suggest experimenting with different settings of \textbf{Processing Direction} in \textbf{Process->Process LC} to fully understand system accuracy.
+Delete \emph{Out\{...\}} to remove whole epoch. Make sure you don't remove static data used by IMU to initialise. Start with small data gaps and slowly increase their duration. Make sure you work on copy of the GNSS.cmb.\\
+
+Once file has been produced reprocess relevant IMU project using altered GNSS trajectory file. I also suggest experimenting with different settings of \textbf{Processing Direction} in \textbf{Process->Process LC} to fully understand system accuracy.
+
+
+\chapter{Visualising and exporting  results\label{sec:Exporting-final-results}}
+
+Above sections have outlined technical knowledge needed to process the data and verify the performance of three integrated INS systems. A critical part of your assessment is to draw the conclusions and prepare visualisations and summary of data supporting your findings. It is likely that IE output, discussed below, will be sufficient for that, but you are welcome to summarise some of the results in the tables or plot additional graphs using exported coordinates/data. You are expected to show your own judgement and expertise in selecting output supporting your narrative.
+
+\section{Graphical results}
+
+\begin{itemize}
+	\item To save all active plots use\textbf{\emph{ Output->Build HTML Report }}
+	\begin{itemize}
+		\item Data will be saved in .\\Html folder;
+		\item You should have at least two set of plots (testing and final) for each sensor
+	\end{itemize}
+	\item To output trajectory to Google Earth use\textbf{\emph{ Output->Export to Google Earth...}}. In case of multiple exports it recommended to change the output parameters using \textbf{\emph{Export}} tab:
+	\begin{description}
+		\item [{Optimize~output~for~trajectory~comparison~in~GE}] creates new colour for the each export\footnote{This also means that export won't follow Quality Numbers,\refLoc{tab:Quality-Number-description}.}. For each run a new folder is created.
+		\item [{Use~concise~epoch~description~for~lower~memory~usage}] shortens output information allowing for quick display in Google Earth.
+		\item [] First and last option of this menu (\emph{Hold epochs and events to ground }and \emph{Output MSL height for better compatibility with GE elevation data, using}) are mutually exclusive and should be used respectively for terrestrial (ground) and aviation data only.
+	\end{description}
+\end{itemize}
+
+
+%Save and check all the plots listed in this walk-trough. You should have at least two set of plots (testing and final) for each sensor. 
 
 
 
-\section{Exporting final results\label{sec:Exporting-final-results}}
-
-\subsection{Graphical results}
-
-To save all active plots use\textbf{\emph{ Output->Build HTML Report }}\emph{. }Data will be saved in .\textbackslash{}Html folder. Save and check all the plots listed in this walk-trough. You should have at least two set of plots (testing and final) for each sensor!  To output trajectory to Google Earth use\textbf{\emph{ Output->Export to Google Earth...}}
-
-
-In case of multiple exports it recommended to change the output parameters. To do so right click on the background map window, go to \textbf{\emph{Export}} tab and set the following:
-\begin{description}
-	\item [{Optimize~output~for~trajectory~comparison~in~GE}] creates new colour for the each export (it also means that export don\textquoteright{}t follow Quality Numbers any more), files are not overwritten and a new folder is created if the \emph{Run} descriptor has changed.
-	\item [{Use~concise~epoch~description~for~lower~memory~usage}] shortens output information allowing for quick display in Google Earth
-\end{description}
-
-First and last option of this menu (\emph{Hold epochs and events to ground }and \emph{Output MSL height for better compatibility with GE elevation data, using}) are mutually exclusive and should be used respectively for terrestrial (ground) and aviation data only.
-
-\subsection{Coordinates}
+\section{Coordinates}
 
 
 \NOTE{
-	To use \textbf{\emph{Export Wizard}} combined solution ({*}.cmb) must exist. It is generated after each LC/TC processing run but it can be also created using \textbf{\emph{Process->Combine Solution}}. Use extreme caution if using this option.
+	To use \textbf{\emph{Export Wizard}} combined solution ({*}.cmb) must exist. It is generated after each LC/TC processing run. It can be also be created using \textbf{\emph{Process->Combine Solution}}. Use extreme caution if using this option.
 }
 
 To output post-processed coordinates as ASCII go to \textbf{\emph{Output->Export Wizard}} 	
@@ -497,7 +545,7 @@ To output post-processed coordinates as ASCII go to \textbf{\emph{Output->Export
 
 
 
-\subsection{Checking results}
+\section{Checking results}
 Check IMU solution against GNSS one. Export values at ARP (\textbf{SUBTRACT antenna L1 height offsets}). It should agree to few mm in clean environment.  Check between different IMU solutions. SPAN/POSRS should agree on mm to cm level.
 
 
@@ -505,6 +553,8 @@ Check IMU solution against GNSS one. Export values at ARP (\textbf{SUBTRACT ante
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%APPENDIX
 
 \chapter{Appendixes}
+
+
 \begin{figure}[tbh]
 \centering\includegraphics[clip,width=12cm]{pic/VanLayout}%%\resizebox{!}{\textheight}{%Ur object here%}
 \caption{Van experiment layout\label{fig:Van-experiment-layout}}
@@ -513,6 +563,8 @@ Check IMU solution against GNSS one. Export values at ARP (\textbf{SUBTRACT ante
 \centering\includegraphics[clip,height=12cm]{pic/TrajectoryLayout}%%\resizebox{!}{\textheight}{%Ur object here%}
 \caption{Test route plan\label{fig:Van-trajectory}}
 \end{figure}
+
+
 \begin{table}[h]
 \centering{}%
 \begin{minipage}[t]{1\columnwidth}%
@@ -536,6 +588,8 @@ Check IMU solution against GNSS one. Export values at ARP (\textbf{SUBTRACT ante
 \par\end{center}%
 \end{minipage}
 \end{table}
+
+
 \begin{table}[h]
 \centering{}%
 \begin{minipage}[t]{1\columnwidth}%
@@ -608,4 +662,8 @@ Check IMU solution against GNSS one. Export values at ARP (\textbf{SUBTRACT ante
 	\end{minipage}
 	\end{table}
 \end{comment}
+
+
+
+
 \end{document}

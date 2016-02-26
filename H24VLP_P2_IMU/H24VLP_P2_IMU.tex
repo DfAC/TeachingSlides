@@ -1,5 +1,4 @@
-\documentclass[british,DIV=calc, paper=a4, fontsize=12pt, onecolumn]{scrartcl}	
-%\documentclass[british]{book}
+\documentclass[british]{book}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{geometry}
@@ -54,6 +53,15 @@
 \usepackage{fancyhdr}
 
 
+
+\renewcommand{\footnotesize}{\scriptsize} %change footnote sizes
+\newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/tree/master/H24VLP_IMS}.}}
+
+
+
+
+
+
 \begin{document}
 \global\long\def\units#1{\textrm{\ensuremath{\mathbf{[\si{#1}]}}}}
 %restart numbering for each Part
@@ -67,7 +75,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{titlepage}
-\title{\includegraphics[width=7cm]{pic/00_logo}\vspace*{5cm}
+\title{\includegraphics[width=7cm]{./../logo.png}\vspace*{5cm}
 \\
 H24VLP Location Technology\\
 \textbf{Project 2}\\
@@ -97,54 +105,93 @@ H24VLP Location Technology\\
 \chapter{Introduction}
 \setcounter{page}{1} %start from 1
 
-The goal of this practical is to assess the performance of integrated GNSS and INS for navigation and tracking applications, using a moving platform and to develop a full understanding of the advantages and limitations of integrated GNSS and INS system.\\
-To this end you will analyse the performance of three types of IMU sensors (navigation grade, tactical grade and low cost MEMS one) collected during route combining three different environments:
+Welcome to the second Project of H24VLP Location Technology Practical. We will focus on navigation applications of the Inertial Navigation Systems (IMS) using a integrated GNSS and IMU system deployed on a moving platform (NGI Van). This practical is supporting Learning outcomes are:
+
+\begin{itemize}
+	\item Practical understanding of the IMU;
+	\item Practical understanding of the IMS;
+	\item Ability to process and analyse the IMS dataset;
+	\item Understand the advantages and limitations of integrated GNSS and INU system;
+
+\end{itemize}
+
+We will use an existing dataset, with the route combining three different environments:
+
 \begin{itemize}
 	\item semi-urban;
 	\item rural;
 	\item dense urban (down town).
 \end{itemize}
-You will first process GNSS data (as outlined in sections \ref{sec:Processing-GNSS-data}) to create good GNSS trajecotry to be used for processing each IMU separately (section \ref{sec:Processing-Loosely-Coupled}). After obtaining understanding of each system performance you will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set (section \ref{sec:Simulating-GNSS-outage}). Duration of those gaps should allow you to properly characterise each of the IMUs and combined with exploratory analysis of all results should allow you to answer the following:\\
-\textbf{Characterise the performance of each integrated GNSS and INS system for navigation and tracking applications.}\\
-We expect you to both visualise and summarise your work. While a brief description of outputs provided by IE can be found in section \ref{sec:Exporting-final-results}, you are expected to show your own judgement and expertise in selecting output supporting your narrative. It is likely that IE output will be sufficient for that, but you are welcome to summarise some of the results in the tables or plot additional graphs using comparing exported coordinates.
+
+The goal of this practical is to understand the advantages and limitations of integrated GNSS and INU systems. You will gain it by assessing the performance of three types of IMU sensor:
+
+\begin{itemize}
+	\item navigation grade POSRS unit with Digital Laser gyros;
+	\item tactical grade SPAN LCI with fiber optic gyros;
+	\item low cost Microstrain 3DM-GX4-25 with MEMS sensor.
+\end{itemize}
+
 
 \section{Layout of the practical}
-This practical will span two supervised lab classes, giving you knowledge to complete the task. Apart from that, you are expected to work in your own time, and to facilitate this, each group will be provided with two IE dongles for the duration of thee weeks.
+
+This practical will span two supervised lab classes, with aim to provide you with tools and knowledge to complete the task. Apart from that, you are expected to work in your own time, and to facilitate this, each group will be provided with two IE dongles for the duration of thee weeks.
+
 \begin{description}
-	\item [{Week~1}] Introduction to the practical. By the end you should
-	have processed all your GNSS data and started processing IMU data.
-	\item [{Week~2}] IMU processing. By the end you should have processed
-	all IMU data and start introducing data gaps.
+	\item [{Week~1}] Introduction to the practical. By the end of this practical you should
+	have processed all GNSS data and get ready to process IMU data.
+	\item [{Week~2}] IMS processing. By the end you should have processed
+	all IMS data and start introducing data gaps.
 	\item [{Week~3}] Group presentation.
 \end{description}
 
-\subsection{Dataset used}
+\subsection{Dataset description}
 
-Approximately 90 minutes long dataset was collected using NGI van, equipped with three types of IMU. Trial was run in around Nottingham (see figure \ref{fig:Van-trajectory}). Each dataset should have static period at the beginning and the end, and you will explore both GNSS and IMU data to identify those periods properly. NGB2 was used as a reference station for the duration of the trials. Experiment setup is summarised  in figure \ref{Van-experiment-layout} and table \ref{Lever-Arm-Values}.
+Approximately 90 minutes trajectory have been collected using NGI van, demonstrated to you earlier. Trial was run in around Nottingham (see figure \ref{fig:Van-trajectory}) starting and ending with a static period\footnote{You will explore both GNSS and IMU data to identify those periods properly.}. NGB2 was used as a reference station for the duration of the trials.
+Figure \ref{Van-experiment-layout} and table \ref{Lever-Arm-Values} demonstrate experimental setup used.
 
-All data was converted to \emph{Inertial Explorer} native format. Those files are:
+All collected data has been converted to \emph{Inertial Explorer} native format. Those files are:
 	\begin{description}
-	\item [{NGB2.{*}}] GNSS data from NGB2 reference station;
-	\item [{POSRS.{*}}] IMU and GNSS data for POSRS receiver (navigation grade);
-	\item [{SPAN\_54.{*}}] IMU and GNSS data for SPAN receiver (tactical grade);
-	\item [{microstrain.imr}] IMU data for low cost Microstrain receiver;
+	\item [{NGB2.{*}}] NGB2 reference station;
+	\item [{POSRS.{*}}] IMU and GNSS data for POSRS (navigation grade);
+	\item [{SPAN\_54.{*}}] IMU and GNSS data for SPAN (tactical grade);
+	\item [{microstrain.imr}] IMU data for low cost Microstrain IMU;
 	\end{description}
 
-\subsection{Handling of data}
-During the fist week you will be provided with all relevant data files, which you should copy to local folder on your computer. Please make a backup of all your work before leaving the Photogrammetry Lab. This should include all RAW data files and any \emph{Inertial Explorer} generated files. It is recommended that all project files are placed in the same directory.
 
-\subsection{Supporting Document}
+\subsection{Supporting Document on Moodle}
 
 Following document are also provided for your reference:
+
 	\begin{description}
 	\item [{POSRS.pdf}] Document outlining POSRS characteristics;
 	\item [{SPAN.pdf}] Document outlining SPAN characteristics;
 	\item [{Microstrain.pdf}] Document outlining Microstrain characteristics;
-	\item [{InertialExplorer850\_Manual.pdf}] Full manual for IE 8.50 (reference
-	only).
+	\item [{InertialExplorer850\_Manual.pdf}] Full manual for IE 8.50;
+	\item [{H24VLP\_P2.pdf}] This document\footnote{For vers};
 	\end{description}
-	
-	
+
+
+
+
+
+
+
+\subsection{Handling of data}
+During the fist week you will be provided with all relevant data files, which you should copy to local folder on your computer. Please make a backup of all your work before leaving the Photogrammetry Lab. This should include all RAW data files and any \emph{Inertial Explorer} generated files. It is recommended that all project files are placed in the same directory.
+
+
+
+
+
+You will first process GNSS data (as outlined in sections \ref{sec:Processing-GNSS-data}) to create good GNSS trajecotry to be used for processing each IMU separately (section \ref{sec:Processing-Loosely-Coupled}). After obtaining understanding of each system performance you will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set (section \ref{sec:Simulating-GNSS-outage}). Duration of those gaps should allow you to properly characterise each of the IMUs and combined with exploratory analysis of all results should allow you to answer the following:\\
+\textbf{Characterise the performance of each integrated GNSS and INS system for navigation and tracking applications.}\\
+We expect you to both visualise and summarise your work. While a brief description of outputs provided by IE can be found in section \ref{sec:Exporting-final-results}, you are expected to show your own judgement and expertise in selecting output supporting your narrative. It is likely that IE output will be sufficient for that, but you are welcome to summarise some of the results in the tables or plot additional graphs using comparing exported coordinates.
+
+
+
+
+
+
 \section{Workflow}
 In order to process the data, you will be required to:
 

@@ -40,6 +40,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 * For Receiver connect
 	* green (ground) + black (ground) to brick Black
 	* red (-Vin) + white (+Vin) to brick Red
+* if you blow fuse fusebox is behind the driver. Need 15A fuse.
 
 ###PTDL (Microstrain), Footracker:
 

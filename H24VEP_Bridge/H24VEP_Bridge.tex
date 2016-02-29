@@ -32,7 +32,6 @@
 %\renewcommand{\baselinestretch}{1.2} %line spacing
 %{\setstretch{1.0}\color{blue} text bla bla } for section strech
 \renewcommand{\footnotesize}{\scriptsize} %change footnote sizes
-\newcommand{\MatlabRef}{\footnote{History of changes at \url{https://github.com/DfAC/TEQCSPEC}.}}
 \newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/}.}}
 %\usepackage{lipsum} % for dummy text only
 
@@ -44,9 +43,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[H24VEP]{H24VEP Project 3}
-\subtitle{Bridge Monitoring}
+\subtitle{Bridge Monitoring Preparation\thisDocRef}
 
-\author{LKB/SI}
+\author{LKB/SI\footnote{Based on presentation given by the last year MSc cohort. All Google Map screen-shots have been attributed as per guideline. All graphics copyrights belongs to their respective owners.\\}}
+%\newline to prevent footnote cut off, otherwise use \hskip1.2cm
 \institute{NGI}
 \date{\today}
 
@@ -70,22 +70,22 @@ The aim of the project is to characterise bridge movement using precise geodetic
 To do so we will:
 
 \begin{itemize}
-	\item Identify the best layout of the sensors on the bridge;
-	\item Decide the details of the trial next week;
-	\item Analyse measurements made through different sensors;
+	\item Decide where do put sensors on the bridge;
+	\item Decide how are you going to do it;
+	\item Analyse measurements from multiple sensors;
 	\item Examine the bridge's response under different excitation types;
-	\item Compare and contrast results;
-	\item Find the type of excitation which best shows the differences between equipment outputs.
+	\item Compare and contrast the results;
+	\item Tell the story.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Wilford Pedestrian Bridge}
 Wilford Pedestrian Bridge is single span suspension bridge. Spans the River Trent; 69 m long and 3.7 m wide.
-
-	\includegraphics[height=.4\textheight]{pic/Bridge01.jpg}
+	%\begin{center}
+	\includegraphics[width=.6\textwidth]{pic/Bridge01.jpg}
+	\includegraphics[width=.55\textwidth]{pic/Bridge02.jpg} 
 	\captionof{figure}{Wilford Pedestrian Bridge} %to make images on top of each other
-		\centering
-	\includegraphics[width=.4\textwidth]{pic/Bridge02.jpg} 
+	%\end{center}
 	%\includegraphics[width=.4\textwidth]{pic/Bridge02.jpg} 
 
 \end{frame}
@@ -95,18 +95,24 @@ Wilford Pedestrian Bridge is single span suspension bridge. Spans the River Tren
 We plan to use following equipment on the bridge:
 
 \begin{itemize}
-	\item Leica GNSS receiver
-	\item Leica Robotic Total Station (RTS)
-	\item Novatel SPAN IMU sensor
-	\item Leica Nivel 210 inclinometer
+	\item Leica GNSS receiver x5
+	\item Leica Robotic Total Station (RTS) x2
+	\item Novatel SPAN IMU sensor x1
+	\item Leica Nivel 210 inclinometer x1
 \end{itemize}
 
 \end{frame}
 
+
+% Time scale
+% bridge location
+
 \begin{frame}{Plan}%{Daily repetition}
 \begin{itemize}
-	\item What you want to do?
-	\item How you want to do it?
+	\item What equipment are you using? 
+	\item Where are you placing it?
+	\item	How are you going to time synchronise equipment?
+	\item What about coordinate system?
 	\item How many ppl you have?
 	\item Who is responsible for what?
 	\item How can we prevent mistakes? How can we prevent accidents?
@@ -114,24 +120,26 @@ We plan to use following equipment on the bridge:
 \end{frame}
 
 \begin{frame}{H\&S}%{Daily repetition}
-	%\centering
-	\includegraphics[width=.7\textwidth]{pic/rainbow.jpg}
+\begin{center}
+	\includegraphics[width=.8\textwidth]{pic/rainbow.jpg}
 	\captionof{figure}{Have you got risk assessment?} %to make images on top of each other
+\end{center}
 \end{frame}
 
 
 \section{Implementation}
 
 \begin{frame}{Bridge layout}%{Daily repetition}
-	\centering
+	\begin{center}
 	\includegraphics[height=.6\textheight]{pic/BridgeBare.jpg}
 	\captionof{figure}{Top view} %to make images on top of each other
+	\end{center}
 \end{frame}
 
 \begin{frame}{Sensors layout}%{Daily repetition}
 	\centering
 	\includegraphics[height=.7\textheight]{pic/layout.jpg}
-	\captionof{figure}{Location of the sensors} %to make images on top of each other
+	\captionof{figure}{Location of the sensors from last year} %to make images on top of each other
 
 \end{frame}
 
@@ -140,7 +148,7 @@ We plan to use following equipment on the bridge:
 
 	\centering
 	\includegraphics[height=.6\textheight]{pic/excitation.jpg}
-	\captionof{figure}{Excitation example from last year} %to make images on top of each other
+	\captionof{figure}{Example of excitations from last year trial} %to make images on top of each other
 	%\captionof{figure}{Example of visualisation}
 \end{frame}
 
@@ -149,12 +157,18 @@ We plan to use following equipment on the bridge:
 
 
 	\begin{frame}{Summary}
-	%For older versions please refer to the GitHub site.
+	\begin{itemize}
+		\item Decide on your equipment.
+		\item Decide on your activities.
+		\item Select Time Keeper and Note Keeper.
+		\item Agree on roles (responsibilities) before next Monday.
+		\item Submit all relevant H\&S forms before Thursday.
+	\end{itemize}
 	\end{frame}
 
 
 %Final slide
 \setbeamercolor{background canvas}{bg=blueBgd!60}
-\plain{Good luck}
+\plain{Good luck\thisDocRef}
 
 \end{document}

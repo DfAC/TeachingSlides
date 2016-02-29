@@ -11,6 +11,13 @@
 	\end{tcolorbox}
 }
 
+%TABLE SETTINGS
+\usepackage{colortbl} %colors in table
+\usepackage{rotating} %rotatins within tables
+\usepackage{multirow}
+\renewcommand{\arraystretch}{1.2} %add padding/spacing
+%\usepackage{adjustbox}%rotating and fitting into page
+%
 
 %COLORS
 \usepackage{color}
@@ -19,12 +26,52 @@
 \definecolor{verylight}{gray}{0.05}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%MATH, number display
+%need to install siunitx, l3kernel,l3packages
+\usepackage{siunitx} %this is for units display
+
+\sisetup{per-mode=fraction, tight-spacing = true , fraction-function = \nicefrac, quotient-mode = fraction}% %nicefrac \tfrac
+\sisetup{inter-unit-product = \ensuremath { { } \cdot { } } , exponent-product = \cdot }%
+\sisetup{input-product=x , output-quotient =  \ensuremath { { } \times{}}} %for 1x2x3
+%number grouping(3), std==true %\sisetup{group-digits = decimal} 
+\sisetup{group-minimum-digits = 4} %start grouping from 4 digits, in 3 no groups
+\sisetup{range-units = single,range-phrase = \,--\,} %2-3C not 2C-3C %, range-phrase = --
+\sisetup{separate-uncertainty=true} %2+-1 not 2(1)
+\sisetup{prefixes-as-symbols=true } % , scientific-notation = engineering false for 10^-9 ect ect , exp in multiple of 3
+%\sisetup{zero-decimal-to-integer, round-mode = places,round-precision = 3}
+%\sisetup{add-arc-degree-zero=true , add-arc-minute-zero=true ,add-arc-second-zero=true} %for angle settings
+
+%This is to auto convert ns,ms,us to 10^-xx s
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\psec}{\pico\second}
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\nsec}{\nano\second} 
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\usec}{\micro\second}
+\DeclareSIUnit[scientific-notation = engineering, prefixes-as-symbols=false]{\msec}{\milli\second} 
+
+%...AND SOME UNITS
+\DeclareSIUnit\dBm{dBm}
+\DeclareSIUnit\ppm{ppm} %{\num{1e-6}}%{ppm}
+\DeclareSIUnit\yr{yr} %{{361}\day}<-nice nice
+\DeclareSIUnit\cy{cycle} %phase cycle
+\DeclareSIUnit\epoch{epoch} %GPS/LL epoch
+\DeclareSIUnit\inch{"} %inch 
+\DeclareSIUnit\wk{GPS week} %week
+\DeclareSIUnit\mile{mi}
+\DeclareSIUnit\Mcps{Mcps}
+\DeclareSIUnit\bit{bit}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %SHORTHANDS
 %\newcommand*{\Myrange}[3]{$\textrm{\SIrange{#1}{#2}{#3}}$}
-%\newcommand*{\refLoc}[1]{as explained in section \ref{#1}.\xspace}
+\newcommand*{\refLoc}[1]{as explained in section \ref{#1}.\xspace}
 
 %\newcommand*{\RefLoc}[1]{Section \vref{#1} provide more information.\xspace}
+
+
+
 
 
 %HOW 2 reference Wikipedia Common Imaages and others

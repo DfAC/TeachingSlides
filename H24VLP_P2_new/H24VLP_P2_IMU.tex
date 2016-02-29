@@ -63,7 +63,16 @@
 \newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/}.}}
 \newcommand{\moreInfo}[1]{\footnote{For more details check \url{#1}.}}
 
-\newcommand*{\refLoc}[1]{as explained in section \ref{#1}.\xspace}
+%\newcommand*{\refLoc}[1]{as explained in section \ref{#1}.\xspace}
+
+
+\usepackage[section]{placeins} %This prevents placing floats before a section. For appendix
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STARTS NOW
+%----------------------------------------------------------------------------------------
 
 \begin{document}
 
@@ -579,39 +588,142 @@ Check IMU solution against GNSS one. Export values at ARP (\textbf{SUBTRACT ante
 
 \section{Lever Arms}
 
-\begin{figure}[tbh]
-\centering\includegraphics[clip,width=12cm]{pic/VanLayout}%%\resizebox{!}{\textheight}{%Ur object here%}
+\begin{figure}[!htb]
+\centering\includegraphics[clip,width=16cm]{pic/VanLayout}%%\resizebox{!}{\textheight}{%Ur object here%}
 \caption{Van experiment layout\label{fig:Van-experiment-layout}}
 \end{figure}
 
-\begin{table}
-	\centering
-	\begin{minipage}[t]{\textwidth}%
-		\resizebox{\columnwidth}{!}{%
-			\begin{tabular}{lcccc} %{l|c|c|c|c}
-				\toprule %\rowcolor{lightgray}
-				ID & $E[m]$ & $N[m]$ & Ht Ort [m]\footnote{Geoid undulation is \num{48.523}m} & Notes \\
-				\midrule
-				JUB7 & \num{454729.5517} & \num{339338.9003} & \num{28.9802} & Open Area\\
-				JUB8 & \num{454682.3444} & \num{339523.0937} & \num{27.8030} & Trees\\
-				UrbanA & \num{454853.269} & \num{339696.63} & \num{29.89} & MP area for Group A\\
-				UrbanB & \num{454858.511} & \num{339697.517} & \num{29.854} & MP area for Group B\\
-			\end{tabular}%
-		}
-		\caption{OSGB coordinates for the Project 1}
-	\end{minipage}
+
+
+\begin{table}[!htb]
+\centering{}%
+\begin{minipage}[t]{1\columnwidth}%
+\begin{center}
+\begin{tabular}{>{\centering}m{2.5cm}>{\centering}p{2cm}>{\centering}p{3cm}>{\centering}p{3cm}>{\centering}p{3cm}}
+\toprule 
+%\rowcolor{lightgray}
+\textbf{IMU Sensor} & \multirow{2}{2cm}{\textbf{Antenna Mount}} & \multicolumn{3}{>{\centering}p{9cm}}{\textbf{Lever Arm}%
+\footnote{Lever arm is estimated to the ARP. Direction IMU to antenna.}}\tabularnewline
+%\rowcolor{lightgray}
+ &  & X & Y & Z\tabularnewline
+\midrule
+\multirow{2}{2.5cm}{\textbf{POSRS}} & RR\footnote{Mount used in the trials.\label{fn:Testing-Ant}} & 0.198 & -0.830 & 0.552\tabularnewline
+\cmidrule{2-5} 
+ & FL & -1.134 & 2.338 & 0.557\tabularnewline
+\midrule
+\multirow{2}{2.5cm}{\textbf{SPAN }} & RR\textsuperscript{\ref{fn:Testing-Ant}} & 0.307 & -0.626 & 0.543\tabularnewline
+\cmidrule{2-5} 
+ & FL & -1.025 & 2.542 & 0.583\tabularnewline
+\bottomrule
+\end{tabular}\caption{Lever Arms for POSRS and SPAN\label{tab:Lever-Arm-Values}}
+\par\end{center}%
+\end{minipage}
 \end{table}
 
+\clearpage %to prevent jumping floats
+%----------------------------------------------------------------------------------------
+\section{Quality Indicators}
+
+Inertial Explorer use colour coded Quality Indicators (IQ) to indicate quality of any positioning solution. Use it to assess the accuracy of your solution.
+
+\begin{table}[!htb]
+\centering{}%
+\begin{minipage}[t]{1\columnwidth}%
+\begin{center}
+\begin{tabular}{>{\centering}p{2cm}>{\centering}p{3cm}>{\centering}p{6cm}>{\centering}p{3cm}}
+ \rowcolor{lightgray}\textbf{QN} & \textbf{Color} & \textbf{Description} & \textbf{3D Accuracy (m) }\tabularnewline
+\midrule
+\textbf{1} & \textcolor{green}{Green}%
+\footnote{\textbf{Recommended for LC integration}.\label{fn:Suggested-accuracy-QT}%
+} & Fixed integer & $\SIrange[range-phrase=\,-\,]{0.00}{0.15}{}$\tabularnewline
+\textbf{2} & \textcolor{cyan}{Cyan} \textsuperscript{\ref{fn:Suggested-accuracy-QT}} & Converged float or noisy fixed integer & $\SIrange[range-phrase=\,-\,]{0.05}{0.40}{}$\tabularnewline
+\midrule
+\textbf{3} & \textcolor{blue}{Blue} & Converging float & $\SIrange[range-phrase=\,-\,]{0.20}{1.00}{}$\tabularnewline
+\textbf{4} & \textcolor{purple}{Purple} & Converging float & $\SIrange[range-phrase=\,-\,]{0.50}{2.00}{}$\tabularnewline
+\midrule
+\textbf{5} & \textcolor{magenta}{Magenta}%
+\footnote{\textcolor{red}{Do not use for LC integration.}\label{fn:Not-recommended-LC}%
+} & DGPS & $\SIrange[range-phrase=\,-\,]{1.00}{5.00}{}$\tabularnewline
+\textbf{6} & \textcolor{red}{Red}\textsuperscript{\ref{fn:Not-recommended-LC}} & DGPS & $\SIrange[range-phrase=\,-\,]{2.00}{10.00}{}$\tabularnewline
+\midrule
+ & \textcolor{gray}{Grey} & Data haven't been processed & \tabularnewline
+ \endrule
+\end{tabular}\caption{IE Quality Number description\label{tab:Quality-Number-description}}
+\par\end{center}%
+\end{minipage}
+\end{table}
 
 
 
 %----------------------------------------------------------------------------------------
 \section{Test route}
 
-\begin{figure}[tbh]
-\centering\includegraphics[clip,height=18cm]{pic/TrajectoryLayout}%%\resizebox{!}{\textheight}{%Ur object here%}
+\begin{figure}[!htb]
+\centering\includegraphics[clip,height=11cm]{pic/TrajectoryLayout}%%\resizebox{!}{\textheight}{%Ur object here%}
 \caption{Test route \label{fig:Van-trajectory}}
 \end{figure}
+
+
+%----------------------------------------------------------------------------------------
+%HIDDEN CONTENT
+%----------------------------------------------------------------------------------------
+\begin{comment} 
+
+\section{Indicative accuracy of IMUs}
+
+
+	\begin{table}[h]
+	\centering{}%
+	\begin{minipage}[t]{1\columnwidth}%
+	\begin{center}
+	\begin{tabular}{>{\raggedright}m{2.5cm}>{\centering}p{3cm}>{\centering}p{3cm}>{\centering}m{3cm}}
+	\rowcolor{lightgray} & \multicolumn{2}{>{\centering}p{6cm}}{\textbf{Duration of GNSS outage {[}s{]}}%
+	\footnote{Artificially generated, no valid GNSS information.%
+	}} & \multirow{4}{3cm}{\begin{sideways}
+	\textbf{Drift value {[}m{]}}%
+	\footnote{Value is estimated as double the observed difference (to compensate
+	for fwd/rev).%
+	}
+	\end{sideways}}\tabularnewline
+	\cmidrule{2-3} 
+	\rowcolor{lightgray} & \textbf{100} & \textbf{300} & \tabularnewline
+	\cmidrule{1-3} 
+	\multirow{1}{2.5cm}{\textbf{POSRS}} & 0.16 & 1.2 & \tabularnewline
+	\cmidrule{1-1} 
+	\multirow{1}{2.5cm}{\textbf{SPAN }} & 0.60 & 2.8 & \tabularnewline
+	\cmidrule{1-3} 
+	\end{tabular}\caption{Approximate positional drift value per GNSS outage}
+	\par\end{center}%
+	\end{minipage}
+	\end{table}
+
+
+
+	\begin{table}[h]
+	\centering{}%
+	\begin{minipage}[t]{1\columnwidth}%
+	\begin{center}
+	\begin{tabular}{>{\centering}p{2.5cm}c>{\centering}p{1.5cm}>{\centering}p{1cm}>{\centering}p{1cm}>{\centering}p{1cm}>{\centering}p{1cm}>{\centering}m{3cm}}
+	 & \multicolumn{6}{c}{\textbf{Duration of GNSS outage {[}s{]}}%
+	\footnote{Artificially generated, no valid GNSS information.%
+	}} & \multirow{6}{3cm}{\begin{sideways}
+	\textbf{Drift value {[}m{]}}
+	\end{sideways}}\tabularnewline
+	 & \multicolumn{3}{c}{\textbf{One way}} & \multicolumn{3}{c}{\textbf{Combined (Two ways)}} & \tabularnewline
+	 & \textbf{56} & \textbf{92} & \textbf{401} & \textbf{56} & \textbf{92} & \textbf{401} & \tabularnewline
+	\cmidrule(lr){1-1}\cmidrule(rl){2-4}\cmidrule(rl){5-7}\textbf{POSRS} & 0.30? & N/A & 6.83 & 0.30 & 1.60 & 0.91 & \tabularnewline
+	\textbf{SPAN } & 0.80 & 2.90 & 127 & 0.43 & 1.50 & 6.83 & \tabularnewline
+	\rowcolor{lightgray}\textbf{Microstrain} &  &  &  & 258 & 255 & 2500 & \tabularnewline
+	\cmidrule{1-1} 
+	\end{tabular}\caption{IMU positional drift during er GNSS outage, based on 2014 results}
+	\par\end{center}%
+	\end{minipage}
+	\end{table}
+
+
+\end{comment}
+
+
 
 
 %----------------------------------------------------------------------------------------

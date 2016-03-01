@@ -4,6 +4,7 @@ Teaching material for MSc courses at the University of Nottingham for following 
 
 * H24VSP Satellite Based Positioning Practical
 * H24VLP Navigation Technology Practical
+* H24VEP Deformation Monitoring Practical
 
 ## Slides status
 
@@ -11,7 +12,7 @@ Tick indicates that slides have been updated for this year lectures.
 
 - [x] **H24VSP_PPP** - H24VSP Project 3 (NRTK vs PPP) introduction slides
 - [x] **H24VLP_P1_MP** - H24VLP Project 1 (Multipath) introduction slides
-- [ ] **H24VLP_P2_IMU** -  H24VLP Project 2 Sensor integration lecture notes
+- [ ] **H24VLP_P2_IMU** -  H24VLP Project 2 Sensor integration handout
 - [x] **H24VEP_Bridge** -  H24VLP Project 3 Bridge monitoring introduction slides
 
 ## Supporting repos

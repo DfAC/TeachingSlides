@@ -4,13 +4,14 @@
 %\usepackage{lipsum}
 
 \newcommand*{\NOTE}[1]{
-	\begin{tcolorbox}[colback=red!25,colframe=red!70!black,fonttitle=\bfseries,
-		colbacktitle=red!85!black,enhanced,
+	\begin{tcolorbox}[colback=blue!15!,colframe=blue!60!black,fonttitle=\bfseries,
+		colbacktitle=blue!60!black,enhanced,
 		attach boxed title to top center={yshift=-2mm},title=NOTES]
 		{#1}
 	\end{tcolorbox}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %TABLE SETTINGS
 \usepackage{colortbl} %colors in table
 \usepackage{rotating} %rotatins within tables
@@ -19,13 +20,24 @@
 %\usepackage{adjustbox}%rotating and fitting into page
 %
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %COLORS
 \usepackage{color}
 %\definecolor{lightgray}{gray}{0.1} %for colortbl
 %\definecolor{lightgray}{rgb}{0.2,0.2,0.2}
 \definecolor{verylight}{gray}{0.05}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+%\definecolor{uniBlue}{rgb}{0,0.1,0.3}
+\definecolor{uniBlueBgd}{RGB}{30,210,255}
+\definecolor{uniBlue}{RGB}{0,128,255}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%LISTS
+%\setitemize[0]{leftmargin=15pt,itemindent=0pt,labelwidth=10pt}
+\usepackage{enumitem}
+%\setlist{nosep} % or \setlist{noitemsep} to leave space around whole list
+%\begin{enumerate}[itemsep=1pt, topsep=12pt, partopsep=0pt]
+\setlist{noitemsep, topsep=10pt, partopsep=0pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %MATH, number display

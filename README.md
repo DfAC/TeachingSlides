@@ -4,6 +4,7 @@ Teaching material for MSc courses at the University of Nottingham for following 
 
 * H24VSP Satellite Based Positioning Practical
 * H24VLP Navigation Technology Practical
+* H24VEP Deformation Monitoring Practical
 
 ## Slides status
 

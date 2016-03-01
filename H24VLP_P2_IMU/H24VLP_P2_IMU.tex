@@ -65,9 +65,6 @@
 \newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/}.}}
 \newcommand{\moreInfo}[1]{\footnote{For more details check \url{#1}.}}
 
-%\newcommand*{\refLoc}[1]{as explained in section \ref{#1}.\xspace}
-
-
 \usepackage[section]{placeins} %This prevents placing floats before a section. For appendix
 
 
@@ -112,11 +109,15 @@
 
 \noindent Copyright \copyright\ 2016 LKB\\ % Copyright notice
 %\noindent \textsc{Published by Lukasz K Bonenberg}\\ % Publisher
-\noindent \textsc{University of Nottingham}\\ % URL
+\textsc{University of Nottingham}\\ % URL
 
-\noindent Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information
+Licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License (the ``License''). You may not use this file except in compliance with the License. You may obtain a copy of the License at \url{http://creativecommons.org/licenses/by-nc/3.0}. Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an \textsc{``as is'' basis, without warranties or conditions of any kind}, either express or implied. See the License for the specific language governing permissions and limitations under the License.\\ % License information
 
-%\noindent \textit{Primeira impressão?, Ainda não} % Printing/edition date
+
+%\shortdate
+\noindent This document was compiled on \today. \\ 
+History of changes at \url{https://github.com/DfAC/TeachingSlides/}.
+%\textit{\date} % Printing/edition date
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS
@@ -139,7 +140,7 @@
 
 \chapter{Introduction}
 
-Welcome to the second project of H24VLP Location Technology Practical. We will focus on navigation applications of the Inertial Navigation Systems (IMS) using a integrated GNSS and IMU system deployed on a moving platform (NGI Van). This practical is supporting Learning outcomes are:
+Welcome to the second project of H24VLP Location Technology Practical\thisDocRef. We will focus on navigation applications of the Inertial Navigation Systems (IMS) using a integrated GNSS and IMU system deployed on a moving platform (NGI Van). This practical is supporting Learning outcomes are:
 
 \begin{itemize}
 	\item Practical understanding of the IMU;
@@ -149,7 +150,7 @@ Welcome to the second project of H24VLP Location Technology Practical. We will f
 
 \end{itemize}
 
-\\We will use an existing dataset, with the route combining three different environments:
+We will use an existing dataset, with the route combining three different environments:
 
 \begin{itemize}
 	\item semi-urban;
@@ -165,10 +166,10 @@ The goal of this practical is to understand the advantages and limitations of in
 	\item low cost Microstrain 3DM-GX4-25 with MEMS sensor.
 \end{itemize}
 
+\newpage
+\section{Practical Layout}
 
-\section{Layout of the practical}
-
-This practical will span two supervised lab classes, with aim to provide you with tools and knowledge to complete the task. Apart from that, you are expected to work in your own time, and to facilitate this, each group will be provided with two IE dongles for the duration of thee weeks.
+This practical will consist of two supervised lab classes, with aim to provide you with tools and knowledge to complete the task. Apart from that, you are expected to work in your own time, and to facilitate this, each group will be provided with two IE dongles for the duration of thee weeks.
 
 \begin{description}
 	\item [{Week~1}] Introduction to the practical. By the end of this practical you should
@@ -181,7 +182,7 @@ This practical will span two supervised lab classes, with aim to provide you wit
 \section{Dataset description}
 
 Approximately 90 minutes trajectory have been collected using NGI van, demonstrated to you earlier. Trial was run in around Nottingham (see figure \ref{fig:Van-trajectory}) starting and ending with a static period\footnote{You will explore both GNSS and IMU data to identify those periods properly.}. NGB2 was used as a reference station for the duration of the trials.
-Figure \ref{Van-experiment-layout} and table \ref{Lever-Arm-Values} demonstrate experimental setup used.
+Figure \ref{fig:Van-experiment-layout} and table \ref{tab:Lever-Arm-Values} demonstrate experimental setup used.
 
 All collected data has been converted to \emph{Inertial Explorer} native format. Those files are:
 	\begin{description}
@@ -235,7 +236,7 @@ In order to process and understand the data, you will have to:
 		\item Process Microstrain, using GNSS.cmb and transferring alignment from POSRS, \refLoc{sub:Processing-Microstrain}).
 	\end{enumerate}
 	\item Process only IMU data (without GPS data) for each sensor, \refLoc{Processing-IMU-on-its-own}. You will use this to estimate the required GNSS gaps for each IMU system. Use this step to better understand limitations of each sensor. 
-	\item You will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set for each sensor, \refLoc{Simulating-GNSS-outage}. The aim here is: 
+	\item You will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set for each sensor, \refLoc{sec:Simulating-GNSS-outage} The aim is to: 
 	\begin{enumerate}
 	\item Verify your understanding of last step;
 	\item Demonstrate the performance of each integrated GNSS and INS system for navigation, by highlighting differences between systems.
@@ -367,7 +368,7 @@ For the successful initialisation of IMUs we need to identify the static periods
 \end{itemize}
 
 \vspace{2cm}
-\flushleft{Once you happy with identified static periods (they should be between 5-10 min long) compare results using any other plots that we discussed. You can also use your experience from the first project to fine tune processing parameters such as: excluding poor satellites or change cut off angles\footnote{Be careful with changes, especialy with those related to KF or Ambiguity Resolution (AR).}. Once you happy with results save and exit the project. As an extra precaution you might consider making a copy of \textit{GNSS.cmb} and re-naming it, for example as \textit{GoodData.cmb}.}
+\flushleft{Once you happy with identified static periods (they should be between 5-10 min long) compare results using any other plots that we discussed. You can also use your experience from the first project to fine tune processing parameters such as: excluding poor satellites or change cut off angles\footnote{Be careful with changes here, especially when changing KF or Ambiguity Resolution (AR) related parameters. Make sure you identify those changes properly in processing history.}. Once you happy with results save and exit the project. As an extra precaution you might consider making a copy of \textit{GNSS.cmb} and re-naming it, for example as \textit{GoodData.cmb}.}
 
 
 \chapter{Processing LC GNSS/IMU data\label{sec:Processing-Loosely-Coupled}}
@@ -532,8 +533,8 @@ Previous sections should provide you with enough technical knowledge to successf
 \begin{itemize}
 	\item To save all active plots use\textbf{\emph{ Output->Build HTML Report }}
 	\begin{itemize}
-		\item Data will be saved in .\\Html folder;
-		\item You should have at least two set of plots (testing and final) for each sensor
+		\item Data will be saved in \textbf{Html} folder;
+		\item Save at least two set of plots (testing and final) for each sensor. This is for your reference - you don't need to present them all.
 	\end{itemize}
 	\item To output trajectory to Google Earth use\textbf{\emph{ Output->Export to Google Earth...}}. In case of multiple exports it recommended to change the output parameters using \textbf{\emph{Export}} tab:
 	\begin{description}
@@ -555,26 +556,29 @@ Previous sections should provide you with enough technical knowledge to successf
 	To use \textbf{\emph{Export Wizard}} combined solution ({*}.cmb) must exist. It is generated after each LC/TC processing run. It can be also be created using \textbf{\emph{Process->Combine Solution}}. Use extreme caution if using this option.
 }
 
-To output post-processed coordinates as ASCII go to \textbf{\emph{Output->Export Wizard}} 	
+To output post-processed coordinates as ASCII  	
 \begin{itemize}
+	\item Select \textbf{\emph{Output->Export Wizard}}
 	\item Select output profile. 
 	\begin{itemize}
-		\item Mostl likely you will create your own profile using Modify or New buttons.
-		\item I suggest outputting either in local grid (East, North, Ellipsoidal Heigh) or Absolute ECEF-XYZ.
+		\item Create your own profile using Modify or New buttons.
+		\item I suggest output either in local grid (East, North, Ellipsoidal Heigh) or Absolute ECEF-XYZ.
 		\item Once happy click OK and Next
 		\NOTE{
-			IE does not produce correct OSGB coordinates. For this experiment you can compare in any grid coordinates, including quasi-OSGB, as long as you mention it. For any other assignment, to obtain those export data as ECEF XYZ and convert it to OSGB use Grid InQuest\footnote{\url{http://www.ordnancesurvey.co.uk/docs/gps/grid-inquest-executable.zip}}.
+			IE does not produce \textcolor{red}{correct OSGB coordinates}. For this experiment you can use any grid coordinates, as long as yu are consistent and describe it properly.\\
+			If you need OSGB coordinates, export data as ECEF XYZ and convert it to OSGB using Grid InQuest\footnote{\url{http://www.ordnancesurvey.co.uk/docs/gps/grid-inquest-executable.zip}} or Ordnance Survey online tool\footnote{\url{https://www.ordnancesurvey.co.uk/gps/transformation}}.
 		}
 	\end{itemize}
 	\item Select \textbf{\emph{Use processing datum}} and click Next
-	\item In this window you define your output parameters
+	\item Define your output parameters
 	\begin{itemize}
-		\item Define time interval for output (you can interpolate up to 200Hz with POSRS/SPAN but I would recommend outputs of few Hz to keep file sizes reasonable)
-		\item Define lever arm using table \ref{tab:Lever-Arm-Values} but read following note in this section before proceeding. 
+		\item Define time interval for output (you can interpolate up to 200Hz with POSRS/SPAN. I recommend 0.5-5 Hz to keep file sizes reasonable.)
+		\item Define lever arm using table \ref{tab:Lever-Arm-Values} . 
 	\end{itemize}
 	
 	\NOTE{
-		If you followed instruction correctly, your GNSS and IMU level arm will be calculated to antenna ARP but output lever arm will be estimated to antenna phase centre. This means that for EXPORT ONLY your level arm has to be calculated using equation $Arm_{exprt}^{Z}=Arm^{Z}-AntProfile_{L1}^{Z}-AntHeight$. Relevant Arm values can be read from table \ref{tab:Lever-Arm-Values} and antenna profile (\textbf{View->Project Overview}).
+		If you followed instruction correctly, your GNSS and IMU level arm are calculated to \textbf{antenna ARP} but output lever arm will be estimated to \textbf{antenna phase centre}. This means that for EXPORT ONLY your level arm has to be calculated using equation $Arm_{exprt}^{Z}=Arm^{Z}-AntProfile_{L1}^{Z}-AntHeight$.\\
+		Relevant Arm values can be read from table \ref{tab:Lever-Arm-Values}. Antenna profile can be checked using (\textbf{View->Project Overview}).
 	}
 	
 	
@@ -682,37 +686,12 @@ Inertial Explorer use colour coded Quality Indicators (IQ) to indicate quality o
 %----------------------------------------------------------------------------------------
 \begin{comment} 
 
-%\section{Indicative accuracy of IMUs}
+\section{Indicative accuracy of IMUs}
+
+Note that results below are based on small subset of data and can be treated as indicative only. Any change in movement characteristics, especially more consistent dynamics, will severely affect the outcome.
 
 
-	\begin{table}[h]
-	\centering{}%
-	\begin{minipage}[t]{1\columnwidth}%
-	\begin{center}
-	\begin{tabular}{>{\raggedright}m{2.5cm}>{\centering}p{3cm}>{\centering}p{3cm}>{\centering}m{3cm}}
-	\rowcolor{lightgray} & \multicolumn{2}{>{\centering}p{6cm}}{\textbf{Duration of GNSS outage {[}s{]}}%
-	\footnote{Artificially generated, no valid GNSS information.%
-	}} & \multirow{4}{3cm}{\begin{sideways}
-	\textbf{Drift value {[}m{]}}%
-	\footnote{Value is estimated as double the observed difference (to compensate
-	for fwd/rev).%
-	}
-	\end{sideways}}\tabularnewline
-	\cmidrule{2-3} 
-	\rowcolor{lightgray} & \textbf{100} & \textbf{300} & \tabularnewline
-	\cmidrule{1-3} 
-	\multirow{1}{2.5cm}{\textbf{POSRS}} & 0.16 & 1.2 & \tabularnewline
-	\cmidrule{1-1} 
-	\multirow{1}{2.5cm}{\textbf{SPAN }} & 0.60 & 2.8 & \tabularnewline
-	\cmidrule{1-3} 
-	\end{tabular}\caption{Approximate positional drift value per GNSS outage}
-	\par\end{center}%
-	\end{minipage}
-	\end{table}
-
-
-
-	\begin{table}[h]
+	\begin{table}[!h]
 	\centering{}%
 	\begin{minipage}[t]{1\columnwidth}%
 	\begin{center}
@@ -728,13 +707,13 @@ Inertial Explorer use colour coded Quality Indicators (IQ) to indicate quality o
 	\textbf{SPAN } & 0.80 & 2.90 & 127 & 0.43 & 1.50 & 6.83 & \tabularnewline
 	\rowcolor{lightgray}\textbf{Microstrain} &  &  &  & 258 & 255 & 2500 & \tabularnewline
 	\cmidrule{1-1} 
-	\end{tabular}\caption{IMU positional drift during er GNSS outage, based on 2014 results}
+	\end{tabular}\caption{IMU positional drift during artificial GNSS outage, based on 2014 results}
 	\par\end{center}%
 	\end{minipage}
 	\end{table}
 
 
-%\end{comment}
+\end{comment}
 
 
 

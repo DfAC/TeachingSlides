@@ -140,7 +140,7 @@ History of changes at \url{https://github.com/DfAC/TeachingSlides/}.
 
 \chapter{Introduction}
 
-Welcome to the second project of H24VLP Location Technology Practical\thisDocRef. We will focus on navigation applications of the Inertial Navigation Systems (INS)\footnote{For more informations check lectures or \url{https://en.wikipedia.org/wiki/Inertial_navigation_system}}, in our case consisting of integrated GNSS and inertial measurement unit (IMU) deployed on a moving platform (NGI Van). This practical learning outcomes are:
+Welcome to the second project of H24VLP Location Technology Practical. We will focus on navigation applications of the Inertial Navigation Systems (INS)\footnote{For more informations check lectures or \url{https://en.wikipedia.org/wiki/Inertial_navigation_system}}. Our system is consisting of integrated GNSS and inertial measurement unit (IMU) deployed on a moving platform (NGI Van). The outcomes are:
 
 \begin{itemize}
 	\item Practical understanding of the IMU;
@@ -211,8 +211,8 @@ You are being provided with all relevant data from onset of your project. I sugg
 
 \begin{itemize}
 	\item Keep all your data in a single project folder structure which you can backup on your own computer before leaving the Photogrammetry Lab;
-	\item Place all given data file in the same  \\RAW subfolder
-	\item Create the separate project file for each IMU and put them in the project folder (main folder of the \\RAW subfolder);
+	\item Place all given data files in \url{.\H24VLP_gXX\RAW} subfolder of the the project folder;
+	\item Create the separate project file for each IMU and put them in the project folder;
 	\item Please name each project accordingly (GNSS, SPAN, POSRS, MicroStrain ect); 
 	\item IE is producing a large number of files - the critical ones are \textit{*.cfg}, all other ones can be restored from RAW data.
 \end{itemize}
@@ -231,12 +231,12 @@ In order to process and understand the data, you will have to:
 	\end{enumerate}
 	\item Process Loosely Coupled (LC) IMU and GNSS data. You will:
 	\begin{enumerate}
-		\item Process POSRS, using GNSS.cmb \footnote{This is trajectory created in the previous step.}, \refLoc{sub:Processing-POSRS};
+		\item Process POSRS, using GNSS.cmb\footnote{This is trajectory created in the previous step.}, \refLoc{sub:Processing-POSRS};
 		\item Process SPAN, using GNSS.cmb and by transferring alignment from POSRS, \refLoc{sub:Processing-SPAN};
-		\item Process Microstrain, using GNSS.cmb and transferring alignment from POSRS, \refLoc{sub:Processing-Microstrain}).
+		\item Process Microstrain, using GNSS.cmb and transferring alignment from POSRS, \refLoc{sub:Processing-Microstrain}.
 	\end{enumerate}
 	\item Process only IMU data (without GPS data) for each sensor, \refLoc{Processing-IMU-on-its-own}. You will use this to estimate the required GNSS gaps for each IMU system. Use this step to better understand limitations of each sensor. 
-	\item You will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set for each sensor, \refLoc{sec:SIMUlating-GNSS-outage} The aim is to: 
+	\item You will introduce artificial GNSS denied environment, by introducing gaps (outages) in the GNSS data set for each sensor, \refLoc{sec:SIMUlating-GNSS-outage}. The aim is to: 
 	\begin{enumerate}
 	\item Verify your understanding of last step;
 	\item Demonstrate the performance of each integrated GNSS and INS system for navigation, by highlighting differences between systems.
@@ -368,17 +368,18 @@ For the successful initialisation of IMUs we need to identify the static periods
 \end{itemize}
 
 \vspace{2cm}
-\flushleft{Once you happy with identified static periods (they should be between 5-10 min long) compare results using any other plots that we discussed. You can also use your experience from the first project to fine tune processing parameters such as: excluding poor satellites or change cut off angles\footnote{Be careful with changes here, especially when changing KF or Ambiguity Resolution (AR) related parameters. Make sure you identify those changes properly in processing history.}. Once you happy with results save and exit the project. As an extra precaution you might consider making a copy of \textit{GNSS.cmb} and re-naming it, for example as \textit{GoodData.cmb}.}
+\flushleft{Once you identified static periods (they should be between 5-10 min long) compare results using any other plots that we discussed. You can also use your experience from the first project to fine tune processing parameters such as: excluding poor satellites or change cut off angles\footnote{Be careful with changes here, especially when changing KF or Ambiguity Resolution (AR) related parameters. Make sure you identify those changes properly in processing history.}. Once you happy with results save and exit the project. As an extra precaution you might consider making a copy of \textit{GNSS.cmb} and re-naming it, for example as \textit{GoodData.cmb}.}
 
 
 \chapter{Processing LC GNSS and IMU\label{sec:Processing-Loosely-Coupled}}
 
 To compare performance of IMU component, we will use the same GNSS data set for each project - created in last section. You should not need to re-process GNSS - should you do so you will have to re-process all LC project as well.  
 
-Following subsection will explain detailed settings and workflow for each sensor. The general workflow is the same:
+Following subsection will explain detailed settings and workflow for each sensor. The general workflow is the same for each sensor:
+
 \medskip
 \begin{itemize}
-	\item To create a new project 
+	\item Create a new project 
 	\begin{enumerate}
 		\item Navigate to project folded and name project (POSRS, SPAN, Microstrain);
 		\item Select required GNSS \& IMU files (for ex POSRS.{*});
@@ -386,14 +387,14 @@ Following subsection will explain detailed settings and workflow for each sensor
 		\item There is not need to add base station data;
 		\item Finish.
 	\end{enumerate}
-	\item To process Loosely Coupled GNSS/IMU solution go to \textbf{\emph{Process->Process LC}}
+	\item Process Loosely Coupled GNSS/IMU solution go to \textbf{\emph{Process->Process LC}}
 		\begin{enumerate}
 			\item Select required IMU files only ({*}.imr);
 			\item Check orientation of axis and level arms (those are values AFTER the rotation) following table \ref{tab:Lever-Arm-Values};
 			\item in \textbf{Advanced...}:
 			\begin{itemize}
-			 	\item select proper time period for the dataset from first static period to end of last static period identified in section \ref{sec:Static-periods}.
-			 	\item select proper method for forward and backward initial alignment
+			 	\item select a time period for the dataset: that is from beginning of the first static period to end of the last static period, as identified in section \ref{sec:Static-periods};
+			 	\item select proper method for forward and backward initial alignment;
 			 	\item press OK.
 			 \end{itemize} 
 			\item Change description and user;
@@ -408,19 +409,23 @@ Following subsection will explain detailed settings and workflow for each sensor
 
 In \textbf{\emph{Process->Process LC}} choose:
 \begin{description}
-	\item [{update~data}] \emph{External Trajectory; }Use \emph{Browser External} to select {*}.cmb file.
-	\item [{POSRS~Profile}] \emph{SPAN Airborne (uIRS)}
-	\item [{Lever~Arm~Offset}] use POSRS lever arms from table \ref{tab:Lever-Arm-Values} and select \textbf{\emph{Z to ARP}}
-	\item [{Body~to~IMU~Rotation:}] \emph{180,0,90 }
-	\end{description}
+	\item [{update~data}] \emph{External Trajectory; }Use \emph{Browser External} to select {*}.cmb file;
+	\item [{POSRS~Profile}] \emph{SPAN Airborne (uIRS)};
+	\item [{Lever~Arm~Offset}] use POSRS lever arms from table \ref{tab:Lever-Arm-Values} and select \textbf{\emph{Z to ARP}};
+	\item [{Body~to~IMU~Rotation:}] \emph{180,0,90 };
+\end{description}
 	
 \subsection{POSRS Workflow\label{sub:POSRS-Workflow}}
 
 \begin{enumerate}
-	\item Run all automatic. There should be small separation between pitch and roll (70 arc-sec), aligned with large jumps in heading at the beginning and the end (up to 700 arc-sec). This tend to indicate weak starting (and finishing) angle estimate. Everything else should be smooth (within 70 arc-sec).
+	\item Run all automatic. There should be small separation between pitch and roll (70 arc-sec), aligned with large jumps in heading at the beginning and the end (up to 700 arc-sec). This tend to indicate weak starting (and finishing) angle estimate. Everything else should be smooth (within 70 arc-sec)\footnote{Note that graph values are displayed in arc-min.}.
 	\item Plot \emph{Acceleration Profile} and \emph{Velocity Profile} to check if static periods are matching ones from GNSS only processing. Make sure that dataset start and finish on static period changing \textit{IMU Time Range} in \textbf{\emph{Advanced...}} if necessary.
-	\item Knowing static periods go to \textbf{\emph{Advanced...}}and in \textbf{\emph{Method for Initial Alignment}} select \emph{Static Coarse+Fine align} for both reverse and forward. Use Coarse: 60-100s, Fine 100-200s. If you have longer static dataset extend fine alignment period. Results should be within 10 arc-sec and there should be no separation between pitch and roll. There will be large jumps in heading at the beginning and end (up to 100 arc-sec) 
-	\item Transfer alignment that is use reverse value for forward solution and vice versa.
+	\item Knowing static periods go to \textbf{\emph{Advanced...}}and in \textbf{\emph{Method for Initial Alignment}} select \emph{Static Coarse+Fine align} for both reverse and forward. 
+	\begin{itemize}
+		\item Use Coarse: 60-100s, Fine 100-200s. If you have longer static dataset extend fine alignment period. 
+		\item Results should be within 30 arc-sec - mostly due to heading, there should be no separation between pitch and roll. Large jumps in heading at the beginning and the end (up to 100 arc-sec) are expected. 
+	\end{itemize}
+	\item In order to improve on the precision you will use final reverse to feed initial forward solution and vice versa - known as alignment transfer. Note, that at this stage you are mostly improving internal accuracy (precision) - please make sure that results look correct before proceeding.
 	\begin{itemize}
 		\item In \textbf{\emph{Advanced...}} for the \textbf{\emph{Method for Initial Alignment}} select \emph{Transfer Alignment (enter known attitude) }and press\emph{ Enter Attitude }button. You will do the same for forward and reverse solution.
 		\item Click \emph{Get From Trajectory }and select \emph{reverse} POSRS data ({*}.rim) for forward and \emph{forward} POSRS data ({*}.fim) for reverse. Estimated StdDev for both should be similar. Increase it tenfold (x10) to loosen EKF. 
@@ -430,7 +435,7 @@ In \textbf{\emph{Process->Process LC}} choose:
 		\item Click OK three times to get back to \emph{Process Loosely Coupled} screen.
 		\item Process data
 	\end{itemize}
-	\item Results should be within 10 arc-sec for heading and 2 arc-sec for rest. There should be no separation between pitch and roll. Heading separation should be largest in the middle and no jumps at the beginning/end. 
+	\item Results should be within 20 arc-sec for heading and 5 arc-sec for rest. There should be no separation between pitch and roll. Heading separation should be largest in the middle and no jumps at the beginning/end. 
 \end{enumerate}
 
 \subsection{Checking results}

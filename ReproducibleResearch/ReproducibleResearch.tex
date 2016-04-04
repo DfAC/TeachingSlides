@@ -1,0 +1,150 @@
+\documentclass[11pt]{beamer}
+
+%my colours
+
+
+\usetheme{metropolis}
+\metroset{everytitleformat = regular,progressbar=foot} %settings
+\mode<presentation>
+%\usecolortheme{dove} %dove
+% albatross, beaver, beetle, crane, default, dolphin, dove, orchid, rose, seagull, seahorse, whale, wolverine
+%dont use  fly, lily,
+%http://mirror.ox.ac.uk/sites/ctan.org/macros/latex/contrib/beamer/doc/beameruserguide.pdf
+\setbeamercolor{title separator}{fg = UniBlue}
+\setbeamercolor{frametitle}{fg = deepBlue, bg=aBlue!70}
+
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+
+%coords are in relation to lower right corner
+%\logo{\pgfputat{\pgfxy(0,6}{\pgfbox[right,top]{\includegraphics[width=2.5cm]{logo.png}}}}
+
+\usepackage{tikz}
+\addtobeamertemplate{frametitle}{}{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=north east,yshift=2pt] at (current page.north east) {\includegraphics[height=0.8cm]{./../logo.png}};
+\end{tikzpicture}}
+
+\input{Preamble.tex}
+%\renewcommand{\baselinestretch}{1.2} %line spacing
+%{\setstretch{1.0}\color{blue} text bla bla } for section strech
+\renewcommand{\footnotesize}{\scriptsize}
+%\usepackage[demo]{graphicx}
+\usepackage[font={small,it}]{caption}
+%\usepackage{subcaption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[RR]{Reproducible Research}
+\subtitle{and why to do it...}
+\author{Lukasz K Bonenberg}
+\institute{NGI}
+
+\date{\today}
+\titlegraphic{\hfill\includegraphics[height=1.3cm]{./../bigLogo.png}}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Table of Contents}
+
+  \setbeamertemplate{section in toc}[sections numbered]
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+\begin{frame}[fragile]{Introduction}
+
+\textbf{Reproducible research} is the idea that data analyses, and more generally, scientific claims, are published with their data and software code so that others may verify the findings and build upon them\footnote[frame]{Quoted after Roger Peng (
+Johns Hopkins University)}.
+
+\bigskip
+This means that both data and the analysis code are available allowing others to easily execute the same analysis to obtain the same results.
+
+\bigskip
+The aim for this presentation is to discuss the tools available and discuss the reasoning behind it.
+\end{frame}
+
+\begin{frame}[fragile]{But why?}
+
+In cancer research:
+
+Prof Keith A. Baggerly discussed errors in genomic signatures during Cancer Bioinformatics Workshop, Cambridge 2010\footnote{\url{http://bit.ly/235DoBa}}, there is Coursera course on the topic\footnote{\url{https://www.coursera.org/learn/reproducible-research}}.
+
+But its use is widespread in engineering as well:
+
+\begin{itemize}
+	\item Stanford Exploration Project - \url{http://sepwww.stanford.edu/}
+	\item Computer vision - \url{http://www.csee.wvu.edu/~xinl/}
+	\item Wavelab - \url{http://finmath.stanford.edu/~wavelab/}
+
+\end{itemize}
+
+\end{frame}
+
+
+\setbeamercolor{background canvas}{bg=blueBgd!60}
+\plain{Is this to do with \LaTeX{} ?}
+\setbeamercolor{background canvas}{bg=blueBgd!0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Version Control}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tools}
+
+
+\begin{frame}[plain]{Veripos \$GPGST NMEA strings}
+
+	\begin{exampleblock}{Example}
+		{\textit{\$GPGST,140545.00,3.81,0.02,0.01,81.00,0.02,0.01,0.02*57}.}
+	\end{exampleblock}
+	\vspace*{-1cm}
+	\begin{table}
+		\centering
+		\begin{minipage}[t]{\textheight}%
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{lc} %{l|c|c|c|c}
+					\toprule %\rowcolor{lightgray}
+					Cell & Notes\tabularnewline
+					\midrule
+					0&Message ID \$GPGST\\
+					1&UTC of position fix\footnote{Notice 17s offset to GPS time.}\\
+					2&RMS value of the pseudorange or carrier phase (RTK/PPP) residuals\\
+					3&Error ellipse semi-major axis 1 sigma error, in meters\\
+					4&Error ellipse semi-minor axis 1 sigma error, in meters\\
+					5&Error ellipse orientation, degrees from true north\\
+					6&Latitude 1 sigma error, in meters\\
+					7&Longitude 1 sigma error, in meters\\
+					8&Height 1 sigma error, in meters\\
+					9&The checksum data, always begins with *\\
+					\bottomrule
+				\end{tabular}%
+			}
+			%	\caption{Coordinates of NGB5}
+		\end{minipage}
+	\end{table}
+	
+	
+	
+\end{frame}
+
+%Final slide
+\setbeamercolor{background canvas}{bg=blueBgd!60}
+\plain{Questions?}
+
+
+
+\end{document}

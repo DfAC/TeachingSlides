@@ -12,8 +12,6 @@ Concept of the talk:
 
 
 
-
-
 ## links
 
 ### Reproducible Research

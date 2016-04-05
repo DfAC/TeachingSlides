@@ -51,7 +51,7 @@
 
 \maketitle
 
-\begin{frame}{Table of Contents}
+\begin{frame}{Table of Contents\thisDocRef}
 
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
@@ -61,90 +61,197 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-\begin{frame}[fragile]{Introduction}
 
-\textbf{Reproducible research} is the idea that data analyses, and more generally, scientific claims, are published with their data and software code so that others may verify the findings and build upon them\footnote[frame]{Quoted after Roger Peng (
-Johns Hopkins University)}.
+\begin{frame}{}%{Daily repetition}
+
+	\begin{exampleblock}{}
+\begin{itemize}
+	\item report\_01.doc
+	\item report\_02.doc
+	\item report\_03\_revByJim.doc
+	\item report\_04\_changes.doc
+	\item report\_05\_final.doc
+	\item report\_05\_finalFinal.doc
+	\item report\_05\_finalFinal\_FINAL.doc
+	\item report\_05\_finalFinal\_FINAL\_send.doc
+
+\end{itemize}
+	\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{Entropy}%{Daily repetition}
+
+\centering
+\includegraphics[width=\textwidth]{pic/disaster.jpg}\footnote{\url{http://www.slideshare.net/jomikr/quick-introduction-to-git}}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{git - Version Control}
+
+\begin{frame}{Control the time}%{Daily repetition}
+	\centering
+	\includegraphics[width=\textwidth]{pic/git01.png}\footnote{\url{https://git-scm.com/book/ch1-3.html}}
+	%\captionof{figure}{Visualisation} %to make images on top of each other
+\end{frame}
+
+
+\begin{frame}{Examples}%{Daily repetition}
+
+	\begin{itemize}
+		\item \url{https://github.com/tomojitakasu/RTKLIB}
+		\item \url{https://github.com/DfAC/TEQCSPEC}
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Lets try it}%{Daily repetition}
+
+	\begin{itemize}
+		\item \url{http://rogerdudler.github.io/git-guide/}
+		\item \url{https://try.github.io/levels/1/challenges/10}
+	\end{itemize}
+
+\end{frame}
+
+
+% \begin{frame}{Summary}
+% \centering
+% \includegraphics[height=.7\textheight]{pic/Git_flow.png}\footnote{\url{https://www.atlassian.com/git/tutorials/}}
+% %\captionof{figure}{Gitflow Workflow \hfill\\\tiny{\url{https://www.atlassian.com/git/tutorials/}}}
+
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What can we use it for?}
+
+
+%\setbeamercolor{background canvas}{bg=blueBgd!60}
+%\plain{Is this just for \LaTeX{} then?}
+%\plain{What can we use it for?}
+%\setbeamercolor{background canvas}{bg=blueBgd!0}
+
+\begin{frame}{Team work}
+\centering
+\includegraphics[height=.7\textheight]{pic/Git_flow.png} \footnote{\url{https://www.atlassian.com/git/tutorials/}}
+%\captionof{figure}{Gitflow Workflow \hfill\\ \tiny{\url{https://www.atlassian.com/git/tutorials/}}} %to make images on top of each other
+\end{frame}
+
+\begin{frame}{More teaching}
+
+\begin{itemize}
+	\item \url{https://github.com/FOSS4GAcademy}
+	\item \url{https://github.com/DfAC/TeachingSlides}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{More teaching}
+Sebastien Saunier\footnote{\url{http://bit.ly/1MQLSo9}} discussed auto-marking using git.
+\centering
+\includegraphics[height=0.7\textheight]{pic/git_teaching.png}
+\end{frame}
+
+
+\begin{frame}{Open Source}
+\centering
+\includegraphics[width=\textwidth]{pic/git-OS.png}
+\end{frame}
+
+
+\begin{frame}{Social space}
+\begin{itemize}
+	\item \url{https://github.com/tomojitakasu/RTKLIB/issues}
+	\item \url{https://gist.github.com/forked}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Big guys' open source}
+\centering
+\includegraphics[width=.6\textwidth]{pic/Tensorflow.png}\footnote{\url{https://www.tensorflow.org/}}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Reproducible research}
+
+\begin{frame}[fragile]{Reproducible research}
+
+\textbf{Reproducible research} is the idea that data analyses, and more generally, scientific claims, are published with their data and software code so that others may verify the findings and build upon them\footnote[frame]{Quoted after Roger Peng (Johns Hopkins University)}.
 
 \bigskip
 This means that both data and the analysis code are available allowing others to easily execute the same analysis to obtain the same results.
 
-\bigskip
-The aim for this presentation is to discuss the tools available and discuss the reasoning behind it.
 \end{frame}
 
 \begin{frame}[fragile]{But why?}
 
-In cancer research:
+Prof Keith A. Baggerly discussed effect of genomic signature errors on cancer research\footnote{Cancer Bioinformatics Workshop, Cambridge 2010 - \url{http://bit.ly/235DoBa}}.
 
-Prof Keith A. Baggerly discussed errors in genomic signatures during Cancer Bioinformatics Workshop, Cambridge 2010\footnote{\url{http://bit.ly/235DoBa}}, there is Coursera course on the topic\footnote{\url{https://www.coursera.org/learn/reproducible-research}}.
-
-But its use is widespread in engineering as well:
+The concept is very popular in computer science and engineering as well:
 
 \begin{itemize}
 	\item Stanford Exploration Project - \url{http://sepwww.stanford.edu/}
 	\item Computer vision - \url{http://www.csee.wvu.edu/~xinl/}
 	\item Wavelab - \url{http://finmath.stanford.edu/~wavelab/}
+\end{itemize}
 
+There is even Coursera course on the topic\footnote{\url{https://www.coursera.org/learn/reproducible-research}}.
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Some examples}
+
+
+\begin{itemize}
+	\item Gravitational Wave - \url{http://bit.ly/LIGO_OS}
+	\item Earthquakes - \url{http://bit.ly/1MbL6C9}
+	%\item Hawkers in Singapore - \url{https://rpubs.com/JoshMah/168498}
+	\item interactive plots - \url{https://plot.ly/r/}
+	\item ... more at \url{http://bit.ly/1MbL6C9}
 \end{itemize}
 
 \end{frame}
 
-
-\setbeamercolor{background canvas}{bg=blueBgd!60}
-\plain{Is this to do with \LaTeX{} ?}
-\setbeamercolor{background canvas}{bg=blueBgd!0}
-
+%https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Version Control}
+\section{Wrap up}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Discussion}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Tools}
-
-
-\begin{frame}[plain]{Veripos \$GPGST NMEA strings}
-
-	\begin{exampleblock}{Example}
-		{\textit{\$GPGST,140545.00,3.81,0.02,0.01,81.00,0.02,0.01,0.02*57}.}
-	\end{exampleblock}
-	\vspace*{-1cm}
-	\begin{table}
-		\centering
-		\begin{minipage}[t]{\textheight}%
-			\resizebox{\columnwidth}{!}{%
-				\begin{tabular}{lc} %{l|c|c|c|c}
-					\toprule %\rowcolor{lightgray}
-					Cell & Notes\tabularnewline
-					\midrule
-					0&Message ID \$GPGST\\
-					1&UTC of position fix\footnote{Notice 17s offset to GPS time.}\\
-					2&RMS value of the pseudorange or carrier phase (RTK/PPP) residuals\\
-					3&Error ellipse semi-major axis 1 sigma error, in meters\\
-					4&Error ellipse semi-minor axis 1 sigma error, in meters\\
-					5&Error ellipse orientation, degrees from true north\\
-					6&Latitude 1 sigma error, in meters\\
-					7&Longitude 1 sigma error, in meters\\
-					8&Height 1 sigma error, in meters\\
-					9&The checksum data, always begins with *\\
-					\bottomrule
-				\end{tabular}%
-			}
-			%	\caption{Coordinates of NGB5}
-		\end{minipage}
-	\end{table}
-	
-	
-	
+\begin{frame}
+\begin{itemize}
+	\item git
+	\begin{itemize}
+		\item backup & maintain your work;
+		\item has application in teaching, research or learning;
+		\item become social tool.
+	\end{itemize}
+	\item Reproducible research
+	\begin{itemize}
+		\item make it easy to return to the data and analyses;
+		\item provide research scrutiny and transparency;
+		\item can be great self-marketing tool.
+	\end{itemize}
+\end{itemize}
 \end{frame}
 
 %Final slide
 \setbeamercolor{background canvas}{bg=blueBgd!60}
-\plain{Questions?}
+%\plain{\includegraphics[width=.6\textwidth]{pic/git.png}}
+\plain{Thank you}
+\setbeamercolor{background canvas}{bg=blueBgd!0}
 
+\begin{frame}
+\centering
+\includegraphics[height=.8\textheight]{pic/git.png}
+\end{frame}
 
 
 \end{document}
+
+%http://explainxkcd.com/wiki/index.php/1597:_Git

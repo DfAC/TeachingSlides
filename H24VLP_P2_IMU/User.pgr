@@ -1,0 +1,52 @@
+$PLTGRP 8.50.4120
+Group {
+	Name: "QC_GPS"
+	Html: 1
+	Num: 5
+	Plt1: 1 0
+	Plt2: 6 0
+	Plt3: 24 0
+	Plt4: 16 0
+	Plt5: 62 0
+}
+Group {
+	Name: "CheckGPS"
+	Html: 1
+	Num: 12
+	Plt1: 23 0
+	Plt2: 5 0
+	Plt3: 7 0
+	Plt4: 56 0
+	Plt5: 16 0
+	Plt6: 62 0
+	Plt7: 6 0
+	Plt8: 24 0
+	Plt9: 15 0
+	Plt10: 27 0
+	Plt11: 1 0
+	Plt12: 48 6315
+}
+Group {
+	Name: "CheckIMUSolution"
+	Html: 1
+	Num: 8
+	Plt1: 40 0
+	Plt2: 41 0
+	Plt3: 34 0
+	Plt4: 44 0
+	Plt5: 52 0
+	Plt6: 51 0
+	Plt7: 38 0
+	Plt8: 36 0
+}
+Group {
+	Name: "TestForStaticIMU"
+	Html: 0
+	Num: 6
+	Plt1: 30 0
+	Plt2: 13 0
+	Plt3: 63 0
+	Plt4: 64 0
+	Plt5: 43 0
+	Plt6: 45 0
+}

@@ -1,0 +1,72 @@
+$LEVERFAV InertialExplorer 8.50.4320
+Lever {
+	Name: "Aberporth"
+	xyz:  0.1800 0.0000 0.2130
+	Updt: 2/05/2014
+}
+Lever {
+	Name: "kayakSPAN"
+	xyz:  -0.0240 -0.8750 0.1640
+	Updt: 5/04/2014
+}
+Lever {
+	Name: "L1_POSRS_FL"
+	xyz:  -1.1340 2.3380 0.4960
+	Updt: 4/05/2014
+}
+Lever {
+	Name: "L1_POSRS_RR"
+	xyz:  0.1980 -0.8300 0.4910
+	Updt: 3/27/2014
+}
+Lever {
+	Name: "L1_SPAN_FL"
+	xyz:  -1.0250 2.5420 0.5220
+	Updt: 3/30/2014
+}
+Lever {
+	Name: "L1_SPAN_RR"
+	xyz:  0.3070 -0.6260 0.4820
+	Updt: 3/30/2014
+}
+Lever {
+	Name: "POSRS_FL"
+	xyz:  -1.1340 2.3380 0.5570
+	Updt: 3/17/2014
+}
+Lever {
+	Name: "POSRS_RR"
+	xyz:  0.1980 -0.8300 0.5520
+	Updt: 3/17/2014
+}
+Lever {
+	Name: "SPAN_FL"
+	xyz:  -1.0250 2.5420 0.5830
+	Updt: 3/17/2014
+}
+Lever {
+	Name: "SPAN_RR"
+	xyz:  0.3070 -0.6260 0.5430
+	Updt: 3/17/2014
+}
+Lever {
+	Name: "TRAIN_A"
+	xyz:  0.1560 0.7830 1.0110
+	Updt: 9/08/2015
+}
+Lever {
+	Name: "TRAIN_E"
+	xyz:  0.1500 -0.8500 1.0110
+	Updt: 5/22/2015
+}
+Lever {
+	Name: "SPAN2S+"
+	xyz:  0.2280 -0.0010 -0.1220
+	Updt: 9/14/2015
+}
+Lever {
+	Name: "POSRS2S+"
+	xyz:  0.1190 -0.2050 -0.1130
+	Updt: 9/14/2015
+}
+; end-of-file

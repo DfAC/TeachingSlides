@@ -1,8 +1,8 @@
-LKB v24.07.15
+`LKB v24.07.15`
 
 This is Inertial Explorer WORKFLOW manual. Make sure that you read Problem.log for all problems/solutions. Reading Inertial Explorer manual is very useful as well. 8.5 Manual is referenced as ->UMxx where xx is page number
 
-1) COLLECT DATA
+# 1. COLLECT DATA
 
 * Standard NGI van setup include POSRS as a main sensor and SPAN as a check. Both should be connected to same antenna. As a check I recommend to include additional GNSS receiver, connected to different antenna then POSRS/SPAN.
 * POSRS/SPAN GNSS receivers are set to 1Hz, additional receiver should be set to higher frequency, if possible.
@@ -10,7 +10,7 @@ This is Inertial Explorer WORKFLOW manual. Make sure that you read Problem.log f
 * POSRS is VERY sensitive to power. Make sure that batteries are charged before and as-rule of thumb, 3 batteries run for about 5hrs.
 
 
-###When starting SPAN will have a specific light sequence:
+### When starting SPAN will have a specific light sequence:
 
 EVENT | SD_ligtht | GPS1_ligtht | GPS2_light | INS_light | IMU_light | note
 :--:  |  :--:  |  :--:  |  :--:  |  :--:  |  :--:  |  :--:
@@ -22,7 +22,7 @@ IMU aligned | flashing green | green | red* | green | green | will only happen a
 		: *if two antennas are connected this light sequence will follow GPS1_light one
 
 
-###POSSIBLE PROBLEMS AND SOLUTIONS
+### POSSIBLE PROBLEMS AND SOLUTIONS
 
 * if GPS light stays orange check GPS connection
 * if SD_ligtht is not flashing press logging button (next to SD card slot)
@@ -31,7 +31,8 @@ IMU aligned | flashing green | green | red* | green | green | will only happen a
 	* wait until GPS1_light turn green, IMU_light should turn green soon after
 	* if not, check all connections
 
-###SPAN POWER CONNECTION
+### SPAN POWER CONNECTION
+
 I assume that power is provided via "brick" using Black & Red pins.
 
 * For IMU connect
@@ -42,7 +43,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 	* red (-Vin) + white (+Vin) to brick Red
 * if you blow fuse fusebox is behind the driver. Need 15A fuse.
 
-###PTDL (Microstrain), Footracker:
+### PTDL (Microstrain), Footracker:
 
 	* working system should blink
 	* SD_light	GPS_light	3G_light
@@ -50,9 +51,9 @@ I assume that power is provided via "brick" using Black & Red pins.
 	* Microstrain unit light should blink slow and then fast -> this is when data is being recorded.
 
 
-2) Convert DATA
+# 2. Convert DATA
 
-*** SPAN data extraction
+## SPAN data extraction
 	Inertial Explorer
 		File->Convert->Raw GNSS data to Waypoint generic
 			select folder with SPAN *.log files
@@ -64,7 +65,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 			output file are *.epp *.gpb (GNSS) *.imr (IMU). If any file is missing data was not properly recorded. Log file should be about 50MB/h
 
 
-*** POSRS data extraction
+## POSRS data extraction
 	Use POSPac to extract IMU and GPS data
 		Extract->Extract POS data
 			POS Data File Name => input first file name (eq. NT240114_001_aaa.000)
@@ -73,22 +74,24 @@ I assume that power is provided via "brick" using Black & Red pins.
 		Press RUN
 
 	Inertial Explorer
-		File->"Convert raw IMU data to Waypoint generic" to convert imu_{output_kernel}.dat
+		File->"Convert raw IMU data to Waypoint generic" to convert `imu_{output_kernel}.dat`
 			Use POSRS profile (see .\ChrisNotes\cimu02.PNG)
 			One I created is called POSRS
 		File->Convert->Raw GNSS data to Waypoint generic
-			convert mgps_{output_kernel}.nov
+			convert` mgps_{output_kernel}.nov`
 			Program will recognise file format as NovAtel OEM4/OEV/OEM6
+			conversion details are in `extract_POSRS.log`
 
-
-*** Microstrain data extraction
+## Microstrain data extraction
 	Run extractMicrostrain.bat
 	cut bad records from txt file
 		cat LOG010_IMU.TXT | awk -F " " "{i=1; if ($i >100.0) {print $0} }" > IMU.txt
 	convert LOG0xx_IMU.TXT into bin using microstrainToBinary.m
 
 
-***LEICA format conversion
+### LEICA format conversion
+
+```
 	Inertial Explorer
 		File->Convert->Raw GNSS data to Waypoint generic
 			select folder with Leica *.m00 files
@@ -99,15 +102,16 @@ I assume that power is provided via "brick" using Black & Red pins.
 			In case of any problems convert data to RINEX using teqc or going via LGO and then use File->Convert->Raw GNSS data to Waypoint generic
 			Merge files to single one using File->GPB Utilities->Concatenate, Splice and Resample
 				this will change station information if processed from *.m00! Make sure that proper coordinates are entered.
+```
 
-3) Check if L2C Phase is correct for all data
+3. Check if L2C Phase is correct for all data
 	View->Raw GNSS data
 		select *.GPB data
 		Edit->L2 Phase Correction
 			check L2C Phase correction enabled
 			values below should be:
 				Novatel +.25 cy (confirmed by Marcus)
-				all Leica +.25 cy (this agree with Chris Hide and Leica support but IE by default use -0.25!!!!)
+				all Leica +.25 cy (this agree with Chris Hide and Leica support but IE by default use -0.25. THis has changed in 8.50 for correct value)
 				Leica RINEX +0.25 cy (tested on one RINEX file processed by LGO8.3)
 				Javad ??
 				Trimble ??
@@ -115,7 +119,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 		Conduct it for each raw file. Those setting should be correct for Novatel
 
 
-5) Create a New project in Inertial Explorer
+5. Create a New project in Inertial Explorer
 	File->New Project->Project Wizard
 		navigate to project folder and name processing accordingly (SPAN, POSRS, MicroStrain ect)
 		select GNSS & IMU file
@@ -136,7 +140,7 @@ NOTES SECTION
 			GPS_Rover (ht=0), Arms (add_ht), Export (add_ht)
 
 
-6) Process GPS
+6. Process GPS
 Processing GNSS will generate *.cmb file (combined GPS file), which is used in next step (those values are estimated at antenna, without applying ht!)
 
 	GNSS WORKFLOW
@@ -145,15 +149,15 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 	Make sure that measured to ARP is selected for both master and rover.
 
 
-	1) Check if you have proper data by plotting File Data Coverage and base on distance to base station decide on single/multibaseline solution
+	1. Check if you have proper data by plotting File Data Coverage and base on distance to base station decide on single/multibaseline solution
 
-	2) Check observations
+	2. Check observations
 		Check frequency of base/rover (POSRS data is 2Hz). IE8.5 will automatically up-sample base data if rover obs freq is different! Be careful.
 		To minimalist file sizes use View->GNSS Observation->Master{..}->Resample/Fill gaps, using-> Remote Time Interval
 			all data outside of remote time will be removed
 		To check L2C offset use View->GNSS Observations->{Master/Rover}->View Raw GNSS data.
 
-	2) Download precise orbits&clocks if available. GPS/GLONASS precise orbits/clocks latency is 12-18 days, GPS rapid orbits/clocks about one day.
+	2. Download precise orbits&clocks if available. GPS/GLONASS precise orbits/clocks latency is 12-18 days, GPS rapid orbits/clocks about one day.
 		File->Add precise Files
 			Set proper time and date, uncheck GLONASS and press Download for GPS data
 			Set proper time and date, check GLONASS and press Download for GLONASS data (some files will be overwritten)
@@ -161,7 +165,7 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 			Press OK to exit window
 		In View->Project Overview you should be able to see all the files you added
 
-	3) Process all data
+	3. Process all data
 	To process single baseline GNSS go to Process->Process GNSS
 			Processing Method	Differential GNSS
 			Processing Direction->Both
@@ -180,7 +184,7 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 		 For VS leaving baseline limit at standard 70km makes no difference and it seems that VS is slightly more precise for those baselines. If you keep 30km limit both results show same precision. The larger the limit the longer it takes to process data. Maximum baselines you can process at one time is 8.
 		To save results to HTML, plot my normal group plots, then Plot Multi-Base and then use Output->Build HTML Report.
 
-	5) Define static sessions and check Static Session Convergence plot.
+	5. Define static sessions and check Static Session Convergence plot.
 		use File->GPB Utility->Insert Static/Kinematic Markers
 			ht value here is not important. Its only for static file.
 		check NavNet850 p32 for details, file line ex
@@ -200,7 +204,7 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 			grep RMS -A3 *.sum
 		Also plot data on Google Earth (GE) to check any outages observed. Especially useful is Show elevation profile (right click on Epochs)
 
-	6) Prepare best possible GNSS dataset taking into consideration length of datagaps, quality of data ect.
+	6. Prepare best possible GNSS dataset taking into consideration length of datagaps, quality of data ect.
 		Try to prepare raw data so it can be reprocessed
 		If not possible (time, datagaps ect) edit *.cmb by hand
 		To use only specific QN data use...
@@ -230,7 +234,7 @@ NOTES SECTION
 
 
 
-7) Process LC
+7. Process LC
 	Decide on trajectory, most of the time it should be Update data: GNSS combined but sometimes you should use External trajectory (*.cmb file, see prev step). For source GNSS data try to use only QN1-4 (position acc < 1.0). Note that settings here should match that for GNSS processing and given Van/Train level arms are to ARP!
 
 	Rule of thumb acc with gaps (those value are approximate only)
@@ -298,18 +302,19 @@ Microstrain WORKFLOW
 	PROBLEMS:
 		sinusoidal behaviour of Az. Error model is wrong.
 
-*7) Process TC & Combine Solutions
+7. Process TC & Combine Solutions
 	TC does not seems to give better results all the time and prone to user errors. Ignore if possible and progress to next step.
 	Combine solution will mix two solutions. Only useful in very specific scenarios. Ignore if possible and progress to next step.
+* optional step
 
-8) Combine solution
+8. Combine solution
 	Combines GNSS and IMU solution. Required before output can be produced.
 
-*9) Smooth solution (Process->Smooth Solution)
+9) Smooth solution (Process->Smooth Solution)
 	Be careful to use it. Its not recommended and can hide bad result.
 
 
-10) PROCESS IMU DATA ON ITS OWN
+10. PROCESS IMU DATA ON ITS OWN
 	Process->Process LC
 		check "Process IMU Data Only"
 		make sure that all settings are correct (as per step 7)
@@ -317,7 +322,7 @@ Microstrain WORKFLOW
 
 
 
-11) Send data to client
+11. Send data to client
 	Output->Export Wizard
 	remember to apply proper level arm	see Problem.log
 	NOTE: lever arms are calculated to ARP so if you done both GPS and LC processing to ARP you should use exactly the use same lever arms as for IMU (step 7).

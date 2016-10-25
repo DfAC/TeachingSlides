@@ -1,0 +1,32 @@
+ConvertIMU { Name: "MicroStrain"
+	X: 1
+	Y: 3
+	Z: 5
+	ByteOrder: 0
+	GyroScale: 7158278.82333333
+	GyroFlag: 0
+	AccelScale: 121615338486.80484000
+	AccelFlag: 0
+	DataRate: 100.000000
+	TimeTagFormat: 0
+	TimeTagSource: 0
+	TimeTagBias: 0.000000
+	Manufact: 0
+	Decoder: StdIMU.dll
+	}
+ConvertIMU { Name: "POSRS"
+	X: 1
+	Y: 3
+	Z: 5
+	ByteOrder: 0
+	GyroScale: 299845329.78405309
+	GyroFlag: 0
+	AccelScale: 880694127.88383293
+	AccelFlag: 0
+	DataRate: 200.000000
+	TimeTagFormat: 0
+	TimeTagSource: 0
+	TimeTagBias: 0.007000
+	Manufact: 0
+	Decoder: StdIMU.dll
+	}

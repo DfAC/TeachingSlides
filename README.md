@@ -12,7 +12,8 @@ Tick indicates that slides have been updated for this year lectures.
 
 - [x] **H24VSP_PPP** - H24VSP Project 3 (NRTK vs PPP) introduction slides
 - [x] **H24VLP_P1_MP** - H24VLP Project 1 (Multipath) introduction slides
-- [ ] **H24VLP_P2_IMU** -  H24VLP Project 2 Sensor integration handout
+- [x] **H24VLP_P2_IMU** -  H24VLP Project 2 Sensor integration handout
+  - to convert POSRS data copy all user.* files to `c:\Users\USER_NAME\AppData\Roaming\NovAtel\Waypoint_8_50\User\`
 - [x] **H24VEP_Bridge** -  H24VLP Project 3 Bridge monitoring introduction slides
 
 ## Supporting repos

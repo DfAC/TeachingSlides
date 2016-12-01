@@ -51,48 +51,40 @@
 
 \maketitle
 
-\begin{frame}{Table of Contents}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Introduction}
 
+%\begin{frame}[allowframebreaks=0.9]{Introduction}
+\begin{frame}[fragile]{Introduction}
+
+	In last practical of the H24VSP module we will explore the capacities of the Precise Point Positoning (PPP) by comparing it with real-time kinematic double-differenced positioning (RTK) that you are already familiar with. During practical we will be using \textbf{Leica GS10} receiver and maritime \textbf{Veripos LD5} receiver with AsterRx chipset\footnote[frame]{For short introductory video see \url{http://bit.ly/VeriposLD5}.}.
+    We are interested in assessing difference between:
+	\begin{itemize}
+		\item convergence time;
+		\item precision - estimated and actual after convergence; 
+		\item accuracy after convergence.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{What we are going to discuss}
   \setbeamertemplate{section in toc}[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-
-\begin{frame}[allowframebreaks=0.8]]{Introduction}
-%\begin{frame}[fragile]{Introduction}
-
-	Aim of the H24VSP module is to develop the practical understanding of the practical aspects of
-satellite-based positioning and its applications. In the last practical we will explore the capacities of the Precise Point Positoning (PPP) by comparing it with Network RTK that you are allready familiar with. We are interested in assessing difference between:
-	\begin{itemize}
-		\item convergence time;
-		\item precision - estimated and actual after convergence; 
-		\item accuracy after convergence.
-	\end{itemize}
-	
-	We will be using:
-	\begin{itemize}
-		\item Leica GS10;
-		\item maritime Veripos LD5 receiver with AsterRx chipset\footnote[frame]{For short introductory video see \url{http://bit.ly/VeriposLD5}.}.
-	\end{itemize}
-%\href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer Theme} by Benjamin Weiss.
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Veripos Services}
 
 \begin{frame}[allowframebreaks]{Veripos Services}
-	Veripos offer hardware (receivers) in combination with following services\footnote[frame]{Also check \url{http://www.veripos.com/services.html} and for video \url{http://bit.ly/VeriposServices}.}:
+	Veripos is a commercial company offering both hardware (receivers) in combination with following services\footnote[frame]{Also check \url{http://www.veripos.com/services.html} and for video \url{http://bit.ly/VeriposServices}.}:
 	
 	\begin{itemize}
-		\item \textbf{Veripos Standard} with single frequency DGPS and 1-2 metre accuracy.
-		\item {\color{gray}\textbf{Legacy Veripos Standard Plus} with dual-frequency DGPS for low latitude areas and 1-2 metre accuracy.} 
-		\item \textbf{Veripos Standard$^2$ } with single frequency combined GPS and GLONASS DGPS. 
-		\item \textbf{Veripos Ultra/APEX} using global orbit, clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
+		\item \textbf{Veripos Standard} - single frequency code DGPS, 1-2 m accuracy.
+		\item \textbf{Veripos Standard$^2$ } - single frequency code GPS and GLONASS DGPS. 
+		\item \textbf{Veripos APEX} using global orbit, clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
 	\end{itemize}
-	Corrections are transmitted via Inmarsat geostationary satellites - 25E, 98W, 143.5E, AORE, AORW, IOR, POR\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}}. All coordinates provided are in ITRF2008.
+	The last service consist of three: APEX, Ultra, APEX$^2$ and Ultra$^2$ - the difference is correction provider and number of constellations used. In all cases the corrections are transmitted via Inmarsat geostationary satellites - 25E, 98W, 143.5E, AORE, AORW, IOR, POR\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}}. All coordinates provided are in ITRF2008.
 \end{frame}
 
 \begin{frame}{Veripos Standard}
@@ -101,38 +93,21 @@ satellite-based positioning and its applications. In the last practical we will 
 		\item Provides RTCM Type 1\footnote{DGPS corrections.}, 3\footnote{GPS reference station parameters.} messages.
 		\item Normal accuracy: 1-2m. 
 		\item Typical latency: 4 seconds\footnote{Typical correction update interval is 15 seconds.}.
-		\item Single difference (DGPS) using GPS C/A code
+		\item Single difference code solution (DGPS) using GPS C/A code on L1 frequency.
 	\end{itemize}	
-	
-\end{frame}
-
-\begin{frame}{Veripos Standard Plus}
-	Standard Plus is intended to support DGPS positioning for lower latitudes and combat ionospheric activity. 
-	\begin{itemize}	
-		\item Provides RTCM Type 1, 3, 15\footnote[frame]{Ground transmitter parameters including ionospheric delay information} messages.
-		\item Normal accuracy: 1-2m. 
-		\item Typical latency: 4 seconds.
-		\item Single difference (DGPS) using GPS C/A and P code
-	\end{itemize}	
-	Note that this is legacy service, according to \url{http://www.veripos.com/services.html}.
-\end{frame}
-
-\begin{frame}{Veripos Standard and Standard Plus}
-	\begin{figure}
-		\includegraphics[height=0.8\textheight]{pic/StdPlus.png}
-		\caption{Solutions at a monitor site in Malongo [Veripos]}
-	\end{figure}
 	
 \end{frame}
 
 
 \begin{frame}{Veripos Standard$^2$}
 	
+	Single frequency code GPS and GLONASS DGPS. 
+
 	\begin{itemize}	
 		\item Provides RTCM Type 1, 3, 31\footnote{DGPS GLONASS corrections.}, 32\footnote{GPS GLONASS reference station parameters.} messages.
 		\item Normal accuracy: 1-2m. 
 		\item Typical latency: 4 seconds.
-		\item Single difference (DGPS) using GPS and GLONASS C/A code\footnote[frame]{It is possible to use GLONASS only with this service as well.}
+		\item Single difference code solution (DGPS) using GPS and GLONASS C/A code (L1/G1)\footnote[frame]{It is possible to calculate position using only GLONASS with this service.}.
 	\end{itemize}	
 	
 \end{frame}
@@ -186,13 +161,28 @@ satellite-based positioning and its applications. In the last practical we will 
 \begin{frame}{Practice layout}
 	
 	\begin{itemize}
-		\item LD5 will be restarted at 12:00 in order to converge properly.
-		\item You will start collecting RTK data after 14:00. 
-		\item You will download Veripos NMEA strings for Ultra and Apex$^2$ alongside data from GS10.
-		\item Make sure that Veripos NMEA file has been splitted into \$GPGGA and \$GPGST before leaving.
+		\item LD5 will be restarted at 12:00. This will allow for PPP convergence. 
+		\item You will collecting RTK data between 14:00 and 16:20. 
+		\item Apart from collected data (GS10) you will be given Veripos NMEA strings for Ultra and Apex$^2$ (LD5).
+		\item \textbf{Make sure that Veripos NMEA file has been split into \$GPGGA and \$GPGST ones before leaving.}
 	\end{itemize}
 
 \end{frame}
+
+\begin{frame}{Data Collection}
+	
+	You will  collect:
+		\begin{itemize}
+			\item RTK GPS solution;
+			\item RTK GPS+GLO solution;
+			\item Network RTK GPS solution;
+			\item Network RTK GPS+GLO solution.
+		\end{itemize}
+
+	The PPP data will be provided for you at the end of practical. It is your task to \textbf{select approximate point and time span} to carry out comparison between RTK and PPP solutions. 
+
+\end{frame}
+
 
 
 \begin{frame}{NGB5}
@@ -204,12 +194,11 @@ satellite-based positioning and its applications. In the last practical we will 
 					\toprule %\rowcolor{lightgray}
 					Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
 					\midrule
-					NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.2065 & at point\\
-					NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.3865 & at ARP\footnote{Antenna heigh = 0.18m.}\\
-					NGB5 & ETRF97 & 52 57 07.05318 & 01 11 01.44897 W & 91.4280 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
-					\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.070524} & \textbf{01 11 1.427085} W & \textbf{91.480} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2015-12-04.} \\
-					\textbf{NGB5} & ITRF2008 & \textbf{5257.1178421} & \textbf{00111.0237848} W & \textbf{91.480} & at antenna PCO\footnote{Converted to DDMM.MMMMMMM to be compatible with NEMEA GGA string.} \\
-					
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.212 & at point\\
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.392 & at ARP\footnote{Antenna heigh = 0.18m.}\\
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.434 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
+					\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.07095} & \textbf{01 11 1.42675} W & \textbf{91.488} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2016-12-04.} \\
+					\textbf{NGB5} & ITRF2008 & \textbf{5257.1178492} & \textbf{0111.0237792} W & \textbf{91.488} & at antenna PCO\footnote{NEMEA GGA string DDMM.MMMMMMM format.} \\		
 					\bottomrule
 				\end{tabular}%
 			}

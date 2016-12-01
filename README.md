@@ -16,7 +16,7 @@ This repo contains the source code for the following presentation:
 
 I am trying to update my slides regulary before the event, and then, periodically after the envent. In case of the teaching there will be a major update every year, which might be important if you intended to use slides. A tick indicates that slides have been updated for this year lectures and no major changes are expected.
 
-- [ ] **H24VSP_PPP** - H24VSP Project 3 (NRTK vs PPP) introduction slides
+- [x] **H24VSP_PPP** - H24VSP Project 3 (NRTK vs PPP) introduction slides
 - [ ] **H24VEP_Bridge** -  H24VLP Project 3 Bridge monitoring introduction slides
 - [x] **H24VLP_P1_MP** - H24VLP Project 1 (Multipath) introduction slides
 - [x] **H24VLP_P2_IMU** -  H24VLP Project 2 Sensor integration handout

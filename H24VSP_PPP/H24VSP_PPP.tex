@@ -33,7 +33,7 @@
 \input{Preamble.tex}
 %\renewcommand{\baselinestretch}{1.2} %line spacing
 %{\setstretch{1.0}\color{blue} text bla bla } for section strech
-\renewcommand{\footnotesize}{\scriptsize}
+%\renewcommand{\footnotesize}{\scriptsize}
 %\usepackage[demo]{graphicx}
 \usepackage[font={small,it}]{caption}
 %\usepackage{subcaption}
@@ -41,11 +41,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title[H24VSP]{H24VSP Project 3}
-\subtitle{Introduction to PPP using DL5}
+\subtitle{Practical PPP with Veripos DL5}
 \author{Lukasz K Bonenberg}
 \institute{NGI}
 \date{\today}
-% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo/logo}}
+ %\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo/logo}}
 
 \begin{document}
 
@@ -68,7 +68,7 @@
 \end{frame}
 
 \begin{frame}{What we are going to discuss}
-  \setbeamertemplate{section in toc}[sections numbered]
+  \setbeamertemplate{section in toc}[circle] %[sections numbered]
   \tableofcontents[hideallsubsections]
 \end{frame}
 
@@ -77,15 +77,17 @@
 \section{Veripos Services}
 
 \begin{frame}[allowframebreaks]{Veripos Services}
-	Veripos is a commercial company offering both hardware (receivers) in combination with following services\footnote[frame]{Also check \url{http://www.veripos.com/services.html} and for video \url{http://bit.ly/VeriposServices}.}:
+	Veripos is a commercial company offering combination of a hardware (receivers) and correction services\footnote[frame]{\url{http://bit.ly/VeriposServices}.}:
 	
 	\begin{itemize}
 		\item \textbf{Veripos Standard} - single frequency code DGPS, 1-2 m accuracy.
 		\item \textbf{Veripos Standard$^2$ } - single frequency code GPS and GLONASS DGPS. 
-		\item \textbf{Veripos APEX} using global orbit, clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
+		\item \textbf{Veripos PPP} using global orbit, clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
 	\end{itemize}
-	The last service consist of three: APEX, Ultra, APEX$^2$ and Ultra$^2$ - the difference is correction provider and number of constellations used. In all cases the corrections are transmitted via Inmarsat geostationary satellites - 25E, 98W, 143.5E, AORE, AORW, IOR, POR\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}}. All coordinates provided are in ITRF2008.
+
+	Veripos PPP service comes in four favours\footnote[frame]{\url{http://www.veripos.com/services.html}}: APEX, Ultra, APEX$^2$ and Ultra$^2$ - the difference is in the correction provider and number of constellations used. In all cases the corrections are transmitted via Inmarsat geostationary satellites\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}} - 25E, 98W, 143.5E, AORE, AORW, IOR, POR. All coordinates provided are in ITRF2008.
 \end{frame}
+
 
 \begin{frame}{Veripos Standard}
 	
@@ -131,27 +133,41 @@
 \end{frame}
 
 
-\begin{frame}{Veripos Apex$^2$}
+\begin{frame}{Veripos Apex and Apex$^2$}
 	\begin{columns}[T,onlytextwidth]
 		\column{0.5\textwidth}
 		\begin{itemize}	
 		\item Orbit and clock corrections in Veripos OCDS format.
 		\item Normal accuracy: 0.1m planar. 
 		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-		\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS.
+		\item Precise Point Positioning (PPP) using code and carrier phase on GPS L1/L2 frequencies.
 		\end{itemize}	
 		\column{0.5\textwidth}
-		\begin{figure}[T]
-			\vspace*{-1cm}
-			\includegraphics[height=0.8\textheight]{pic/Apex.png}
-			\caption{Veripos Apex solution at a monitor site in Aberdeen.}
-		\end{figure}
+		\begin{itemize}	
+		\item Orbit and clock corrections in Veripos OCDS format.
+		\item Normal accuracy: 0.1m planar. 
+		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+		\item PPP, code and carrier phase on L1/L2 and G1/G2 (GPS and GLONASS).
+		\end{itemize}	
+		% \begin{figure}[T]
+		% 	\vspace*{-1cm}
+		% 	\includegraphics[height=0.8\textheight]{pic/Apex.png}
+		% 	\caption{Veripos Apex solution at a monitor site in Aberdeen.}
+		% \end{figure}
 	\end{columns}
+\end{frame}
+
+\begin{frame}{Veripos Apex and Apex$^2$ comparison}
+	\begin{figure}[T]
+		\vspace*{-1cm}
+		\includegraphics[height=0.7\textheight]{pic/Apex_compare.png}
+		\caption{Apex and Apex$^2$ solutions at a monitor site in Aberdeen.}
+	\end{figure}
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Live demo}
+\section{Veripos demo}
 
 
 
@@ -183,30 +199,6 @@
 
 \end{frame}
 
-
-
-\begin{frame}{NGB5}
-	\begin{table}
-		\centering
-		\begin{minipage}[t]{\textwidth}%
-			\resizebox{\columnwidth}{!}{%
-				\begin{tabular}{lccccc} %{l|c|c|c|c}
-					\toprule %\rowcolor{lightgray}
-					Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
-					\midrule
-					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.212 & at point\\
-					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.392 & at ARP\footnote{Antenna heigh = 0.18m.}\\
-					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.434 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
-					\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.07095} & \textbf{01 11 1.42675} W & \textbf{91.488} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2016-12-04.} \\
-					\textbf{NGB5} & ITRF2008 & \textbf{5257.1178492} & \textbf{0111.0237792} W & \textbf{91.488} & at antenna PCO\footnote{NEMEA GGA string DDMM.MMMMMMM format.} \\		
-					\bottomrule
-				\end{tabular}%
-			}
-			\caption{Coordinates of NGB5}
-		\end{minipage}
-	\end{table}
-	%in DDMM.MMMMMMM 7 decimal place is eq to 0.0018 m	
-\end{frame}
 
 
 
@@ -260,10 +252,35 @@
 			%	\caption{Coordinates of NGB5}
 		\end{minipage}
 	\end{table}
-	
-	
-	
 \end{frame}
+
+
+
+
+\begin{frame}{NGB5}
+	\begin{table}
+		\centering
+		\begin{minipage}[t]{\textwidth}%
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{lccccc} %{l|c|c|c|c}
+					\toprule %\rowcolor{lightgray}
+					Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
+					\midrule
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.212 & at point\\
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.392 & at ARP\footnote{Antenna heigh = 0.18m.}\\
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.434 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
+					\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.07095} & \textbf{01 11 1.42675} W & \textbf{91.488} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2016-12-04.} \\
+					\textbf{NGB5} & ITRF2008 & \textbf{5257.1178492} & \textbf{0111.0237792} W & \textbf{91.488} & at antenna PCO\footnote{NEMEA GGA string DDMM.MMMMMMM format.} \\		
+					\bottomrule
+				\end{tabular}%
+			}
+			\caption{Coordinates of NGB5}
+		\end{minipage}
+	\end{table}
+	%in DDMM.MMMMMMM 7 decimal place is eq to 0.0018 m	
+\end{frame}
+
+
 
 %Final slide
 \setbeamercolor{background canvas}{bg=blueBgd!60}

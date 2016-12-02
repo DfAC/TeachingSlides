@@ -37,11 +37,15 @@
 %\usepackage[demo]{graphicx}
 \usepackage[font={small,it}]{caption}
 %\usepackage{subcaption}
+\newcommand{\thisDocRef}{\footnote{History of changes at \url{https://github.com/DfAC/TeachingSlides/}.\\}}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title[H24VSP]{H24VSP Project 3}
-\subtitle{Practical PPP with Veripos DL5}
+\subtitle{Practical PPP with Veripos DL5\thisDocRef}}
 \author{Lukasz K Bonenberg}
 \institute{NGI}
 \date{\today}
@@ -174,16 +178,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Practical work}
 
-\begin{frame}{Practice layout}
-	
-	\begin{itemize}
-		\item LD5 will be restarted at 12:00. This will allow for PPP convergence. 
-		\item You will collecting RTK data between 14:00 and 16:20. 
-		\item Apart from collected data (GS10) you will be given Veripos NMEA strings for Ultra and Apex$^2$ (LD5).
-		\item \textbf{Make sure that Veripos NMEA file has been split into \$GPGGA and \$GPGST ones before leaving.}
-	\end{itemize}
 
-\end{frame}
 
 \begin{frame}{Data Collection}
 	
@@ -200,6 +195,17 @@
 \end{frame}
 
 
+
+\begin{frame}{Practice layout}
+	
+	\begin{itemize}
+		\item LD5 will be restarted at 12:00. This will allow for PPP convergence. 
+		\item You will collecting RTK data between 14:00 and 16:20. 
+		\item Apart from collected data (GS10) you will be given Veripos NMEA strings for Ultra and Apex$^2$ (LD5).
+		\item \textbf{Make sure that Veripos NMEA file has been split into \$GPGGA and \$GPGST ones before leaving.}
+	\end{itemize}
+
+\end{frame}
 
 
 \begin{frame}{Veripos \$GPGGA NMEA strings}

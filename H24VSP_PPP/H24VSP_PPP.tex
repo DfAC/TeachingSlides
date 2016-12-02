@@ -54,7 +54,7 @@
 \begin{document}
 
 \maketitle
-
+%\setbeamercolor{background canvas}{bg=blueBgd!20}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{Introduction}
 
@@ -118,7 +118,7 @@
 	
 \end{frame}
 
-\begin{frame}{Veripos Ultra}
+\begin{frame}{Veripos Ultra and Apex$^2$} %this is what students are going to compare
 	\begin{columns}[T,onlytextwidth]
 		\column{0.5\textwidth}
 		\begin{itemize}	
@@ -128,46 +128,56 @@
 			\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS.
 		\end{itemize}	
 		\column{0.5\textwidth}
+			\begin{itemize}	
+			\item Orbit and clock corrections in Veripos OCDS format.
+			\item Normal accuracy: 0.1m planar. 
+			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+			\item PPP, code and carrier phase on L1/L2 and G1/G2 (GPS and GLONASS).
+			\end{itemize}	
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Veripos Standard and Ultra comparison}
 		\begin{figure}[T]
 			\vspace*{-1cm}
-			\includegraphics[height=0.7\textheight]{pic/Ultra.png}
+			\includegraphics[height=.9\textheight]{pic/Ultra.png}
 			\caption{Standard and Ultra solutions at a monitor site in Singapore.}
 		\end{figure}
-	\end{columns}
 \end{frame}
 
 
-\begin{frame}{Veripos Apex and Apex$^2$}
-	\begin{columns}[T,onlytextwidth]
-		\column{0.5\textwidth}
-		\begin{itemize}	
-		\item Orbit and clock corrections in Veripos OCDS format.
-		\item Normal accuracy: 0.1m planar. 
-		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-		\item Precise Point Positioning (PPP) using code and carrier phase on GPS L1/L2 frequencies.
-		\end{itemize}	
-		\column{0.5\textwidth}
-		\begin{itemize}	
-		\item Orbit and clock corrections in Veripos OCDS format.
-		\item Normal accuracy: 0.1m planar. 
-		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-		\item PPP, code and carrier phase on L1/L2 and G1/G2 (GPS and GLONASS).
-		\end{itemize}	
-		% \begin{figure}[T]
-		% 	\vspace*{-1cm}
-		% 	\includegraphics[height=0.8\textheight]{pic/Apex.png}
-		% 	\caption{Veripos Apex solution at a monitor site in Aberdeen.}
-		% \end{figure}
-	\end{columns}
-\end{frame}
 
-\begin{frame}{Veripos Apex and Apex$^2$ comparison}
-	\begin{figure}[T]
-		\vspace*{-1cm}
-		\includegraphics[height=0.7\textheight]{pic/Apex_compare.png}
-		\caption{Apex and Apex$^2$ solutions at a monitor site in Aberdeen.}
-	\end{figure}
-\end{frame}
+% \begin{frame}{Veripos Apex$^2$}
+% 	\begin{columns}[T,onlytextwidth]
+% 		\column{0.5\textwidth}
+% 		\begin{itemize}	
+% 		\item Orbit and clock corrections in Veripos OCDS format.
+% 		\item Normal accuracy: 0.1m planar. 
+% 		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+% 		\item Precise Point Positioning (PPP) using code and carrier phase on GPS L1/L2 frequencies.
+% 		\end{itemize}	
+% 		\column{0.5\textwidth}
+% 		\begin{itemize}	
+% 		\item Orbit and clock corrections in Veripos OCDS format.
+% 		\item Normal accuracy: 0.1m planar. 
+% 		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+% 		\item PPP, code and carrier phase on L1/L2 and G1/G2 (GPS and GLONASS).
+% 		\end{itemize}	
+% 		% \begin{figure}[T]
+% 		% 	\vspace*{-1cm}
+% 		% 	\includegraphics[height=0.8\textheight]{pic/Apex.png}
+% 		% 	\caption{Veripos Apex solution at a monitor site in Aberdeen.}
+% 		% \end{figure}
+% 	\end{columns}
+% \end{frame}
+
+% \begin{frame}{Veripos Apex and Apex$^2$ comparison}
+% 	\begin{figure}[T]
+% 		\vspace*{-1cm}
+% 		\includegraphics[height=0.7\textheight]{pic/Apex_compare.png}
+% 		\caption{Apex and Apex$^2$ solutions at a monitor site in Aberdeen.}
+% 	\end{figure}
+% \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

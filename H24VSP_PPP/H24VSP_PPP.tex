@@ -45,10 +45,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \title[H24VSP]{H24VSP Project 3}
-\subtitle{Practical PPP with Veripos DL5\thisDocRef}}
+\subtitle{Practical PPP with Veripos DL5\thisDocRef}
 \author{Lukasz K Bonenberg}
 \institute{NGI}
-\date{\today}
+%\date{\today}
  %\titlegraphic{\hfill\includegraphics[height=1.5cm]{logo/logo}}
 
 \begin{document}
@@ -61,7 +61,7 @@
 %\begin{frame}[allowframebreaks=0.9]{Introduction}
 \begin{frame}[fragile]{Introduction}
 
-	In last practical of the H24VSP module we will explore the capacities of the Precise Point Positoning (PPP) by comparing it with real-time kinematic double-differenced positioning (RTK) that you are already familiar with. During practical we will be using \textbf{Leica GS10} receiver and maritime \textbf{Veripos LD5} receiver with AsterRx chipset\footnote[frame]{For short introductory video see \url{http://bit.ly/VeriposLD5}.}.
+	In last practical of the H24VSP module we will explore the capacities of the Precise Point Positoning (PPP) by comparing it with real-time kinematic double-differenced positioning (RTK) that you are already familiar with. During practical we will be using \textbf{Leica GS10} receiver and maritime\footnote{For application examples see \url{www.veripos.com/applications/overview/}.} \textbf{Veripos LD5} receiver using AsterRx chipset\footnote[frame]{For short introductory video see \url{http://bit.ly/VeriposLD5}.}.
     We are interested in assessing difference between:
 	\begin{itemize}
 		\item convergence time;
@@ -71,122 +71,10 @@
 
 \end{frame}
 
-\begin{frame}{What we are going to discuss}
-  \setbeamertemplate{section in toc}[circle] %[sections numbered]
-  \tableofcontents[hideallsubsections]
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Veripos Services}
-
-\begin{frame}[allowframebreaks]{Veripos Services}
-	Veripos is a commercial company offering combination of a hardware (receivers) and correction services\footnote[frame]{\url{http://bit.ly/VeriposServices}.}:
-	
-	\begin{itemize}
-		\item \textbf{Veripos Standard} - single frequency code DGPS, 1-2 m accuracy.
-		\item \textbf{Veripos Standard$^2$ } - single frequency code GPS and GLONASS DGPS. 
-		\item \textbf{Veripos PPP} using global orbit, clock correction and dual-frequency GPS/GLONASS observations for dm level accuracy.
-	\end{itemize}
-
-	Veripos PPP service comes in four favours\footnote[frame]{\url{http://www.veripos.com/services.html}}: APEX, Ultra, APEX$^2$ and Ultra$^2$ - the difference is in the correction provider and number of constellations used. In all cases the corrections are transmitted via Inmarsat geostationary satellites\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}} - 25E, 98W, 143.5E, AORE, AORW, IOR, POR. All coordinates provided are in ITRF2008.
-\end{frame}
-
-
-\begin{frame}{Veripos Standard}
-	
-	\begin{itemize}	
-		\item Provides RTCM Type 1\footnote{DGPS corrections.}, 3\footnote{GPS reference station parameters.} messages.
-		\item Normal accuracy: 1-2m. 
-		\item Typical latency: 4 seconds\footnote{Typical correction update interval is 15 seconds.}.
-		\item Single difference code solution (DGPS) using GPS C/A code on L1 frequency.
-	\end{itemize}	
-	
-\end{frame}
-
-
-\begin{frame}{Veripos Standard$^2$}
-	
-	Single frequency code GPS and GLONASS DGPS. 
-
-	\begin{itemize}	
-		\item Provides RTCM Type 1, 3, 31\footnote{DGPS GLONASS corrections.}, 32\footnote{GPS GLONASS reference station parameters.} messages.
-		\item Normal accuracy: 1-2m. 
-		\item Typical latency: 4 seconds.
-		\item Single difference code solution (DGPS) using GPS and GLONASS C/A code (L1/G1)\footnote[frame]{It is possible to calculate position using only GLONASS with this service.}.
-	\end{itemize}	
-	
-\end{frame}
-
-\begin{frame}{Veripos Ultra and Apex$^2$} %this is what students are going to compare
-	\begin{columns}[T,onlytextwidth]
-		\column{0.5\textwidth}
-		\begin{itemize}	
-			\item Orbit and clock corrections in JPL GDGPS format.
-			\item Normal accuracy: 0.1m planar. 
-			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-			\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS.
-		\end{itemize}	
-		\column{0.5\textwidth}
-			\begin{itemize}	
-			\item Orbit and clock corrections in Veripos OCDS format.
-			\item Normal accuracy: 0.1m planar. 
-			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-			\item PPP, code and carrier phase on L1/L2 and G1/G2 (GPS and GLONASS).
-			\end{itemize}	
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Veripos Standard and Ultra comparison}
-		\begin{figure}[T]
-			\vspace*{-1cm}
-			\includegraphics[height=.9\textheight]{pic/Ultra.png}
-			\caption{Standard and Ultra solutions at a monitor site in Singapore.}
-		\end{figure}
-\end{frame}
-
-
-
-% \begin{frame}{Veripos Apex$^2$}
-% 	\begin{columns}[T,onlytextwidth]
-% 		\column{0.5\textwidth}
-% 		\begin{itemize}	
-% 		\item Orbit and clock corrections in Veripos OCDS format.
-% 		\item Normal accuracy: 0.1m planar. 
-% 		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-% 		\item Precise Point Positioning (PPP) using code and carrier phase on GPS L1/L2 frequencies.
-% 		\end{itemize}	
-% 		\column{0.5\textwidth}
-% 		\begin{itemize}	
-% 		\item Orbit and clock corrections in Veripos OCDS format.
-% 		\item Normal accuracy: 0.1m planar. 
-% 		\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-% 		\item PPP, code and carrier phase on L1/L2 and G1/G2 (GPS and GLONASS).
-% 		\end{itemize}	
-% 		% \begin{figure}[T]
-% 		% 	\vspace*{-1cm}
-% 		% 	\includegraphics[height=0.8\textheight]{pic/Apex.png}
-% 		% 	\caption{Veripos Apex solution at a monitor site in Aberdeen.}
-% 		% \end{figure}
-% 	\end{columns}
+% \begin{frame}{What we are going to discuss}
+%   \setbeamertemplate{section in toc}[circle] %[sections numbered]
+%   \tableofcontents[hideallsubsections]
 % \end{frame}
-
-% \begin{frame}{Veripos Apex and Apex$^2$ comparison}
-% 	\begin{figure}[T]
-% 		\vspace*{-1cm}
-% 		\includegraphics[height=0.7\textheight]{pic/Apex_compare.png}
-% 		\caption{Apex and Apex$^2$ solutions at a monitor site in Aberdeen.}
-% 	\end{figure}
-% \end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Veripos demo}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Practical work}
 
 
 
@@ -209,13 +97,122 @@
 \begin{frame}{Practice layout}
 	
 	\begin{itemize}
-		\item LD5 will be restarted at 12:00. This will allow for PPP convergence. 
-		\item You will collecting RTK data between 14:00 and 16:20. 
+		\item LD5 will be restarted at 08:00. This will allow for PPP convergence. 
+		\item You will collecting RTK data between 08:30 and 10:50. 
 		\item Apart from collected data (GS10) you will be given Veripos NMEA strings for Ultra and Apex$^2$ (LD5).
 		\item \textbf{Make sure that Veripos NMEA file has been split into \$GPGGA and \$GPGST ones before leaving.}
 	\end{itemize}
 
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Veripos Services}
+
+\begin{frame}[allowframebreaks]{Veripos Services}
+	Veripos is a commercial company providing high accuracy GNSS positioning, offering both hardware (receivers) and correction services\footnote[frame]{\url{https://www.veripos.com/services/overview/}.}:
+	
+	\begin{itemize}
+		\item \textbf{Apex Service} uses Veripos own Orbit and Clock Determination System (OCDS) and their network of reference stations\footnote{\url{http://bit.ly/VeriposNet}}. Apex utilises dual-frequency GPS, APEX$^2$ dual-frequency GPS/GLONASS and APEX$^5$  dual-frequency GPS/GLONASS/Beidou/Galileo/QZSS receivers observations for dm level accuracy.
+		\item \textbf{Ultra Service} uses JPL Orbit and Clock Determination System (OCDS) which uses data from JPL network\footnote{\url{http://bit.ly/JPLnetwork}}. Ultra utilises dual-frequency GPS and Ultra$^2$ GPS and GLONASS.
+		\item \textbf{Standard Service} - provide high integrity, meter level service. Standard provide single frequency code DGPS and Standard$^2$ single frequency code GPS and GLONASS DGPS.
+	\end{itemize}
+	All corrections are transmitted via Inmarsat geostationary satellites\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}} - 25E, 98W, 143.5E, AORE, AORW, IOR, POR. All coordinates provided are in ITRF2014.
+
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]{Standard Service}
+
+	Single frequency code GPS DGPS.
+
+	\begin{itemize}	
+		\item Provides RTCM Type 1\footnote[frame]{DGPS corrections.}, 3\footnote[frame]{GPS reference station parameters.} messages.
+		\item Normal accuracy: 1-2m. 
+		\item Typical latency: 4 seconds\footnote[frame]{Average age received 10s. Typical correction update interval is 15 seconds.}.
+		\item Single difference code solution (DGPS) using GPS C/A code on L1 frequency.
+	\end{itemize}	
+
+\end{frame}
+
+
+\begin{frame}{Veripos Standard$^2$}
+	
+	Single frequency code GPS and GLONASS DGPS. 
+
+	\begin{itemize}	
+		\item Provides RTCM Type 1, 3, 31\footnote{DGPS GLONASS corrections.}, 32\footnote{GPS GLONASS reference station parameters.} messages.
+		\item Normal accuracy: 1-2m. 
+		\item Typical latency: 4 seconds.
+		\item Single difference code solution (DGPS) using GPS and GLONASS C/A code (L1/G1)\footnote[frame]{It is possible to calculate position using only GLONASS with this service.}.
+	\end{itemize}	
+	
+\end{frame}
+
+\begin{frame}{Veripos Standard and Ultra comparison}
+		\begin{figure}[T]
+			\vspace*{-1cm}
+			\includegraphics[height=.85\textheight]{pic/Ultra.png}
+			\caption{Standard and Ultra solutions at a monitor site in Singapore.}
+		\end{figure}
+\end{frame}
+
+
+\begin{frame}{Veripos Ultra and Apex$^2$} %this is what students are going to compare
+	\begin{columns}[T,onlytextwidth]
+		\column{0.5\textwidth}
+		\begin{itemize}	
+			\item Orbit and clock corrections in JPL GDGPS format.
+			\item Nominal accuracy: 0.1m planar. 
+			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+			\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS G1/G2.
+		\end{itemize}	
+		\column{0.5\textwidth}
+			\begin{itemize}	
+			\item Orbit and clock corrections in Veripos OCDS format.
+			\item Nominal accuracy: 0.1m planar. 
+			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
+			\item PPP, code and carrier phase on GPS L1/L2, GLONASS G1/G2, BeiDou B1/B2, Galileo E1/E5b, QZSS L1C/L2L (exact corections depend on the service type).
+			\end{itemize}	
+	\end{columns}
+\end{frame}
+
+% \begin{frame}{Veripos Apex and Apex$^2$ comparison}
+% 	\begin{figure}[T]
+% 		\vspace*{-1cm}
+% 		\includegraphics[height=0.7\textheight]{pic/Apex_compare.png}
+% 		\caption{Apex and Apex$^2$ solutions at a monitor site in Aberdeen.}
+% 	\end{figure}
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Practical work}
+
+
+\begin{frame}{NGB5}
+	\begin{table}
+		\centering
+		\begin{minipage}[t]{\textwidth}%
+			\resizebox{\columnwidth}{!}{%
+				\begin{tabular}{lccccc} %{l|c|c|c|c}
+					\toprule %\rowcolor{lightgray}
+					Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
+					\midrule
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.212 & at point\\
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.392 & at ARP\footnote{Antenna heigh = 0.18m.}\\
+					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.434 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
+					\textbf{NGB5} & ITRF2014 & \textbf{52 57 7.07341} & \textbf{01 11 1.42740} W & \textbf{91.484} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2014 at epoch 2017-12-06.} \\
+					\textbf{NGB5} & ITRF2014 & \textbf{5257.1178902} & \textbf{0111.0237900} W & \textbf{91.484} & at antenna PCO\footnote{NEMEA GGA string DDMM.MMMMMMM format, eq to 0.0018 m.} \\		
+					\bottomrule
+				\end{tabular}%
+			}
+			\caption{Coordinates of NGB5}
+		\end{minipage}
+	\end{table}
+	%in DDMM.MMMMMMM 7 decimal place is eq to 0.0018 m	
+\end{frame}
+
 
 
 \begin{frame}{Veripos \$GPGGA NMEA strings}
@@ -271,36 +268,14 @@
 \end{frame}
 
 
-
-
-\begin{frame}{NGB5}
-	\begin{table}
-		\centering
-		\begin{minipage}[t]{\textwidth}%
-			\resizebox{\columnwidth}{!}{%
-				\begin{tabular}{lccccc} %{l|c|c|c|c}
-					\toprule %\rowcolor{lightgray}
-					Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
-					\midrule
-					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.212 & at point\\
-					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.392 & at ARP\footnote{Antenna heigh = 0.18m.}\\
-					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.434 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ so\\ $2.545*55.3-1.545*64.2=41.5mm$.}\\
-					\textbf{NGB5} & ITRF2008 & \textbf{52 57 7.07095} & \textbf{01 11 1.42675} W & \textbf{91.488} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2008 at epoch 2016-12-04.} \\
-					\textbf{NGB5} & ITRF2008 & \textbf{5257.1178492} & \textbf{0111.0237792} W & \textbf{91.488} & at antenna PCO\footnote{NEMEA GGA string DDMM.MMMMMMM format.} \\		
-					\bottomrule
-				\end{tabular}%
-			}
-			\caption{Coordinates of NGB5}
-		\end{minipage}
-	\end{table}
-	%in DDMM.MMMMMMM 7 decimal place is eq to 0.0018 m	
-\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Veripos demo}
 
 
 
 %Final slide
-\setbeamercolor{background canvas}{bg=blueBgd!60}
-\plain{Questions?}
+% \setbeamercolor{background canvas}{bg=blueBgd!60}
+% \plain{Questions?}
 
 
 

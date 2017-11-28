@@ -194,7 +194,9 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 		To get static periods
 		* do Velocity Profile graph and stats for the static period
 		* CtrC
-		* getclip | grep -A 1 Start: | tr -s "\t" "," | tr "\n" "," | cut -d, -f2,7 | awk -F "," "{printf \"NGB_Yard %.1f %.1f Period%.1f\n\",$1,$2,$2-$1}" >> static.txt
+		* download pclip from <https://sourceforge.net/projects/unxutils/files/latest/downloadl>
+		* 'd:\tmp\Dropbox\Programming\skrypty\pclip.exe | grep -A 1 Start: | tr -s "\t" "," | tr "\n" "," | cut -d, -f2,7 | awk -F "," "{printf \"NGB_Yard %.1f %.1f Period%.1f\n\",$1,$2,$2-$1}" >> static.txt'
+		* for reverse opearation use clip (std in windows)
 
 	4) Analyse results
 		Check following plots: Combined Separation, Combined Separation(Fix), Quality factor, Float/Fixed Ambiguity Status, RMS -  Carrier Phase. In case of Multi-baseline solution last plot is wrong, use MB plot instead.

@@ -3,7 +3,7 @@ TeachingSlides
 
 This repo contains the source code for the following presentation:
 
-* Teaching material for MSc courses at the University of Nottingham for following modules, that is:
+* Teaching material for MSc courses at the University of Nottingham for the following modules:
   * H24VSP Satellite Based Positioning Practical
   * H24VLP Navigation Technology Practical
   * H24VEP Deformation Monitoring Practical
@@ -14,7 +14,7 @@ This repo contains the source code for the following presentation:
 
 ## Teaching slides status
 
-I am trying to update my slides regulary before the event, and then, periodically after the envent. In case of the teaching there will be a major update every year, which might be important if you intended to use slides. A tick indicates that slides have been updated for this year lectures and no major changes are expected.
+I am trying to update my slides regulary before the event and, then, periodically after the event. As far as the teaching material is concerned, there will be a major update every year, which might be important if you intended to use these slides. A tick indicates that slides have been updated for this year lectures and no major changes are expected.
 
 - [x] **H24VSP_PPP** - H24VSP Project 3 (NRTK vs PPP) introduction slides
 - [ ] **H24VEP_Bridge** -  H24VLP Project 3 Bridge monitoring introduction slides
@@ -25,7 +25,7 @@ I am trying to update my slides regulary before the event, and then, periodicall
 
 ## Supporting repos
 
-A number of related repos exist, further supporting teaching. Those are listed below. Similary as with list above tick indicates that no major reviews are expected this year.
+A number of related repos exist, further supporting teaching. Those are listed below. In the same way as with the list above, tick indicates that no major reviews are expected this year.
 
 * [x] [TEQCSPEC repo](https://github.com/DfAC/TEQCSPEC) contains Matlab code used at 24VSP Satellite Based Positioning Practical Project 1 (Multipath).
 

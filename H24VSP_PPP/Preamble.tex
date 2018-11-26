@@ -43,7 +43,8 @@
 \let\mytoprule\midrule
 \renewcommand{\midrule}{\mytoprule[0.08em]}
 
-\usepackage{spreadtab} % for simple calculations
+%\usepackage{spreadtab} % for simple calculations
+\newcolumntype{d}[1]{D{.}{.}{#1}} %to define aligment with the dot
 
 %vertically and horizontally centered multicolumn cells with a fixed width. M{width}
 %\newcolumntype{M}[1]{>{\centering\hspace{0pt}}m{#1}}

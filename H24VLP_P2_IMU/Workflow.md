@@ -91,18 +91,15 @@ I assume that power is provided via "brick" using Black & Red pins.
 
 ### LEICA format conversion
 
-```
-	Inertial Explorer
-		File->Convert->Raw GNSS data to Waypoint generic
-			select folder with Leica *.m00 files
-			Auto Add All
-				Program will recognise file format as Leica System 1200
-			Press Convert
-				new window show processing information
-			In case of any problems convert data to RINEX using teqc or going via LGO and then use File->Convert->Raw GNSS data to Waypoint generic
-			Merge files to single one using File->GPB Utilities->Concatenate, Splice and Resample
-				this will change station information if processed from *.m00! Make sure that proper coordinates are entered.
-```
+* In Inertial Explorer go to 'File->Convert->Raw GNSS data to Waypoint generic'
+* select folder with Leica *.m00 files and 'Auto Add All'
+	*	Program will recognise file format as Leica System 1200
+* Press Convert
+	* New window show processing information. In case of any problems convert data to RINEX using teqc or going via LGO and then use 'File->Convert->Raw GNSS data to Waypoint generic'
+* Merge files to single one using 'File->GPB Utilities->Concatenate, Splice and Resample'
+	* **This will change station coordinates if processed from *.m00 !!** Make sure that proper coordinates are entered.
+
+### L2C Phase offset
 
 3. Check if L2C Phase is correct for all data
 	View->Raw GNSS data
@@ -113,7 +110,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 				Novatel +.25 cy (confirmed by Marcus)
 				all Leica +.25 cy (this agree with Chris Hide and Leica support but IE by default use -0.25. THis has changed in 8.50 for correct value)
 				Leica RINEX +0.25 cy (tested on one RINEX file processed by LGO8.3)
-				Javad ??
+				Javad ??, IE will set it to -0.25
 				Trimble ??
 			File->Close (do not use File->Save As)
 		Conduct it for each raw file. Those setting should be correct for Novatel
@@ -135,8 +132,8 @@ I assume that power is provided via "brick" using Black & Red pins.
 			52° 57' 06.95636" N 1° 11' 02.39879" W 91.2006m
 		NEXT, NEXT, Finish, Finish
 
-NOTES SECTION
-	IE use a very strange naming convention for the height. Ant height will only be applied to export, Arms need to INCLUDE antenna height. Other words to match GPS and IMU one need to: GPS (add_ht), Arms (add_ht), Export (no_ht!). This is VERY CONFUSING so, following CH I suggest:
+### NOTES
+IE use a very strange naming convention for the height. Ant height will only be applied to export, Arms need to INCLUDE antenna height. Other words to match GPS and IMU one need to: GPS (add_ht), Arms (add_ht), Export (no_ht!). This is VERY CONFUSING so, following CH I suggest:
 			GPS_Rover (ht=0), Arms (add_ht), Export (add_ht)
 
 

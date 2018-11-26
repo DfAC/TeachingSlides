@@ -161,8 +161,8 @@ We will use an existing dataset, with the route combining three different enviro
 The goal of this practical is to understand the advantages and limitations of integrated GNSS and IMU systems. You will gain it by assessing the performance of three types of IMU sensor:
 
 \begin{itemize}
-	\item navigation grade POSRS unit with Digital Laser gyros;
-	\item tactical grade SPAN LCI with fiber optic gyros;
+	\item navigation grade Applanix POSRS unit with digital laser gyros;
+	\item tactical grade SPAN LCI with fibre optic gyros;
 	\item low cost Microstrain 3DM-GX4-25 with MEMS sensor.
 \end{itemize}
 
@@ -747,11 +747,12 @@ Inertial Explorer use colour coded Quality Indicators (IQ) to indicate quality o
 %----------------------------------------------------------------------------------------
 %HIDDEN CONTENT
 %----------------------------------------------------------------------------------------
-\begin{comment} 
+%\begin{comment} 
 
-\section{Indicative accuracy of IMUs}
+\section{Indicative accuracy of the IMUs}
 
-Note that results below are based on small subset of data and can be treated as indicative only. Any change in movement characteristics, especially more consistent dynamics, will severely affect the outcome.
+Note that results below are based on the very limited number of trials and should be treated as indicative only. Those results have been produced using a vehicle in typical road characteristics by artificially removing GNSS observations, as discussed in section \refLoc{Processing-IMU-on-its-own}. The critical factors affecting the accuracy is the movement dynamics (more varied the better). Both the prolong movement with same speed and direction as well as slow, crawling movement will severely degrade IMU performance. Also, the heigh hardly changes.
+
 
 
 	\begin{table}[!h]
@@ -776,7 +777,7 @@ Note that results below are based on small subset of data and can be treated as 
 	\end{table}
 
 
-\end{comment}
+%\end{comment}
 
 
 

@@ -2,6 +2,10 @@
 
 %my colours
 
+%TODO: update framework to match new settings
+%DONE: review Veripos service
+%DONE: update coords
+%DONE: re-word table
 
 \usetheme{metropolis}
 \metroset{everytitleformat = regular,progressbar=foot} %settings
@@ -61,7 +65,7 @@
 %\begin{frame}[allowframebreaks=0.9]{Introduction}
 \begin{frame}[fragile]{Introduction}
 
-	In last practical of the H24VSP module we will explore the capacities of the Precise Point Positoning (PPP) by comparing it with real-time kinematic double-differenced positioning (RTK) that you are already familiar with. During practical we will be using \textbf{Leica GS10} receiver and maritime\footnote{For application examples see \url{www.veripos.com/applications/overview/}.} \textbf{Veripos LD5} receiver using AsterRx chipset\footnote[frame]{For short introductory video see \url{http://bit.ly/VeriposLD5}.}.
+	In last practical of the H24VSP module we will explore the capacities of the Precise Point Positoning (PPP) by comparing it with real-time kinematic double-differenced positioning (RTK) that you are already familiar with. During practical we will be using \textbf{Leica GS10} receiver and maritime\footnote[frame]{For application examples see \url{www.veripos.com/applications}} \textbf{Veripos LD5} receiver using AsterRx chipset.}.
     We are interested in assessing difference between:
 	\begin{itemize}
 		\item convergence time;
@@ -88,7 +92,7 @@
 			\item Network RTK GPS+GLO solution.
 		\end{itemize}
 
-	The PPP data will be provided for you at the end of practical. It is your task to \textbf{select approximate point and time span} to carry out comparison between RTK and PPP solutions. 
+	The PPP data will be provided for you at the end of practical. It is your task to \textbf{select most appropriate RTK observation point and time span} to carry out comparison between RTK and PPP solutions. 
 
 \end{frame}
 
@@ -110,14 +114,14 @@
 \section{Veripos Services}
 
 \begin{frame}[allowframebreaks]{Veripos Services}
-	Veripos is a commercial company providing high accuracy GNSS positioning, offering both hardware (receivers) and correction services\footnote[frame]{\url{https://www.veripos.com/services/overview/}.}:
+	Veripos is a commercial company providing high accuracy GNSS positioning, offering both hardware (receivers) and correction services:
 	
 	\begin{itemize}
-		\item \textbf{Apex Service} uses Veripos own Orbit and Clock Determination System (OCDS) and their network of reference stations\footnote{\url{http://bit.ly/VeriposNet}}. Apex utilises dual-frequency GPS, APEX$^2$ dual-frequency GPS/GLONASS and APEX$^5$  dual-frequency GPS/GLONASS/Beidou/Galileo/QZSS receivers observations for dm level accuracy.
+		\item \textbf{Apex Service} uses Veripos own Orbit and Clock Determination System (OCDS) and their network of reference stations\footnote[frame]{\url{www.veripos.com/about/coverage}}. Apex utilises dual-frequency GPS, APEX$^2$ dual-frequency GPS/GLONASS and APEX$^5$  dual-frequency GPS/GLONASS/Beidou/Galileo/QZSS receivers observations for dm level accuracy.
 		\item \textbf{Ultra Service} uses JPL Orbit and Clock Determination System (OCDS) which uses data from JPL network\footnote{\url{http://bit.ly/JPLnetwork}}. Ultra utilises dual-frequency GPS and Ultra$^2$ GPS and GLONASS.
 		\item \textbf{Standard Service} - provide high integrity, meter level service. Standard provide single frequency code DGPS and Standard$^2$ single frequency code GPS and GLONASS DGPS.
 	\end{itemize}
-	All corrections are transmitted via Inmarsat geostationary satellites\footnote[frame]{\url{http://www.veripos.com/global-coverage.html}} - 25E, 98W, 143.5E, AORE, AORW, IOR, POR. All coordinates provided are in ITRF2014.
+	All corrections are transmitted via Inmarsat geostationary satellites - 25E, 98W, 143.5E, AORE, AORW, IOR, POR. All coordinates provided are in ITRF2014.
 
 \end{frame}
 
@@ -149,15 +153,6 @@
 	
 \end{frame}
 
-\begin{frame}{Veripos Standard and Ultra comparison}
-		\begin{figure}[T]
-			\vspace*{-1cm}
-			\includegraphics[height=.85\textheight]{pic/Ultra.png}
-			\caption{Standard and Ultra solutions at a monitor site in Singapore.}
-		\end{figure}
-\end{frame}
-
-
 \begin{frame}{Veripos Ultra and Apex$^2$} %this is what students are going to compare
 	\begin{columns}[T,onlytextwidth]
 		\column{0.5\textwidth}
@@ -177,8 +172,20 @@
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Veripos Standard and Ultra comparison}
+		\begin{figure}[T]
+			\vspace*{-1cm}
+			\includegraphics[height=.85\textheight]{pic/Ultra.png}
+			\caption{Standard and Ultra solutions at a monitor site in Singapore.}
+		\end{figure}
+\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Veripos demo}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Practical work}
 \begin{frame}{NGB5}
 	\begin{table}
@@ -187,14 +194,14 @@
 			\resizebox{\columnwidth}{!}{%
 				\begin{tabular}{lccccc} %{l|c|c|c|c}
 					\toprule %\rowcolor{lightgray}
-					Point & Frame & Lat[deg]  & Long[deg]  & EllHt[m] & Notes\tabularnewline
+					Point & Frame & Lat $\phi$[deg]  & Long $\lambda$[deg]  & EllHt[m] & Notes\tabularnewline
 					\midrule
 					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.212 & at point\\
 					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.392 & at ARP\\
 					%\footnote{Antenna heigh = 0.18m.}
 					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.434 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ = $2.545*55.3-1.545*64.2=41.5mm$.}\\
-					\textbf{NGB5} & ITRF2014 & \textbf{52 57 7.07154} & \textbf{01 11 1.42594} W & \textbf{91.486} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2014 at epoch 2017-12-06.} \\
-					\textbf{NGB5} & ITRF2014 & \textbf{5257.117859} & \textbf{0111.023766} W & \textbf{91.486} & at antenna PCO\footnote{To calculate error in N($\phi$) and E($\lambda$), in meters, from NEMEA GGA string, at longitude of NGI, use $\lambda_{NMEA}-\lambda_{truth}*1800$ and $\phi_{NMEA}-\phi_{truth}*1200$. Note that 6th decimal place of GGA string is equivalent to 0.0018 N($\phi$) and 0.0012 m E($\lambda$).
+					\textbf{NGB5} & ITRF2014 & \textbf{52 57 7.07209} & \textbf{01 11 1.42505} W & \textbf{91.488} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2014 at epoch 2017-12-06.} \\
+					\textbf{NGB5} & ITRF2014 & \textbf{5257.117868} & \textbf{0111.023751} W & \textbf{91.488} & at antenna PCO\footnote{To calculate error in meters at latitude $\phi$ of NGI, use $(\lambda_{NMEA}-\lambda_{truth})*1800$ and $(\phi_{NMEA}-\phi_{truth})*1200$. The 6th decimal place of GGA string is equivalent to 18mm N($\phi$) and 12mm E($\lambda$).
 } \\		
 					\bottomrule
 				\end{tabular}%
@@ -242,7 +249,7 @@
 					Cell & Notes\tabularnewline
 					\midrule
 					0&Message ID \$GPGST\\
-					1&UTC of position fix\footnote{Notice 17s offset to GPS time.}\\
+					1&UTC of position fix\footnote{Notice 18s offset to GPS time.}\\
 					2&RMS value of the pseudorange or carrier phase (RTK/PPP) residuals\\
 					3&Error ellipse semi-major axis 1 sigma error, in meters\\
 					4&Error ellipse semi-minor axis 1 sigma error, in meters\\
@@ -254,14 +261,9 @@
 					\bottomrule
 				\end{tabular}%
 			}
-			%	\caption{Coordinates of NGB5}
 		\end{minipage}
 	\end{table}
 \end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Veripos demo}
 
 
 

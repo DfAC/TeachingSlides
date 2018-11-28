@@ -101,10 +101,10 @@
 \begin{frame}{Practice layout}
 	
 	\begin{itemize}
-		\item LD5 will be restarted at 07:30. This will allow for PPP convergence. 
-		\item You will collecting RTK data between 08:30 and 10:50. 
-		\item Apart from collected data (GS10) you will be given Veripos NMEA strings for Ultra and Apex$^2$ (LD5).
-		\item \textbf{Make sure that Veripos NMEA file has been split into \$GPGGA and \$GPGST ones before leaving.}
+		\item LD5 will be restarted at 08:00. This will allow for PPP convergence. 
+		\item You will collect RTK data between 09:20-10:40 and 11:20-12:40, using Leica GS10 receiver. 
+		\item You will also get Veripos NMEA strings for Ultra and Apex$^2$ (LD5).
+		\item \textbf{Before you leave make sure that Veripos NMEA file has been split into \$GPGGA and \$GPGST.}
 	\end{itemize}
 
 \end{frame}
@@ -158,16 +158,16 @@
 		\column{0.5\textwidth}
 		\begin{itemize}	
 			\item Orbit and clock corrections in JPL GDGPS format.
-			\item Nominal accuracy: 0.1m planar. 
+			\item Nominal accuracy: 0.10m planar. 
 			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
 			\item Precise Point Positioning (PPP) using C/A and P code and L1/L2 carrier phase for GPS and GLONASS G1/G2.
 		\end{itemize}	
 		\column{0.5\textwidth}
 			\begin{itemize}
 			\item Orbit and clock corrections in Veripos OCDS format.
-			\item Nominal accuracy: 0.1m planar. 
+			\item Nominal accuracy: 0.05m planar. 
 			\item Typical latency: 2 seconds with 30 s update rate.% for clocks and 120s for orbits.
-			\item PPP, code and carrier phase on GPS L1/L2, GLONASS G1/G2, BeiDou B1/B2, Galileo E1/E5b, QZSS L1C/L2L (exact corections depend on the service type).
+			\item PPP, code and carrier phase on GPS L1/L2, GLONASS G1/G2, BeiDou B1/B2, Galileo E1/E5b, QZSS L1C/L2L (exact corrections depend on the service type).
 			\end{itemize}	
 	\end{columns}
 \end{frame}
@@ -200,8 +200,8 @@
 					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.392 & at ARP\\
 					%\footnote{Antenna heigh = 0.18m.}
 					NGB5 & ETRF97 & 52 57 7.05304 & 01 11 1.44953 & 91.434 & at antenna PCO\footnote{Antenna offset for ionsphere free solution is $2.545L_1-1.545L_2$ = $2.545*55.3-1.545*64.2=41.5mm$.}\\
-					\textbf{NGB5} & ITRF2014 & \textbf{52 57 7.07209} & \textbf{01 11 1.42505} W & \textbf{91.488} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2014 at epoch 2017-12-06.} \\
-					\textbf{NGB5} & ITRF2014 & \textbf{5257.117868} & \textbf{0111.023751} W & \textbf{91.488} & at antenna PCO\footnote{To calculate error in meters at latitude $\phi$ of NGI, use $(\lambda_{NMEA}-\lambda_{truth})*1800$ and $(\phi_{NMEA}-\phi_{truth})*1200$. The 6th decimal place of GGA string is equivalent to 18mm N($\phi$) and 12mm E($\lambda$).
+					\textbf{NGB5} & ITRF2014 & \textbf{52 57 7.07209} & \textbf{01 11 1.42505} W & \textbf{91.488} & at antenna PCO\footnote{Converted from ETRF97 to ITRF2014 at epoch 2018-12-05.} \\
+					\textbf{NGB5} & ITRF2014 & \textbf{5257.117868} & \textbf{0111.023751} W & \textbf{91.488} & at antenna PCO\footnote{To calculate error in meters at latitude $\phi$ of NGI, use $(\lambda_{NMEA}-\lambda_{truth})*1800$ and $(\phi_{NMEA}-\phi_{truth})*1200$. The 6th decimal place of GGA string is equivalent to 1.8mm for N($\phi$) and 1.2mm for E($\lambda$).
 } \\		
 					\bottomrule
 				\end{tabular}%
@@ -210,7 +210,7 @@
 		\end{minipage}
 	\end{table}
 \end{frame}
-%in case of sec diference use 30 and 20m
+%in case of sec diference use 30m and 20m
 % DDMM.123456
 
 

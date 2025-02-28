@@ -7,7 +7,7 @@ This is Inertial Explorer WORKFLOW manual. Make sure that you read Problem.log f
 * Standard NGI van setup include POSRS as a main sensor and SPAN as a check. Both should be connected to same antenna. As a check I recommend to include additional GNSS receiver, connected to different antenna then POSRS/SPAN.
 * POSRS/SPAN GNSS receivers are set to 1Hz, additional receiver should be set to higher frequency, if possible.
 * I recommend at least 10-15min static at the beginning and end of the data collection. Ideally this should be in clean GNSS environment. Otherwise extend static period accordingly.
-* POSRS is VERY sensitive to power. Make sure that batteries are charged before and as-rule of thumb, 3 batteries run for about 5hrs.
+* POSRS is VERY sensitive to power. Make sure that batteries are charged before. As-rule of thumb, 3 batteries run for about 5hrs.
 
 
 ### When starting SPAN will have a specific light sequence:
@@ -19,7 +19,7 @@ GPS got fix | flashing green | green | red* | red | none |
 IMU working | flashing green | green | red* | red | green |
 IMU aligned | flashing green | green | red* | green | green | will only happen after movement is applied
 
-		: *if two antennas are connected this light sequence will follow GPS1_light one
+		: *if two antennas are connected GPS2_light light sequence will follow GPS1_light one
 
 
 ### POSSIBLE PROBLEMS AND SOLUTIONS
@@ -41,7 +41,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 * For Receiver connect
 	* green (ground) + black (ground) to brick Black
 	* red (-Vin) + white (+Vin) to brick Red
-* if you blow fuse fusebox is behind the driver. Need 15A fuse.
+* if you blow fuse, note that fusebox is behind the driver. Use 15A fuse.
 
 ### PTDL (Microstrain), Footracker:
 
@@ -102,6 +102,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 ### L2C Phase offset
 
 3. Check if L2C Phase is correct for all data
+
 	View->Raw GNSS data
 		select *.GPB data
 		Edit->L2 Phase Correction
@@ -117,6 +118,7 @@ I assume that power is provided via "brick" using Black & Red pins.
 
 
 5. Create a New project in Inertial Explorer
+
 	File->New Project->Project Wizard
 		navigate to project folder and name processing accordingly (SPAN, POSRS, MicroStrain ect)
 		select GNSS & IMU file
@@ -133,15 +135,24 @@ I assume that power is provided via "brick" using Black & Red pins.
 		NEXT, NEXT, Finish, Finish
 
 ### NOTES
-IE use a very strange naming convention for the height. Ant height will only be applied to export, Arms need to INCLUDE antenna height. Other words to match GPS and IMU one need to: GPS (add_ht), Arms (add_ht), Export (no_ht!). This is VERY CONFUSING so, following CH I suggest:
+
+IE use a very strange naming convention for the height. 
+
+Ant height will only be applied to the export, Arms need to INCLUDE antenna height. 
+
+in otherwords to match GPS and IMU one need to do as follows: GPS (add_ht), Arms (add_ht), Export (no_ht!). 
+
+This is VERY CONFUSING so, following CH advice I suggest:
 			GPS_Rover (ht=0), Arms (add_ht), Export (add_ht)
 
 
 6. Process GPS
+
 Processing GNSS will generate *.cmb file (combined GPS file), which is used in next step (those values are estimated at antenna, without applying ht!)
 
 	GNSS WORKFLOW
-	It is vital that all stations are in the same datum. In IE processing Datum is the same as Master. You cant change one without the other, neither can you have one station in different datum, so its vital to make sure that all coordinates are correct. Nevertheless SV coordinates has to be converted to current datum during KF processing. Therefore it is important to properly set processing datum in IE!!! For more details see GNSS.log
+
+It is vital that all stations are in the same datum. In IE processing Datum is the same as Master. You cant change one without the other, neither can you have one station in different datum, so its vital to make sure that all coordinates are correct. Nevertheless SV coordinates has to be converted to current datum during KF processing. Therefore it is important to properly set processing datum in IE!!! For more details see GNSS.log
 	Practical example show that actual effect on position between ITRF89 & WGS84 is below 4mm.
 	Make sure that measured to ARP is selected for both master and rover.
 
@@ -149,12 +160,15 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 	1. Check if you have proper data by plotting File Data Coverage and base on distance to base station decide on single/multibaseline solution
 
 	2. Check observations
+
 		Check frequency of base/rover (POSRS data is 2Hz). IE8.5 will automatically up-sample base data if rover obs freq is different! Be careful.
 		To minimalist file sizes use View->GNSS Observation->Master{..}->Resample/Fill gaps, using-> Remote Time Interval
 			all data outside of remote time will be removed
 		To check L2C offset use View->GNSS Observations->{Master/Rover}->View Raw GNSS data.
 
-	2. Download precise orbits&clocks if available. GPS/GLONASS precise orbits/clocks latency is 12-18 days, GPS rapid orbits/clocks about one day.
+	2. Download precise orbits&clocks if available.
+
+ GPS/GLONASS precise orbits/clocks latency is 12-18 days, GPS rapid orbits/clocks about one day.
 		File->Add precise Files
 			Set proper time and date, uncheck GLONASS and press Download for GPS data
 			Set proper time and date, check GLONASS and press Download for GLONASS data (some files will be overwritten)
@@ -163,6 +177,7 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 		In View->Project Overview you should be able to see all the files you added
 
 	3. Process all data
+
 	To process single baseline GNSS go to Process->Process GNSS
 			Processing Method	Differential GNSS
 			Processing Direction->Both
@@ -178,16 +193,19 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 		In IE8.50 software will automatically use most convenient selection of all BS data. Just process data as usual. To check Local Level Vector (pay attention to height component!!) and Distance Separation. You cant use Distance Separation plot. Use Export->Plot Multi-Base instead
 
 		NOTE!!!
-		 For VS leaving baseline limit at standard 70km makes no difference and it seems that VS is slightly more precise for those baselines. If you keep 30km limit both results show same precision. The larger the limit the longer it takes to process data. Maximum baselines you can process at one time is 8.
+
+		 For Virtual Station (VS) leaving baseline limit at standard 70km makes no difference and it seems that VS is slightly more precise for those baselines. If you keep 30km limit both results show same precision. The larger the limit the longer it takes to process data. Maximum baselines you can process at one time is 8.
 		To save results to HTML, plot my normal group plots, then Plot Multi-Base and then use Output->Build HTML Report.
 
 	5. Define static sessions and check Static Session Convergence plot.
+
 		use File->GPB Utility->Insert Static/Kinematic Markers
 			ht value here is not important. Its only for static file.
 		check NavNet850 p32 for details, file line ex
 				NGB_Yard 201200.0 203505.0 Preparation
 
-		NOTE!!!
+###		NOTE!!!
+
 		To get static periods
 		* do Velocity Profile graph and stats for the static period
 		* CtrC
@@ -196,6 +214,7 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 		* for reverse opearation use clip (std in windows)
 
 	4) Analyse results
+
 		Check following plots: Combined Separation, Combined Separation(Fix), Quality factor, Float/Fixed Ambiguity Status, RMS -  Carrier Phase. In case of Multi-baseline solution last plot is wrong, use MB plot instead.
 		To estimate data gaps in the GNSS file use python FindDataGaps.py -l xx.xx
 		To compare View->Processing summary:
@@ -212,9 +231,10 @@ Processing GNSS will generate *.cmb file (combined GPS file), which is used in n
 
 	Best working practice is to have a full GPS trajectory in one file, even if there are multiple IMU sessions
 
-NOTES SECTION
-	Make sure that IE is not applying any datum conversion!!!
-	If you ever close map, use Output->Show Map window
+# NOTES SECTION
+
+*	Make sure that IE is not applying any datum conversion!!!
+*	If you ever close map, use Output->Show Map window
 
 	The more advanced option for precise orbits/clocks is	Tools->Download Service Data
 		Set proper time and date
@@ -234,6 +254,7 @@ NOTES SECTION
 
 
 7. Process LC
+
 	Decide on trajectory, most of the time it should be Update data: GNSS combined but sometimes you should use External trajectory (*.cmb file, see prev step). For source GNSS data try to use only QN1-4 (position acc < 1.0). Note that settings here should match that for GNSS processing and given Van/Train level arms are to ARP!
 
 	Rule of thumb acc with gaps (those value are approximate only)
@@ -264,7 +285,8 @@ NOTES SECTION
 			Body2IMU Rotation: 180,0,90 !!! depends on how it was mounted!!
 
 
-	check results
+###	check results
+
 	Plot Attitude separation to check IMU initialisation. To check final position, and quality of LC results plot Combined Separation, Combined Separation (fix) and IMU/GPS position misclosure.
 	Heading (orientation of axis) can be checked by plotting Heading minus COG and Attitude(Azimuth/Heading).
 		Check times where van is kinematic (ideally large acc changes->Acc profile plot and GPS is good match with IMU->Position Misclosure Plot (match should be perfect) and then one where IMU/GPS match is poor - there should be out-layers but apart from that, good fit)
@@ -273,7 +295,8 @@ NOTES SECTION
 			check "Solve lever arm values as add KF states"
 		Plot results => IMU/IMU-GPS Level Arm and compare results. This will show both level arms and axis!
 
-POSRS WORKFLOW
+## POSRS WORKFLOW
+
 	A) Run all automatic.
 		There might be small separation between pitch and roll (up to 10 arc-min), aligned with large jumps in heading at the beginning and the end (up to 50 arc-min). This tend to indicate weak starting (and finishing) angle estimate. Everything else should be smooth (within few arc-min).
 	B) Try to run Static Coarse+Fine alignment. Compare results with automatic.
@@ -286,7 +309,8 @@ POSRS WORKFLOW
 		If all agrees cut processing to 40-70s of static from each side
 	D) Process data using only GNSS qn1-2 (or if large gaps 1-4) against data obtained in C). Its paramount to use TA from C) as final determination can be more precise than one obtained it this step.
 
-SPAN WORKFLOW
+## SPAN WORKFLOW
+
 	A) Run all automatic.
 	B) Try to run Static Coarse+Fine alignment. Compare results with automatic.
 		settings (UM16) Coarse: 120s, Fine 480s
@@ -294,7 +318,8 @@ SPAN WORKFLOW
 	C) Transfer alignment from POSRS. Accuracy should be within 10-20 arc-min. Keep StdDev estimation.
 	D*) If you dont have POSRS transfer alignment rev 2 forward and fwd 2 reverse. Make sure that Std Dev is x10 estimated. Compare results.
 
-Microstrain WORKFLOW
+# Microstrain WORKFLOW (WIP)
+
 	A) Transfer alignment from POSRS
 	B)
 
@@ -314,6 +339,7 @@ Microstrain WORKFLOW
 
 
 10. PROCESS IMU DATA ON ITS OWN
+
 	Process->Process LC
 		check "Process IMU Data Only"
 		make sure that all settings are correct (as per step 7)
@@ -322,14 +348,17 @@ Microstrain WORKFLOW
 
 
 11. Send data to client
+
 	Output->Export Wizard
 	remember to apply proper level arm	see Problem.log
 	NOTE: lever arms are calculated to ARP so if you done both GPS and LC processing to ARP you should use exactly the use same lever arms as for IMU (step 7).
 	Otherwise, if you didn't process LC to ARP you might need to add L1/L2 height offset in order to get height matching GNSS results from IE.
 	OS coordinates output is wrong by up to 100m. Do not use!
 
-CHECKS:
-	1. Prepare RTK (qn1) GNSS solution only and check it against IMU solution. Make sure you transfer alignment from complete solution as this will be most precise. Export with the same arms as for IMU calculation, SUBSTRACT any L1/L2 height offsets. It should agree to a few cm (mm on train). (use my CompareDataSets.bat)
+# CHECKS:
+
+	
+1. Prepare RTK (qn1) GNSS solution only and check it against IMU solution. Make sure you transfer alignment from complete solution as this will be most precise. Export with the same arms as for IMU calculation, SUBSTRACT any L1/L2 height offsets. It should agree to a few cm (mm on train). (use my CompareDataSets.bat)
 	2. If you have antenna on another mount, calculate its RTK (qn1) GNSS solution only and check it against IMU solution, with arm estimated to this mount (icl L1 offset). It should agree to a few cm in clean environment.
 	2. Check between different IMU solutions if using more then one sensor. SPAN/POSRS should agree to approx cm. (use my CompareDataSets.bat)
 	3. Save and check all the plots listed in this walk trough. You should have at least two set of plots (testing and final) for each sensor!  (use my PrepareIEOutput.bat)
@@ -340,6 +369,7 @@ CHECKS:
 	6. Check LC against GNSS only solution. Any visible offsets should be in height only (wrong ARP) which should be equal to antenna L1/L2 height offset.
 
 LKB.2012-2014
+
 TODO:
 	step 7
 	GPS and INS time offset recorded in IMR file header can be checked in *.fil. To apply go to Advanced, User Cmds and use TIME_OFFSET (check manual and check if this works!!!)
